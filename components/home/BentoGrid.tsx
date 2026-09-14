@@ -291,6 +291,7 @@ const ORBIT = [
   { label: "WA", color: "#25D366" },
   { label: "RCS", color: "#3D82F5" },
   { label: "VCE", color: "#FF9A3E" },
+  { label: "AI", color: "#7C5CFF" },
 ];
 
 function OrbitCell() {
@@ -300,7 +301,7 @@ function OrbitCell() {
 
       <div className="absolute h-[124px] w-[124px] animate-spin-slow" aria-hidden>
         {ORBIT.map((channel, i) => {
-          const angle = i * (360 / ORBIT.length);
+          const angle = i * 72;
           return (
             <span
               key={channel.label}
@@ -401,7 +402,7 @@ function ThroughputCell() {
         <p className="font-display text-[30px] font-extrabold leading-none text-on-dark">
           <CountUp to={12480} />
         </p>
-        <p className="mt-1 text-[12px] text-on-dark-4">messages routed across every channel</p>
+        <p className="mt-1 text-[12px] text-on-dark-4">messages routed across five channels</p>
       </div>
 
       <div className="flex h-[74px] items-end gap-[5px]">
@@ -531,7 +532,7 @@ export default function BentoGrid() {
 
           <Cell
             span="md:col-span-2"
-            title="One API, every channel"
+            title="One API, five channels"
             desc="One contract, one integration, one invoice. Add a channel without adding a vendor."
             glow="rgba(124,92,255,0.10)"
           >

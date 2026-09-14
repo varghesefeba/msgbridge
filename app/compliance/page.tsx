@@ -4,15 +4,12 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Callout from "@/components/ui/Callout";
 import CTABand from "@/components/ui/CTABand";
-import Accordion from "@/components/ui/Accordion";
 import TableOfContents from "@/components/compliance/TableOfContents";
-import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = buildMetadata("/compliance");
 
 const SECTIONS = [
   { id: "what-is-dlt", label: "What DLT is" },
-  { id: "who-needs", label: "Who needs to register" },
   { id: "entity", label: "Principal entity registration" },
   { id: "header", label: "Sender ID (header) registration" },
   { id: "templates", label: "Content template registration" },
@@ -22,30 +19,6 @@ const SECTIONS = [
   { id: "dnd", label: "DND scrubbing" },
   { id: "rejections", label: "Common rejection reasons" },
   { id: "timelines", label: "Realistic timelines" },
-  { id: "checklist", label: "DLT checklist" },
-];
-
-const FAQ = [
-  {
-    q: "What is DLT registration for SMS in India?",
-    a: "DLT (Distributed Ledger Technology) registration is TRAI's mandatory process for registering a commercial sender, its sender IDs (headers) and its message templates before business SMS will deliver reliably in India. It ties every message back to a verified entity, an approved header and a pre-registered template.",
-  },
-  {
-    q: "Do I need DLT registration for OTP and transactional SMS?",
-    a: "Yes. OTP and transactional messages are sent on registered transactional routes using approved templates bound to your entity and header. Without registration they are liable to be blocked rather than merely delayed.",
-  },
-  {
-    q: "What is the difference between transactional and promotional templates?",
-    a: "The template category determines which routes and time windows a message can use and how it is treated for consent and DND. Transactional and service templates cover order, payment and account messages; promotional templates cover marketing and are subject to DND scrubbing and consent.",
-  },
-  {
-    q: "Why do my messages get rejected even after template approval?",
-    a: "The most common causes are a variable mismatch between the live payload and the registered template text, the wrong category for the route, incomplete TM-chain binding, or missing consent records. Each is fixable — see the common rejection reasons above.",
-  },
-  {
-    q: "Does MsgBridge handle DLT registration for me?",
-    a: "Yes. MsgBridge runs entity, header, template and TM-chain binding alongside your integration through DLT Registration Assistance, so the paperwork moves in parallel with your build rather than after it.",
-  },
 ];
 
 function Rail() {
@@ -59,8 +32,6 @@ function Rail() {
 export default function CompliancePage() {
   return (
     <div>
-      <BreadcrumbJsonLd items={[{ name: "Home", slug: "/" }, { name: "Resources" }, { name: "DLT & TRAI Compliance Guide", slug: "/compliance" }]} />
-      <FaqJsonLd items={FAQ} />
       <section className="relative overflow-hidden -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] bg-paper-warm pb-16">
         <div className="container max-w-container">
           <Breadcrumb items={[{ label: "Resources", href: "/" }, { label: "Compliance Guide" }]} />
@@ -86,15 +57,6 @@ export default function CompliancePage() {
               sent what, on whose behalf, and with what consent. Any business sending transactional or promotional
               SMS or making automated voice calls at scale needs to register on it before traffic will deliver
               reliably.
-            </p>
-
-            <h2 id="who-needs">Who needs DLT registration</h2>
-            <p>
-              Any business, government body or organisation that sends commercial SMS in India — whether{" "}
-              <a href="/sms/otp">OTP</a>, <a href="/sms/transactional">transactional</a> or{" "}
-              <a href="/sms/promotional">promotional</a> — must register on DLT. This applies whether you send through
-              a panel or an <a href="/developers/sms-api">SMS API</a>, and whether you send a few messages or millions.
-              Person-to-person messages are out of scope; business-to-consumer messaging is not.
             </p>
 
             <h2 id="entity">Principal entity registration</h2>
@@ -166,25 +128,7 @@ export default function CompliancePage() {
               before a hard launch date.
             </p>
             <Rail />
-
-            <h2 id="checklist">DLT registration checklist</h2>
-            <ul>
-              <li>Register your business as a Principal Entity with KYC documents (PAN, GST, incorporation, authorised signatory).</li>
-              <li>Register your alphabetic sender ID (header) against that entity.</li>
-              <li>Draft and register each message body as a template, with variables in <code>{"{{ }}"}</code> placeholders.</li>
-              <li>Register every template under the correct category — transactional, service or promotional.</li>
-              <li>Confirm TM-chain binding of entity, header and templates on your operator route.</li>
-              <li>Keep retrievable consent records for promotional and consented service messages.</li>
-              <li>Match your live payload to the registered template text exactly before going live.</li>
-            </ul>
           </article>
-        </div>
-      </section>
-
-      <section className="py-16 md:py-20 bg-paper-warm">
-        <div className="container max-w-container-narrow">
-          <Eyebrow index="11" label="Frequently asked questions" />
-          <Accordion items={FAQ} />
         </div>
       </section>
 

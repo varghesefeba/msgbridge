@@ -54,36 +54,6 @@ export const productsA: ProductPage[] = [
         a: "Yes, both are available on the Business API and can be enabled during onboarding.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is the WhatsApp Business API?",
-        body: [
-          "The WhatsApp Business API is the programmatic channel businesses use to send and receive WhatsApp messages at scale. Unlike the consumer app, it has no chat screen of its own: messages flow through an API and land in a shared team inbox or your own systems. It runs on a WhatsApp Business Account (WABA) that carries your verified business name and, once approved, a green tick.",
-          "Access is granted through a Meta-approved Business Solution Provider rather than by installing an app. That gives you higher throughput, multiple agents on one number, webhooks for inbound messages and delivery status, and the ability to trigger messages directly from your order, payment or CRM systems.",
-        ],
-      },
-      {
-        heading: "WhatsApp Business API vs the WhatsApp Business app",
-        body: [
-          "The free WhatsApp Business app is a phone app for a single small team: you type replies by hand on one device, and there is no automation. It suits a shop or solo operator, not a platform sending thousands of order updates a day.",
-          "The API has no interface of its own. It connects to software, supports many agents on the same number, and lets you send template messages programmatically. Choose the app for manual, low-volume chat; choose the API when messaging is triggered by your systems or handled by a support team at scale.",
-        ],
-      },
-      {
-        heading: "Message templates and the 24-hour service window",
-        body: [
-          "Business-initiated messages must use a template that Meta has reviewed and approved in advance. Templates cover things like order confirmations, shipping updates and reminders, and can include variables, buttons and media. Approval timelines and category rules are set by Meta, so drafting templates that fit their policy matters for getting sends live.",
-          "When a customer messages you, a 24-hour service window opens in which you can reply freely without a template. Once it closes, you must use an approved template again to re-open the conversation. This window is what makes real-time support conversations practical on WhatsApp.",
-        ],
-      },
-      {
-        heading: "When to choose WhatsApp over SMS",
-        body: [
-          "WhatsApp suits rich, two-way conversations: images, documents, buttons, catalogues and in-chat payments, all under a verified business identity. The trade-off is that it needs the recipient to have WhatsApp, requires opt-in, and business-initiated messages depend on approved templates.",
-          "SMS wins where you need universal reach and no dependencies — it works on every phone, needs no app or internet, and is the natural fit for OTPs and critical alerts. Many businesses use both: SMS as the baseline that always arrives, WhatsApp for richer engagement where the customer has opted in.",
-        ],
-      },
-    ],
   },
   {
     slug: "/whatsapp-chatbot",
@@ -138,35 +108,6 @@ export const productsA: ProductPage[] = [
         a: "Yes — healthcare, education, travel, logistics, real estate and financial services all run chatbot flows on this same product.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is a WhatsApp chatbot?",
-        body: [
-          "A WhatsApp chatbot is automated conversation logic that runs on top of the WhatsApp Business API. It reads what a customer sends, follows a designed flow of questions, menus and quick-reply buttons, and responds instantly — no agent needed for routine requests. Behind the scenes it can call your systems to look up an order, check availability or create a lead.",
-          "Because it runs on the official API, the bot works inside the same rules as any WhatsApp business messaging: templates re-open conversations, and the 24-hour service window governs free-form replies. The flow itself is what you design; the API is what carries it.",
-        ],
-      },
-      {
-        heading: "What a WhatsApp chatbot can automate",
-        body: [
-          "Common jobs include answering frequently asked questions, checking order or service status, capturing and qualifying leads from an ad, booking appointments, and collecting survey responses. Each is a repeatable exchange the bot can complete end to end, at any hour, without a person on standby.",
-          "The bot can also connect to your CRM, ERP or website through webhooks, so a conversation can create a record, fetch live data or trigger a follow-up. What it should and should not handle is a design decision made when the flows are mapped.",
-        ],
-      },
-      {
-        heading: "Bot-to-human handover",
-        body: [
-          "A good chatbot knows its limits. Any flow can be set to transfer the conversation to a live agent — when the customer asks, when the request is complex, or when the bot cannot resolve it. The chat history moves with it into the team inbox, so the agent sees the full context and the customer does not repeat themselves.",
-        ],
-      },
-      {
-        heading: "WhatsApp chatbot vs the WhatsApp Business API",
-        body: [
-          "The WhatsApp Business API is the channel — the connection, the number, the ability to send and receive messages. A chatbot is application logic built on that channel. You can use the API with only a team inbox and no automation at all.",
-          "In practice the chatbot sits on top of your API access: it decides what to say and when, then uses the API to deliver it. If you need programmatic messaging without automated conversations, the API alone is enough; add a chatbot when you want routine exchanges handled without an agent.",
-        ],
-      },
-    ],
   },
   {
     slug: "/rcs",
@@ -218,36 +159,6 @@ export const productsA: ProductPage[] = [
       {
         q: "Is analytics included?",
         a: "Yes — delivery and interaction tracking for RCS messages is available over the same reporting API as your other channels.",
-      },
-    ],
-    deepDive: [
-      {
-        heading: "What is RCS Business Messaging?",
-        body: [
-          "RCS (Rich Communication Services) is the upgrade to SMS built into the native messages app on supported Android devices. RCS Business Messaging lets a verified business send branded, app-like messages there: rich cards, image carousels, suggested-reply buttons and suggested actions, all without the customer installing anything.",
-          "Messages come from a verified sender identity with your name and logo, so recipients can see the message is genuinely from your business. Where a device or network does not support RCS, sends can fall back to SMS so the message still arrives.",
-        ],
-      },
-      {
-        heading: "RCS vs SMS",
-        body: [
-          "SMS is plain text on a universal, decades-old standard that reaches essentially every phone. RCS keeps that native-inbox placement but adds rich media, branding, verification and interactive buttons — closer to an app experience than a text message.",
-          "The trade-off is reach: SMS works everywhere, while RCS depends on the recipient's device, operator and RCS support. A common pattern is to send RCS where it is available and fall back to SMS everywhere else, so you gain richness without losing coverage.",
-        ],
-      },
-      {
-        heading: "RCS vs WhatsApp",
-        body: [
-          "Both deliver rich, branded, interactive messages, but they live in different places. RCS appears in the phone's default messages app with no separate install and no opt-in to an app; WhatsApp reaches the large base of people who already use it, with its own catalogue, in-chat payments and conversation model.",
-          "WhatsApp runs on approved templates and a 24-hour service window; RCS uses verified agents and rich cards. Which fits depends on where your audience is and how they prefer to be reached — many businesses run both alongside SMS as fallback.",
-        ],
-      },
-      {
-        heading: "RCS availability in India",
-        body: [
-          "RCS reach in India depends on three things lining up: a device that supports RCS, a network that carries it, and operator-side enablement. Coverage has been growing, but it is not yet universal, so you should not assume every recipient will see a rich card.",
-          "For that reason we recommend pairing RCS with an SMS fallback, so recipients on unsupported devices or networks still receive the message as plain text. Agent verification is handled through our operator partners during onboarding.",
-        ],
       },
     ],
   },
@@ -304,36 +215,6 @@ export const productsA: ProductPage[] = [
         a: "Yes, within DLT's template and variable rules. We help draft the template so it passes approval on the first attempt.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is OTP SMS?",
-        body: [
-          "An OTP (one-time password) SMS delivers a short, single-use code that a customer enters to prove they control a phone number. It is the most widely used verification step in India for login, signup, password reset and payment confirmation, because it works on any phone with no app required.",
-          "OTP messages are transactional in nature — triggered by the user's own action — and in India they are sent over DLT-registered routes using an approved sender header and content template.",
-        ],
-      },
-      {
-        heading: "How OTP SMS delivery works",
-        body: [
-          "When a user requests a code, your system calls the send API with the recipient number and the approved OTP template, filling in the code as a variable. The message routes through a registered sender header on a transactional route and is delivered by the recipient's mobile operator.",
-          "A delivery report comes back over the API indicating whether the message was delivered or failed. Exact timing depends on the recipient's operator and network conditions, so codes are usually given a short validity window to balance security and usability.",
-        ],
-      },
-      {
-        heading: "SMS OTP vs WhatsApp OTP vs voice OTP",
-        body: [
-          "SMS OTP has the widest reach — it needs no app and works on every phone — which makes it the default. WhatsApp OTP can be richer and cheaper per message in some cases, but it requires the recipient to use WhatsApp and to have opted in. Voice OTP reads the code aloud over a call, useful when a text does not arrive or for users who prefer audio.",
-          "Because no single channel reaches everyone every time, higher-stakes verification often chains them: try SMS first, then fall back to WhatsApp or voice until the code lands. MsgBridge Verify automates that fallback.",
-        ],
-      },
-      {
-        heading: "OTP SMS best practices",
-        body: [
-          "Keep codes short but hard to guess, give them a limited validity window, and rate-limit requests per number to blunt abuse. Include a clear do-not-share warning in the message, and never send the same code indefinitely — expire and reissue instead.",
-          "On the compliance side, keep your DLT entity, header and template current, and make sure the template's variable positions match what you send. A verification-only fallback path across SMS, WhatsApp and voice raises the chance the code reaches a genuine user on the first try.",
-        ],
-      },
-    ],
   },
   {
     slug: "/sms/transactional",
@@ -387,36 +268,6 @@ export const productsA: ProductPage[] = [
         a: "Yes, including Hindi and other regional scripts. Unicode messages count as more segments than plain-English text, which affects the price per send.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is transactional SMS?",
-        body: [
-          "Transactional SMS is a service message triggered by a customer's own action or by an event on their account — an order placed, a payment received, a booking made, a balance running low. It carries information the recipient is expecting, not marketing.",
-          "Because these messages are informational and consented by the nature of the relationship, they can be sent at any time of day, unlike promotional sends. In India they still route over DLT-registered headers and approved content templates.",
-        ],
-      },
-      {
-        heading: "Transactional vs promotional SMS",
-        body: [
-          "The dividing line is intent. Transactional messages inform a customer about something they did or something happening on their account, and are not time-restricted. Promotional messages market a product or offer, must be scrubbed against the National DND registry, and can only be sent within the hours TRAI permits.",
-          "Getting the classification right matters: sending marketing content over a transactional route is a compliance breach. When in doubt, if the message sells rather than informs, treat it as promotional.",
-        ],
-      },
-      {
-        heading: "Common transactional SMS types",
-        body: [
-          "Typical uses include order confirmations and shipping updates, payment and refund confirmations, appointment and booking reminders, and account alerts such as low-balance or expiry notices. Each maps to an approved template with variables for the specific details, like an order number or amount.",
-          "These are the messages customers actively want, so they tend to be read quickly — which is why they are usually triggered directly from your order, payment or booking systems the moment the event happens.",
-        ],
-      },
-      {
-        heading: "DLT requirements for transactional SMS",
-        body: [
-          "To send transactional SMS in India you need a principal entity registered on the DLT platform, an approved sender header, and content templates approved with their variable positions declared. The header and template are then bound to your entity through the TM chain before sending can begin.",
-          "Approval timelines are set by the operators, not by us, so we help draft entities, headers and templates to pass review the first time. Once approved, sends and delivery reports run entirely over the API.",
-        ],
-      },
-    ],
   },
   {
     slug: "/sms/promotional",
@@ -468,36 +319,6 @@ export const productsA: ProductPage[] = [
       {
         q: "Do I need consent from recipients?",
         a: "Yes. You should maintain consent records for your promotional list — see the compliance guide for how opt-in and DND scrubbing fit together.",
-      },
-    ],
-    deepDive: [
-      {
-        heading: "What is promotional SMS?",
-        body: [
-          "Promotional SMS is marketing sent by text: sales, discounts, launch announcements and re-engagement campaigns. It is unsolicited in the sense that it sells rather than responds to a customer action, so India regulates it more tightly than transactional messaging.",
-          "These sends go over promotional routes, are scrubbed against the National Do Not Disturb (DND) registry, and are delivered only within the time windows TRAI permits. They still require a DLT-registered entity, header and approved template.",
-        ],
-      },
-      {
-        heading: "Promotional vs transactional SMS",
-        body: [
-          "Transactional messages inform a customer about their own activity — an order, a payment, a reminder — and can be sent at any time. Promotional messages market to the recipient and are restricted: DND-scrubbed and limited to permitted hours.",
-          "Content decides the route. A message that offers a discount or promotes a product is promotional even if it looks routine, and sending it over a transactional route is a breach. Match the route to what the message actually does.",
-        ],
-      },
-      {
-        heading: "Consent and DLT for promotional SMS",
-        body: [
-          "Two things gate a promotional send: DLT registration and consent. On the DLT side you need a registered principal entity, an approved header, and an approved promotional template, all bound to your entity before sending.",
-          "On the consent side, numbers on the National DND registry are automatically excluded from promotional routes, and you should keep your own records of opt-in for the list you send to. Consent and DND scrubbing work together — one is your responsibility to maintain, the other is applied at the platform level.",
-        ],
-      },
-      {
-        heading: "Promotional SMS best practices",
-        body: [
-          "Send to a list that has opted in, keep the message short and lead with the offer, and include a clear way to act — a short link or a keyword. Sending within permitted hours and only to consenting numbers protects both deliverability and your sender reputation.",
-          "Segment where you can, so the offer is relevant to who receives it, and use regional-language (Unicode) content for local audiences — noting that Unicode messages use more segments than plain English of the same length. Track delivery and opt-out data to keep refining the list.",
-        ],
       },
     ],
   },

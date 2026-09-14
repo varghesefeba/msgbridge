@@ -3,14 +3,6 @@ export interface FAQ {
   a: string;
 }
 
-/** A crawlable prose section: an H2 heading plus one or more paragraphs.
- *  Used for "What is X", comparisons, best practices and requirement explainers. */
-export interface ContentSection {
-  heading: string;
-  /** Paragraphs. Rendered as separate <p> blocks. */
-  body: string[];
-}
-
 export interface CodeExample {
   curl: string;
   node: string;
@@ -38,9 +30,6 @@ export interface ProductPage {
   goLive: { title: string; detail: string }[];
   related: string[]; // slugs
   faq: FAQ[];
-  /** Optional crawlable prose: "What is X", comparisons, best practices, etc.
-   *  Rendered as a scannable section between "How to go live" and "Related". */
-  deepDive?: ContentSection[];
   draft?: boolean;
 }
 
@@ -52,12 +41,6 @@ export interface SolutionPage {
   flow: { trigger: string; primary: string; fallback: string; outcome: string };
   templates: { title: string; body: string }[];
   setup: { step: string; owner: "MsgBridge" | "You" }[];
-  /** Optional: how to wire the workflow into your systems (one short paragraph). */
-  integration?: string;
-  /** Optional: metrics a team should watch for this outcome. */
-  metrics?: string[];
-  /** Optional FAQ — enables FAQPage structured data on the solution. */
-  faq?: FAQ[];
   relatedIndustries: string[]; // industry slugs
   relatedProducts: string[]; // product slugs
 }
@@ -71,8 +54,6 @@ export interface IndustryPage {
   complianceNotes: string[];
   templatePack: { title: string; body: string }[];
   integrations: string[];
-  /** Optional FAQ — enables FAQPage structured data on the industry page. */
-  faq?: FAQ[];
   relatedSolutions: string[]; // solution slugs
 }
 

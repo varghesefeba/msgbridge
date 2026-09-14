@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://msgbridge.in"),
   title: { default: "MsgBridge — SMS, WhatsApp, RCS & Voice API for India", template: "%s | MsgBridge" },
   description:
-    "One compliance-ready platform for SMS, WhatsApp, RCS and Voice messaging in India, with chatbots, OTP verification and webhooks. DLT and TRAI paperwork handled. Live in days, not quarters.",
+    "One compliance-ready platform for SMS, WhatsApp, RCS, Voice and AI messaging in India. DLT and TRAI paperwork handled. Live in days, not quarters.",
   icons: { icon: "/favicon.svg" },
   openGraph: {
     siteName: "MsgBridge",

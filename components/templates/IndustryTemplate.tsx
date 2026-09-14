@@ -4,18 +4,16 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 import Callout from "@/components/ui/Callout";
-import Accordion from "@/components/ui/Accordion";
 import CTABand from "@/components/ui/CTABand";
 import Backdrop from "@/components/motion/Backdrop";
 import { getPageSeo } from "@/lib/seo";
-import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export default function IndustryTemplate({ data, resolveLabel }: { data: IndustryPage; resolveLabel: (slug: string) => string }) {
   const seo = getPageSeo(data.slug);
   return (
     <div>
       <BreadcrumbJsonLd items={[{ name: "Home", slug: "/" }, { name: "Industries", slug: "/industries" }, { name: data.name, slug: data.slug }]} />
-      {data.faq && data.faq.length > 0 && <FaqJsonLd items={data.faq} />}
       <section className="relative overflow-hidden bg-paper-warm -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] pb-16 md:pb-24">
         <Backdrop tone="light" variant="grid" />
         <div className="container max-w-container relative">
@@ -173,19 +171,6 @@ export default function IndustryTemplate({ data, resolveLabel }: { data: Industr
           </div>
         </div>
       </section>
-
-      {data.faq && data.faq.length > 0 && (
-        <section className="py-20 md:py-24 bg-paper">
-          <div className="container max-w-container-narrow">
-            <Reveal>
-              <Eyebrow index="07" label="FAQ" />
-            </Reveal>
-            <Reveal delay={80}>
-              <Accordion items={data.faq} />
-            </Reveal>
-          </div>
-        </section>
-      )}
 
       <CTABand title={`Talk to us about ${data.name.toLowerCase()}`} supporting="We'll map your moments to the right channel mix." />
     </div>

@@ -3,12 +3,11 @@ import type { SolutionPage } from "@/lib/types";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
-import Accordion from "@/components/ui/Accordion";
 import CTABand from "@/components/ui/CTABand";
 import Backdrop from "@/components/motion/Backdrop";
 import Spotlight from "@/components/motion/Spotlight";
 import { getPageSeo } from "@/lib/seo";
-import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export default function SolutionTemplate({ data, resolveLabel }: { data: SolutionPage; resolveLabel: (slug: string) => string }) {
   const seo = getPageSeo(data.slug);
@@ -22,7 +21,6 @@ export default function SolutionTemplate({ data, resolveLabel }: { data: Solutio
   return (
     <div>
       <BreadcrumbJsonLd items={[{ name: "Home", slug: "/" }, { name: "Solutions" }, { name: data.name, slug: data.slug }]} />
-      {data.faq && data.faq.length > 0 && <FaqJsonLd items={data.faq} />}
       <section className="relative overflow-hidden bg-ink -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] pb-16 md:pb-24">
         <Backdrop tone="dark" variant="grid" />
         <Spotlight border={false} className="relative">
@@ -169,48 +167,6 @@ export default function SolutionTemplate({ data, resolveLabel }: { data: Solutio
           </div>
         </div>
       </section>
-
-      {(data.integration || (data.metrics && data.metrics.length > 0)) && (
-        <section className="py-20 md:py-24 bg-paper-warm">
-          <div className="container max-w-container grid md:grid-cols-2 gap-12">
-            {data.integration && (
-              <Reveal variant="left">
-                <Eyebrow index="07" label="How to integrate" />
-                <p className="text-[15.5px] text-text-secondary leading-relaxed max-w-[48ch]">{data.integration}</p>
-              </Reveal>
-            )}
-            {data.metrics && data.metrics.length > 0 && (
-              <Reveal variant="right" delay={80}>
-                <Eyebrow index="08" label="Metrics to monitor" />
-                <ul className="space-y-3">
-                  {data.metrics.map((m, i) => (
-                    <Reveal as="li" key={m} delay={i * 60} className="group/item flex gap-3.5 text-[15px] text-text-secondary">
-                      <span
-                        aria-hidden
-                        className="mt-[0.62em] h-px w-5 shrink-0 origin-left rounded-full bg-lime-deep transition-transform duration-base ease-out group-hover/item:scale-x-150"
-                      />
-                      <span className="transition-colors duration-fast group-hover/item:text-text-primary">{m}</span>
-                    </Reveal>
-                  ))}
-                </ul>
-              </Reveal>
-            )}
-          </div>
-        </section>
-      )}
-
-      {data.faq && data.faq.length > 0 && (
-        <section className="py-20 md:py-24 bg-paper">
-          <div className="container max-w-container-narrow">
-            <Reveal>
-              <Eyebrow index="09" label="FAQ" />
-            </Reveal>
-            <Reveal delay={80}>
-              <Accordion items={data.faq} />
-            </Reveal>
-          </div>
-        </section>
-      )}
 
       <CTABand title={`Ready to solve this with ${data.name}?`} supporting="Talk to us about your volumes and we'll recommend the right mix." />
     </div>

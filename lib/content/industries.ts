@@ -35,12 +35,6 @@ export const industries: IndustryPage[] = [
       "CRM systems such as Salesforce and Zoho",
       "Fraud and risk-monitoring systems for real-time alert triggers",
     ],
-    faq: [
-      { q: "Which SMS route should banks use for OTP and transaction alerts?", a: "Both belong on a transactional route, never a promotional one. A promotional route is DND-scrubbed and throttled, so an OTP or a fraud alert sent that way can be blocked or delayed rather than delivered in seconds. Register the OTP and alert templates under the service or transactional category at DLT so they bypass DND and marketing-window rules." },
-      { q: "Can we send EMI and collections reminders without breaching DND rules?", a: "Yes, if the reminder is tied to an existing loan account and drafted as a service message rather than an offer. These sit close to the DND boundary, so keep consent records on file and avoid promotional wording. A pay-now nudge on WhatsApp works well because it carries a button and a payment link, but the recipient must have opted in to WhatsApp first." },
-      { q: "Why do our OTP templates keep getting rejected at DLT approval?", a: "The usual causes are wording that implies a guaranteed return or a specific transaction value, an undeclared URL, or the wrong template category. Declare every variable and link at registration, keep the OTP template to code, validity and a do-not-share line, and register it under the correct transactional category before you rely on it going live." },
-      { q: "Is WhatsApp suitable for suspicious-transaction alerts?", a: "For the fastest fraud alert, SMS is safer: it reaches any handset instantly with no read-receipt or app dependency. WhatsApp suits richer, less time-critical messages such as KYC document uploads or EMI reminders, where a link and a quick-reply button add value and a short delay is acceptable." },
-    ],
     relatedSolutions: ["/solutions/otp-verification", "/solutions/payment-reminders", "/solutions/alerts"],
   },
   {
@@ -76,12 +70,6 @@ export const industries: IndustryPage[] = [
       "Appointment-scheduling software",
       "Lab information systems (LIS)",
       "Pharmacy management systems",
-    ],
-    faq: [
-      { q: "Can we send appointment reminders without revealing patient details?", a: "Yes. A reminder should carry only the doctor's name, date and time, plus a reschedule option, and no diagnosis or reason for the visit. WhatsApp works well here with an SMS fallback because it supports a reschedule link and a read confirmation, which helps cut no-shows without exposing anything clinical in the message body." },
-      { q: "How do we notify patients that a test report is ready?", a: "Send a plain notice that the report is available with a secure link to view it, never the test name, values or result in the message. Report-ready notices go out on an SMS transactional route so they land without an app, and the clinical detail stays behind the secure portal login rather than in the template." },
-      { q: "Is health-related content allowed in DLT and WhatsApp templates?", a: "Anything health-adjacent draws closer scrutiny at template approval, so draft to the stricter service category by default and keep clinical wording out of the body. Record consent for appointment reminders separately from marketing consent. Bulk outbreak or public-health advisories need pre-approval as public-interest content rather than standard promotional templates." },
-      { q: "What is the best channel for an emergency or outbreak alert?", a: "A Voice broadcast, often alongside SMS, gives the widest reach in a genuine public-health situation because it reaches patients who will not open an app, including older or low-literacy patients. At volume these advisories need clearance as public-interest content, not a standard promotional send." },
     ],
     relatedSolutions: ["/solutions/appointments", "/solutions/alerts", "/solutions/support"],
   },
@@ -119,12 +107,6 @@ export const industries: IndustryPage[] = [
       "CRM and agent-distribution platforms",
       "Payment gateways for premium collection",
     ],
-    faq: [
-      { q: "Are premium and renewal reminders treated as service or promotional messages?", a: "When they reference an existing policy number and a due date, they are service messages and can run on a transactional route. A cross-sell nudge such as a top-up cover offer is promotional, so it needs a DND-scrubbed route with consent on file even for a current policyholder. That distinction decides which route each template can use." },
-      { q: "How should we word a claim-status update?", a: "Keep it factual and short: the claim reference and the new status, with a link to a secure portal for the rest. Avoid stating settlement amounts or any medical or accident detail in the template itself, both because it invites template rejection and because it exposes sensitive information over SMS. SMS suits these because they need no login to read the headline." },
-      { q: "Can we send the policy document over WhatsApp?", a: "Yes. WhatsApp can carry the policy document as an attachment in an onboarding or renewal message, which is why it suits welcome and renewal moments where a pay-now button and the document belong together. SMS remains the fallback for policyholders who have not installed WhatsApp or opted in." },
-      { q: "Do we need to declare payment links inside insurance templates?", a: "Yes. Any URL inside a template, whether a fixed link or one that changes per policyholder, has to be declared at registration, and a per-policyholder link needs the dynamic-URL template category. Undeclared links are a common rejection reason at template review." },
-    ],
     relatedSolutions: ["/solutions/payment-reminders", "/solutions/alerts", "/solutions/support"],
   },
   {
@@ -160,12 +142,6 @@ export const industries: IndustryPage[] = [
       "Direct benefit transfer databases, via secure batch upload",
       "e-Governance portals",
       "Citizen helpline and call-centre software",
-    ],
-    faq: [
-      { q: "How does a government department register to send SMS?", a: "A department or public-sector undertaking usually registers under its own entity category on the DLT platform, which carries its own approval chain and timeline separate from commercial senders. Templates for enrolment, disbursal and grievance updates are registered as service or transactional content so they reach citizens on feature phones across every district." },
-      { q: "Can we send a public advisory to everyone in a district at once?", a: "Yes, but a bulk public advisory needs pre-approval as public-interest content. It does not move through the same throttling and DND rules as a commercial promotional send. For a genuine emergency, a Voice broadcast alongside SMS gives the widest reach, including residents with lower literacy or basic handsets." },
-      { q: "How are regional languages handled in citizen messaging?", a: "Multi-lingual content is often a requirement in public communication. Each language needs its own approved template, and any non-Latin script is sent as Unicode, which changes the SMS segment count. Test each regional script for correct rendering before a mass send so characters do not break mid-message." },
-      { q: "Who is responsible for the beneficiary data behind disbursal alerts?", a: "The department. Beneficiary data used to trigger a subsidy or benefit alert stays under the department's own data-handling process. MsgBridge's role is limited to delivering the message from the data the department supplies, typically over a secure batch upload or webhook." },
     ],
     relatedSolutions: ["/solutions/alerts", "/solutions/support", "/solutions/otp-verification"],
   },
@@ -203,12 +179,6 @@ export const industries: IndustryPage[] = [
       "Logistics and courier partner APIs",
       "CRM and marketing-automation tools",
     ],
-    faq: [
-      { q: "How do order and delivery notifications work across SMS and WhatsApp?", a: "Order and shipping updates are transactional and fire from a genuine triggered event, so they run on a transactional route. WhatsApp suits the order confirmation because it can carry the invoice and summary in one template, while SMS is the reliable fallback for shipping updates when a customer has not opted in to WhatsApp. Reusing an order template for marketing gets it re-classified and blocked." },
-      { q: "Are abandoned-cart reminders allowed under TRAI rules?", a: "Yes, but they are promotional. They must run on a DND-scrubbed route and respect TRAI's permitted send-time windows, which is why late-evening campaigns are a common rejection or block. WhatsApp works well for cart nudges because it can show a product image and a direct checkout link, provided the customer opted in." },
-      { q: "Can we confirm COD orders before dispatch?", a: "Yes. A COD-confirmation message or Voice call before the delivery attempt cuts failed deliveries. At meaningful volume these need a recorded opt-in, since a customer can flag an unexpected call or text as unsolicited. A short reply-YES SMS or a quick automated voice call both work for confirming intent." },
-      { q: "Does sending in regional languages change our messaging cost?", a: "It can. Regional-language content is sent as Unicode, which shortens each SMS segment and so raises the segment count for the same message length. For tier-2 and tier-3 reach this is worth planning for up front, since it is a frequent source of billing surprises." },
-    ],
     relatedSolutions: ["/solutions/order-updates", "/solutions/marketing", "/solutions/commerce"],
   },
   {
@@ -231,7 +201,7 @@ export const industries: IndustryPage[] = [
       "Each stage of a shipment's lifecycle needs its own approved template — bundling every update into one generic template is a common rejection reason.",
       "Failed-delivery and reschedule messages need the underlying delivery attempt logged and available on request, or high-frequency sends can get flagged.",
       "Voice broadcasts used for COD confirmation at scale need their own registered use case — routing them through an OTP-category voice line gets flagged.",
-      "Regional-language delivery updates, a real need outside metro areas, use Unicode encoding and split into more SMS segments, so plan message length for non-Latin scripts upfront.",
+      "Regional-language delivery updates, a real need outside metro areas, affect segment-based SMS pricing and should be planned for in the rate card upfront.",
     ],
     templatePack: [
       { title: "Pickup confirmed", body: "Your shipment #{{1}} has been picked up and is on its way to the hub." },
@@ -244,12 +214,6 @@ export const industries: IndustryPage[] = [
       "Courier and rider-allocation platforms",
       "Tally and other accounting software, for COD reconciliation",
       "Customer-facing tracking pages, via webhook",
-    ],
-    faq: [
-      { q: "How does delivery OTP and masked calling work for riders?", a: "A delivery OTP is a short code sent to the customer by SMS that the rider collects at the door to confirm the handover, which cuts disputed deliveries. Masked calling connects the rider and customer through a proxy number so neither sees the other's real number; this runs as a Voice use case and needs to be registered as such rather than routed through an OTP-category line." },
-      { q: "Why does each shipment stage need its own template?", a: "Pickup, out-for-delivery, failed attempt and COD reminder are distinct triggered events, and bundling them into one generic template is a common rejection reason at approval. Register an approved template per stage so each update maps to a real event and can be shown on request if a high-frequency sender is queried." },
-      { q: "What is the best channel for a failed delivery and reschedule?", a: "Start with SMS carrying a reschedule link, and fall back to a Voice call when the SMS goes unread, since a missed delivery is time-sensitive. Keep the underlying delivery attempt logged and available on request, because high-frequency failed-attempt sends can otherwise get flagged." },
-      { q: "Can we use voice broadcasts for COD confirmation at scale?", a: "Yes, and a Voice call confirms cash-in-hand before the rider is already at the door. At scale it needs its own registered use case; routing bulk COD voice calls through an OTP-category voice line gets them flagged. A simple automated call asking the customer to confirm works well for this." },
     ],
     relatedSolutions: ["/solutions/order-updates", "/solutions/payment-reminders", "/solutions/alerts"],
   },
@@ -287,12 +251,6 @@ export const industries: IndustryPage[] = [
       "Payment and refund-processing systems",
       "CRM for guest history and loyalty programmes",
     ],
-    faq: [
-      { q: "How do we make sure a gate change or cancellation reaches the guest in time?", a: "Put time-critical alerts on a distinct urgent-transactional template category so they are not queued behind marketing traffic during peak travel periods. For genuine disruptions, combine Voice and SMS: the message is urgent enough to interrupt regardless of the guest's channel preference, and neither channel depends on an app being open." },
-      { q: "Can we send the e-ticket or hotel voucher over WhatsApp?", a: "Yes. WhatsApp can carry the e-ticket or voucher as a document inside the booking-confirmation message itself, which is cleaner than a link. SMS remains a useful fallback for check-in reminders, which are time-boxed and need to land whichever app the guest happens to open." },
-      { q: "Are post-stay feedback requests and offers treated differently from booking messages?", a: "Yes. Booking confirmations and schedule alerts are transactional, while post-stay feedback requests and offers are promotional and must be DND-scrubbed. Sending feedback or offers on the same transactional route as a confirmation is a frequent and avoidable rejection, so keep them on separate templates and routes." },
-      { q: "How do we handle guests who booked through an OTA or travel agent?", a: "If MsgBridge messages the end guest directly, that guest's own consent must be on file, even when the booking came through an OTA or agency partner. For multi-language guest communication, register a separate approved template per language, since templates are not machine-translated by the platform." },
-    ],
     relatedSolutions: ["/solutions/appointments", "/solutions/alerts", "/solutions/surveys"],
   },
   {
@@ -328,12 +286,6 @@ export const industries: IndustryPage[] = [
       "School and college ERP and fee-management software",
       "CRM for admissions pipelines",
       "Parent-communication apps, via webhook",
-    ],
-    faq: [
-      { q: "Are messages to parents about an enrolled student treated as marketing?", a: "No. Communication to a parent about their enrolled child, such as an attendance alert or a fee reminder, is service communication and can run on a transactional route. Follow-ups to prospective families who only enquired are promotional, so they need consent and DND-scrubbing before the first message." },
-      { q: "How do fee-payment links work in a DLT template?", a: "The URL pattern must be declared at template registration. A single fixed payment page can go in a standard template, but a link that changes per student needs the dynamic-URL template category. Fee reminders suit SMS and WhatsApp together: WhatsApp carries the link and receipt, SMS reaches every parent's phone." },
-      { q: "Do we need a fresh template every time an exam schedule changes?", a: "You need an approved template per message type, not per individual send. A schedule-update template with variables for the class, date and new time covers repeated changes, so you are not re-registering each term; only a genuinely new message type needs a new template. Bulk batch updates still map to that approved template." },
-      { q: "Does messaging parents in regional languages affect cost?", a: "Yes. Regional-language SMS is sent as Unicode, which shortens each segment and raises the segment count for the same text. This is common outside metro schools and worth quoting for in advance so a multi-language parent broadcast does not cost more than expected." },
     ],
     relatedSolutions: ["/solutions/payment-reminders", "/solutions/alerts", "/solutions/lead-generation"],
   },
@@ -371,12 +323,6 @@ export const industries: IndustryPage[] = [
       "Payment gateways for instalment collection",
       "Property-portal lead feeds, via webhook",
     ],
-    faq: [
-      { q: "Can we message a lead the moment they enquire on a property portal?", a: "Only if consent was captured at the point of enquiry, such as the website form or portal listing. Lead-generation follow-ups are promotional by default, so that consent has to exist before the first WhatsApp message. With it in place, a WhatsApp chatbot or a Voice call gives the fast first response that matters in a long sales cycle." },
-      { q: "Are instalment reminders treated the same as project marketing?", a: "No. A payment reminder tied to an active buyer agreement is a service message, while a project-launch or new-inventory push to the same buyer list is promotional. They need separate templates and routes, even when they go to the same person, because the promotional message must be DND-scrubbed and the service one need not be." },
-      { q: "How should we word possession and returns messages?", a: "Carefully. Possession-date and returns language is commonly flagged at template review, so draft possession updates as indicative and tied to the buyer agreement rather than as a standalone promise or guarantee. Construction-milestone updates suit WhatsApp because it can carry progress photos or documents." },
-      { q: "Do project-wide construction updates need approval for every variant?", a: "Yes. A construction update sent to hundreds of buyers still requires template approval per message variant; there is no blanket approval covering \"updates\" in general. Register each milestone or message type as its own template with variables for the project and stage." },
-    ],
     relatedSolutions: ["/solutions/lead-generation", "/solutions/payment-reminders", "/solutions/appointments"],
   },
   {
@@ -412,12 +358,6 @@ export const industries: IndustryPage[] = [
       "Product-analytics tools, for trigger-based sends",
       "CRM and customer-success platforms",
       "In-app webhook events for real-time alerts",
-    ],
-    faq: [
-      { q: "Which route should we use for signup and login OTPs?", a: "A strictly transactional route. Routing account-security OTPs through a cheaper promotional-rate template is a common cause of failed delivery during signup spikes, because promotional traffic is throttled and DND-scrubbed. Keep OTPs on a transactional template with a Voice fallback so the code lands in seconds regardless of network conditions." },
-      { q: "Do DLT and TRAI rules apply to our international users?", a: "No. DLT registration and TRAI rules apply only to Indian mobile numbers. International users fall outside their scope entirely, so you route those messages through the relevant global channels instead. Only your India-facing SMS traffic needs DLT-registered templates and sender IDs." },
-      { q: "Are re-engagement and product-update messages promotional even for a B2B product?", a: "Yes, by default. Re-engagement nudges and feature announcements are promotional and DND-scrubbed even for a B2B tool, unless the recipient is a verified existing customer being messaged on a service route about their own account. WhatsApp suits these nudges because it carries richer content that has to earn attention." },
-      { q: "How far ahead of a launch should we register templates?", a: "Register template variants well before the release date. Approval queues do not move faster because a launch is close, so a same-week submission can miss the date. Draft and submit OTP, trial-expiry, billing and re-engagement templates ahead of time and treat approval as a lead-time dependency." },
     ],
     relatedSolutions: ["/solutions/otp-verification", "/solutions/alerts", "/solutions/lead-generation"],
   },

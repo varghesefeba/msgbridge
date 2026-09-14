@@ -51,36 +51,6 @@ export const productsB: ProductPage[] = [
         a: "We don't publish a connection-rate guarantee. Delivery runs through our operator partners at carrier-grade quality, and actual connection depends on network conditions and handset availability.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is voice OTP?",
-        body: [
-          "Voice OTP is a one-time verification code delivered by an automated phone call instead of a text message. When the recipient answers, a synthesized voice reads the digits aloud, usually one at a time and often repeated, so the code can be entered even on a device that can't receive or display SMS.",
-          "It solves the case where a text simply never arrives — a landline, a dual-SIM handset with the data SIM active, a temporarily out-of-coverage number, or an operator filter that drops the message. The code itself is identical to an SMS OTP; only the delivery channel changes.",
-        ],
-      },
-      {
-        heading: "How voice OTP works",
-        body: [
-          "Your application generates the code as it normally would, then calls the voice OTP endpoint with the recipient's number, the code, and a language. The platform places an outbound call from an approved caller ID and plays the code using text-to-speech in the chosen language.",
-          "The recipient can typically press a key to hear the code again, and you can set how many repeats are allowed before the call ends. Call outcome — answered, no answer, busy — is returned so your flow knows whether to retry, fall back to another channel, or ask the user to try again.",
-        ],
-      },
-      {
-        heading: "When to use voice OTP as a fallback",
-        body: [
-          "The most common pattern is a cascade: try SMS first, and place a voice call only when the SMS isn't confirmed within a short window. This keeps costs down while still rescuing the small share of users who would otherwise be locked out. MsgBridge Verify can run this cascade for you rather than you wiring the fallback logic by hand.",
-          "Voice is also a sensible primary channel for audiences that skew toward feature phones or landlines, and as a deliberate second factor on high-value actions, where a spoken confirmation adds friction that discourages automated abuse.",
-        ],
-      },
-      {
-        heading: "Voice OTP vs SMS OTP",
-        body: [
-          "SMS is faster, cheaper, and silent, so it stays the default for verification at scale. Its weakness is silent failure: when a message is filtered or undelivered, the user just waits. Voice reaches numbers SMS can't and forces an active answer, but it interrupts the user, depends on them picking up, and generally costs more per attempt.",
-          "The practical answer is rarely one or the other. Use SMS as the primary channel and voice as the fallback, so most users get the cheap, quiet path and the rest still complete verification.",
-        ],
-      },
-    ],
   },
   {
     slug: "/voice/tts",
@@ -130,36 +100,6 @@ export const productsB: ProductPage[] = [
       {
         q: "Do I get a delivery report?",
         a: "Yes, real-time delivery reports are available over the API, including call status and duration.",
-      },
-    ],
-    deepDive: [
-      {
-        heading: "What are text-to-speech calls?",
-        body: [
-          "A text-to-speech (TTS) call turns written text into a spoken phone call, generated on the fly by a synthetic voice. You supply the message the same way you'd write an SMS — including variables like a name, amount, or date — and the platform reads it aloud when the recipient answers.",
-          "Because nothing is pre-recorded, the same template can be personalized per call and switched between languages without a studio session. This makes TTS suited to high-volume, frequently changing notifications rather than fixed brand recordings.",
-        ],
-      },
-      {
-        heading: "How programmable voice calls work",
-        body: [
-          "You send an API request with the recipient's number, the message text, and a language code. The platform places an outbound call from an approved caller ID, synthesizes the text into speech, and plays it once the call connects. Optional keypress handling lets a call become interactive — confirm, reschedule, or transfer.",
-          "Every call returns a status over the API — connected, no answer, busy, failed — along with duration, so you can reconcile outcomes, trigger retries, or fall back to SMS. Where the flow is promotional, DLT registration and DND rules apply the same way they do to other channels.",
-        ],
-      },
-      {
-        heading: "Text-to-speech use cases",
-        body: [
-          "Common uses are appointment and payment reminders, order and delivery updates, and service notices that benefit from being heard rather than read. TTS reaches customers who don't check SMS reliably, and a spoken message tends to command more attention than a notification in a crowded inbox.",
-          "It also fits multilingual audiences well: segment a list by preferred language and each customer hears the same underlying message in their own language, without maintaining separate recordings for each.",
-        ],
-      },
-      {
-        heading: "Voice notifications vs SMS",
-        body: [
-          "SMS is cheaper, silent, and leaves a message the recipient can re-read at their own pace, which makes it the default for most notifications. A voice call is more intrusive and costs more, but it demands attention in the moment and works for people who rarely open texts or prefer to listen.",
-          "Many teams pair the two: send an SMS as the record of the notification and add a voice call for time-sensitive or high-stakes messages where you need the recipient to actually notice.",
-        ],
       },
     ],
   },
@@ -213,29 +153,6 @@ export const productsB: ProductPage[] = [
         a: "Call recording is optional and off by default; enable it only where required and disclosed to the recipient.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is a Press-1 campaign?",
-        body: [
-          "A Press-1 campaign is an automated outbound call that asks a short question and captures the recipient's keypress as the answer. The name comes from the typical prompt — \"press 1 to confirm\" — but any digits can be mapped to meanings, so a single call can offer confirm, decline, and speak-to-an-agent options.",
-          "It turns a one-way reminder into a measurable response. Instead of assuming a customer heard a message, you get a recorded choice you can act on: mark a payment acknowledged, confirm an appointment, or route an interested lead onward.",
-        ],
-      },
-      {
-        heading: "How Press-1 campaigns work",
-        body: [
-          "The platform dials each number and plays a recorded or text-to-speech script that names the keys to press. When the recipient presses a key, that input is captured and posted to your webhook in real time, or made available in the delivery report API alongside the call outcome.",
-          "You define which keys are valid and what each one means. Unanswered or no-input calls are logged distinctly so you can retry them or route them differently, and a chosen key can transfer the caller straight to a live agent rather than only recording a response.",
-        ],
-      },
-      {
-        heading: "Press-1 use cases",
-        body: [
-          "Typical uses are payment reminders that need an acknowledgement, appointment confirmations, and lead qualification where pressing a key signals genuine interest before an agent spends time on the call. Post-service feedback and satisfaction surveys work the same way, capturing a rating as a keypress.",
-          "The pattern is most valuable when the response drives a downstream action — flagging a confirmed appointment, prioritizing a warm lead, or escalating an unanswered collections call — so the captured input feeds directly into your CRM or workflow.",
-        ],
-      },
-    ],
   },
   {
     slug: "/voice/broadcast",
@@ -286,29 +203,6 @@ export const productsB: ProductPage[] = [
         a: "Broadcast content that is promotional in nature is scrubbed against the DND registry the same way promotional SMS is; purely informational service messages are not.",
       },
     ],
-    deepDive: [
-      {
-        heading: "What is voice broadcast?",
-        body: [
-          "Voice broadcast sends the same recorded or text-to-speech message to a large list of numbers automatically. It's a one-to-many announcement: everyone on the list receives the identical call, with no agent dialing manually and no expectation of a two-way conversation.",
-          "It suits messages that need to reach many people around the same time — a service disruption, an event reminder, a recall notice — where a phone call is more likely to be noticed than a text and personalization isn't required.",
-        ],
-      },
-      {
-        heading: "How voice broadcast works",
-        body: [
-          "You upload a contact list, attach a recording or a text-to-speech script, and either send immediately or schedule the broadcast for a specific date and time. The platform then dials through the list, playing the message to each number that answers.",
-          "Dialing is paced across operator partners rather than firing all at once, so the campaign completes reliably instead of overloading the network. You can pause or cancel a running broadcast, set a retry window for unanswered numbers, and pull per-number outcomes from the delivery report. Promotional content is scrubbed against DND; service messages are not.",
-        ],
-      },
-      {
-        heading: "When to use voice broadcast",
-        body: [
-          "Reach for it when timing and reach matter more than dialogue: emergency and outage alerts, safety or recall notices, event and deadline reminders, and seasonal greetings to a large audience. A spoken call cuts through when an SMS might be ignored or missed.",
-          "If you need a response — a confirmation, a routed choice, or a transfer to an agent — a Press-1 campaign is the better fit, since a plain broadcast only plays a message and doesn't capture input.",
-        ],
-      },
-    ],
   },
   {
     slug: "/voice/ivr",
@@ -357,36 +251,6 @@ export const productsB: ProductPage[] = [
       {
         q: "Can I see call analytics?",
         a: "Yes, menu selections, call duration and abandonment are all available in the delivery report API and dashboard.",
-      },
-    ],
-    deepDive: [
-      {
-        heading: "What is IVR?",
-        body: [
-          "IVR — interactive voice response — is the automated phone menu that greets a caller and lets them choose where their call goes by pressing a key or, in some setups, speaking. It answers every inbound call instantly and routes it without a person having to pick up and transfer manually.",
-          "For a business, it's the front door to a phone number: it plays a greeting, presents options like sales, support, or billing, and connects the caller to the right team, a specific number, voicemail, or a callback queue.",
-        ],
-      },
-      {
-        heading: "How an IVR flow works",
-        body: [
-          "You attach the IVR to a number — toll-free, virtual, or an existing line where forwarding is supported — and define a flow: a greeting, a set of menu options, and where each option routes. When a call comes in, the platform plays the menu and waits for the caller's input.",
-          "Based on the keypress, the call is routed to a team, an individual number, or another sub-menu. Steps can capture information such as an account or order number and pass it to the agent on transfer, and routing rules can vary by time of day, day of week, or holiday. Menu selections and outcomes are available in reports.",
-        ],
-      },
-      {
-        heading: "IVR use cases",
-        body: [
-          "The core use is routing inbound calls by department so callers reach the right team the first time. It also screens calls before an agent picks up, collects an account or order number to speed up handling, and runs after-hours menus that route to voicemail or a callback request.",
-          "Businesses with multiple branches or a single national number lean on IVR to split one number across locations and functions, keeping the published number simple while the routing behind it stays flexible.",
-        ],
-      },
-      {
-        heading: "Designing an effective IVR menu",
-        body: [
-          "Keep the top menu short — a handful of clear options, most useful first — and state the option before the key (\"for support, press 2\") so callers can act as they listen. Avoid deep nesting; every extra layer loses people. Offer a path to a human, and make sure unanswered or timed-out inputs route somewhere sensible rather than dead-ending.",
-          "Treat the menu as something you tune. Use the analytics on menu selections and abandonment to see where callers drop off or pick the wrong option, then adjust the wording and routing — which you can do without changing the number.",
-        ],
       },
     ],
   },

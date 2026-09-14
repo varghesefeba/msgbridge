@@ -7,8 +7,8 @@ import Magnetic from "@/components/motion/Magnetic";
 import Backdrop from "@/components/motion/Backdrop";
 import { useReducedMotion } from "@/lib/motion";
 
-const CHANNELS = ["WhatsApp", "SMS", "RCS", "Voice"];
-const TRUST = ["DLT handled", "One contract, every channel", "Live in days", "Delivery reports built in"];
+const CHANNELS = ["WhatsApp", "SMS", "RCS", "Voice", "AI"];
+const TRUST = ["DLT handled", "One contract, five channels", "Live in days", "Delivery reports built in"];
 
 const SNIPPET = {
   curl: `curl https://api.msgbridge.in/v1/messages \\\n  -H "Authorization: Bearer $API_KEY" \\\n  -d to="+91XXXXXXXXXX" \\\n  -d channel="sms" \\\n  -d template_id="otp_login"`,
@@ -57,7 +57,7 @@ export default function Hero() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-lime" />
               </span>
               <span className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-on-dark-3">
-                SMS · WhatsApp · RCS · Voice
+                SMS · WhatsApp · RCS · Voice · AI
               </span>
             </div>
 
