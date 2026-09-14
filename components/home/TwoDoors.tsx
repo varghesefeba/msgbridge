@@ -16,10 +16,10 @@ const DOORS = [
     href: "/solutions/marketing",
     eyebrow: "For business teams",
     title: "Campaigns, templates, reports",
-    body: "Ready-to-register DLT templates, campaign tooling, and a named person who answers the phone.",
+    body: "Published pricing, ready-to-register DLT templates, and a named person who answers the phone.",
     cta: "Explore solutions",
     dark: false,
-    items: ["Template library", "Delivery reports", "Book a demo"],
+    items: ["Rate card", "Template library", "Book a demo"],
   },
 ];
 

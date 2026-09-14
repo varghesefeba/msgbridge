@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import ProseTemplate from "@/components/templates/ProseTemplate";
 import Callout from "@/components/ui/Callout";
 import Button from "@/components/ui/Button";
 
-export const metadata: Metadata = buildMetadata("/developers/postman");
+export const metadata: Metadata = { title: "Postman Collection", description: "Import the MsgBridge API into Postman.", alternates: { canonical: "/developers/postman" } };
 
 export default function PostmanPage() {
   return (

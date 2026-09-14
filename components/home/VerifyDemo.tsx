@@ -63,8 +63,8 @@ export default function VerifyDemo() {
                 SMS, then WhatsApp, then a voice call.
               </h2>
               <p className="mt-4 max-w-[54ch] text-[17px] text-on-dark-3">
-                One API call runs the whole cascade until the code lands. If SMS is delayed or undelivered, Verify
-                automatically falls back to WhatsApp and then a voice call — so more users finish signup and login.
+                One API call runs the whole cascade until the code lands. It is the only thing in this catalogue a
+                competitor can&rsquo;t match by shaving a paisa off an SMS rate.
               </p>
 
               <ol className="mt-10 space-y-0">

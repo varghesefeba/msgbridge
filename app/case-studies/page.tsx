@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CTABand from "@/components/ui/CTABand";
 
-export const metadata: Metadata = buildMetadata("/case-studies");
+export const metadata: Metadata = { title: "Case Studies", description: "Customer case studies, published as they're signed off.", alternates: { canonical: "/case-studies" } };
 
 export default function CaseStudiesPage() {
   return (

@@ -86,10 +86,10 @@ export default function ChannelsGrid() {
           </div>
           <Reveal delay={140}>
             <Link
-              href="/contact"
+              href="/pricing"
               className="group/link inline-flex items-center gap-2 font-display text-[13px] font-semibold uppercase tracking-wide text-lime-forest"
             >
-              <span className="underline-grow">Talk to us</span>
+              <span className="underline-grow">Compare rates</span>
               <span aria-hidden className="transition-transform duration-base group-hover/link:translate-x-1">
                 →
               </span>

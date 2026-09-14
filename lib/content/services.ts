@@ -25,6 +25,7 @@ export const services: ServicePage[] = [
       { stage: "Header and template approval", timeline: "1-3 working days", outsideControl: true },
       { stage: "TM chain binding and final activation", timeline: "1 working day" },
     ],
+    cost: { model: "included", detail: "Included with your MsgBridge plan for your first entity, header and up to 10 templates. Additional templates are billed per template." },
     rejectionPolicy: "If a header or template is rejected, we redraft and resubmit at no extra charge until it is approved. Rejections are almost always a wording or variable-placement issue we can see and fix before resubmitting.",
     faq: [
       { q: "How long does DLT registration actually take?", a: "Our part of the work is typically done within a day or two. The approval queues are run by the DLT operator and TRAI-registered entities, and their timelines are outside our control — we've listed realistic ranges above." },
@@ -55,6 +56,7 @@ export const services: ServicePage[] = [
       { stage: "Business verification review", timeline: "1-2 weeks", outsideControl: true },
       { stage: "Green tick application (if eligible)", timeline: "2-4 weeks", outsideControl: true },
     ],
+    cost: { model: "one-off", detail: "A one-off setup fee, quoted based on whether a green tick application is included." },
     rejectionPolicy: "If verification is rejected, we review the reason, correct the documentation or profile details, and resubmit. Most rejections come from a mismatch between the legal name on file and the name shown on the account.",
     faq: [
       { q: "Is the green tick guaranteed?", a: "No. Eligibility and approval are decided by the platform, not by us. We apply on your behalf and tell you honestly if your business doesn't currently meet the criteria." },
@@ -87,6 +89,7 @@ export const services: ServicePage[] = [
       { stage: "Testing and your team's training", timeline: "1-2 working days" },
       { stage: "Launch, subject to WhatsApp's platform review", timeline: "1-3 working days", outsideControl: true },
     ],
+    cost: { model: "quoted", detail: "Quoted per project based on the number of conversation flows and integrations. Ask for a quote with your requirements." },
     rejectionPolicy: "If WhatsApp's platform review flags your templates or bot messaging, we adjust the copy and resubmit at no extra charge. This is a normal part of launch, not a sign anything went wrong.",
     faq: [
       { q: "How complex can the chatbot be?", a: "From a simple FAQ-and-handover bot to a multi-step booking or lead-qualification flow. Complexity is the main driver of both cost and timeline." },
@@ -114,6 +117,7 @@ export const services: ServicePage[] = [
       { stage: "Sandbox integration and testing", timeline: "2-5 working days" },
       { stage: "Production credentials and go-live checklist", timeline: "1 working day" },
     ],
+    cost: { model: "included", detail: "Included with every MsgBridge plan. There is no separate charge for integration support." },
     rejectionPolicy: "There's no approval queue here — if a test message fails, we debug the request together until it delivers, before you go live.",
     faq: [
       { q: "Do you provide SDKs?", a: "Yes, for the languages shown in the quickstart, with example requests for the rest via plain HTTP." },
@@ -143,6 +147,7 @@ export const services: ServicePage[] = [
       { stage: "Launch ads and WhatsApp follow-up flow", timeline: "1 working day" },
       { stage: "Ongoing monitoring and optimisation", timeline: "Continuous, reviewed weekly" },
     ],
+    cost: { model: "quoted", detail: "Quoted as a monthly management fee plus your ad spend, based on target volume and region." },
     rejectionPolicy: "If a platform rejects an ad for policy reasons, we revise the creative and resubmit at no extra charge — this is common with regulated categories like finance and healthcare.",
     faq: [
       { q: "Which platforms do you run ads on?", a: "Meta platforms (Facebook and Instagram) are the primary channels, chosen for the WhatsApp follow-up integration." },

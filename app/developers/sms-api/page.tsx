@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import DevApiTemplate from "@/components/templates/DevApiTemplate";
 
-export const metadata: Metadata = buildMetadata("/developers/sms-api");
+export const metadata: Metadata = { title: "SMS API", description: "Send transactional, OTP and promotional SMS over one endpoint.", alternates: { canonical: "/developers/sms-api" } };
 
 export default function SmsApiPage() {
   return (

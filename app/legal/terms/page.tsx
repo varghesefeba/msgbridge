@@ -14,7 +14,7 @@ export default function TermsPage() {
       <h2>3. Acceptable use</h2>
       <p>Use of the platform is subject to our <a href="/legal/aup">Acceptable Use Policy</a>. We may suspend traffic that violates TRAI regulations or risks our operator relationships.</p>
       <h2>4. Billing</h2>
-      <p>Charges are billed per the rates agreed in your contract or order form in effect at the time of sending.</p>
+      <p>Charges are billed per the rate card in effect at the time of sending, as published on our <a href="/pricing">Pricing</a> page or agreed in your contract.</p>
       <h2>5. Liability</h2>
       <p>MsgBridge delivers messaging through licensed operator and platform partners and is not liable for delivery failures caused by third-party network, device or regulatory conditions outside our control.</p>
       <h2>6. Changes</h2>

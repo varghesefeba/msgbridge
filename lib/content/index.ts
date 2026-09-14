@@ -11,6 +11,7 @@ export { solutions, services, industries, longTailSectors };
 const specialLabels: Record<string, string> = {
   "/verify": "MsgBridge Verify",
   "/compliance": "DLT & TRAI Compliance Guide",
+  "/pricing": "Pricing",
   "/contact": "Contact",
   "/developers/quickstart": "Developer Quickstart",
 };

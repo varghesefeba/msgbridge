@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import DevApiTemplate from "@/components/templates/DevApiTemplate";
 
-export const metadata: Metadata = buildMetadata("/developers/voice-api");
+export const metadata: Metadata = { title: "Voice API", description: "Place text-to-speech or press-1 voice calls.", alternates: { canonical: "/developers/voice-api" } };
 
 export default function VoiceApiPage() {
   return (

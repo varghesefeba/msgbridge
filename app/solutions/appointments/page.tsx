@@ -1,12 +1,19 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getSolution, resolveLabel } from "@/lib/content";
-import { buildMetadata } from "@/lib/seo";
 import SolutionTemplate from "@/components/templates/SolutionTemplate";
 
 const SLUG = "/solutions/appointments";
 
-export const generateMetadata = (): Metadata => buildMetadata(SLUG);
+export function generateMetadata(): Metadata {
+  const data = getSolution(SLUG);
+  if (!data) return {};
+  return {
+    title: data.name,
+    description: data.problem,
+    alternates: { canonical: SLUG },
+  };
+}
 
 export default function Page() {
   const data = getSolution(SLUG);

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import DevApiTemplate from "@/components/templates/DevApiTemplate";
 
-export const metadata: Metadata = buildMetadata("/developers/whatsapp-api");
+export const metadata: Metadata = { title: "WhatsApp API", description: "Send WhatsApp template and session messages.", alternates: { canonical: "/developers/whatsapp-api" } };
 
 export default function WhatsappApiPage() {
   return (

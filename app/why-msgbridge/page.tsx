@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 import CTABand from "@/components/ui/CTABand";
 
-export const metadata: Metadata = buildMetadata("/why-msgbridge");
+export const metadata: Metadata = {
+  title: "Why MsgBridge",
+  description: "One contract across five channels, DLT handled, transparent pricing, and a named person who answers.",
+  alternates: { canonical: "/why-msgbridge" },
+};
 
 const REASONS = [
   { title: "One contract, five channels", detail: "SMS, WhatsApp, RCS, Voice and AI under a single integration and invoice, not five separate vendor relationships." },
   { title: "DLT, handled", detail: "Entity registration, header, content templates and TM chain binding run in parallel with your build, not after you hit a wall." },
   { title: "Delivery you can prove", detail: "Carrier-grade delivery through our operator partners, with operator-end delivery reports available over the API." },
-  { title: "One integration, five channels", detail: "SMS, WhatsApp, RCS, voice and verification through a single API and one contract — not five vendors to reconcile." },
+  { title: "Transparent pricing", detail: "Every rate is published on the pricing page. No wall, no mandatory sales call to see a number." },
   { title: "A named person answers", detail: "Support on WhatsApp with a stated response-time commitment — not a ticket number." },
-  { title: "MsgBridge Verify", detail: "Cascading OTP delivery across SMS, WhatsApp and voice in one API call, so a failure on one channel automatically tries the next until the code lands." },
+  { title: "MsgBridge Verify", detail: "Cascading OTP delivery across SMS, WhatsApp and voice, in one API call — the one thing in this catalogue a competitor can't match by shaving a paisa off an SMS rate." },
 ];
 
 export default function WhyPage() {

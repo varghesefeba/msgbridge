@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CTABand from "@/components/ui/CTABand";
 
-export const metadata: Metadata = buildMetadata("/careers");
+export const metadata: Metadata = { title: "Careers", description: "Open roles at MsgBridge.", alternates: { canonical: "/careers" } };
 
 export default function CareersPage() {
   return (

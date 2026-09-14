@@ -9,9 +9,9 @@ import Stepper from "@/components/ui/Stepper";
 import Accordion from "@/components/ui/Accordion";
 import CTABand from "@/components/ui/CTABand";
 import Callout from "@/components/ui/Callout";
+import Button from "@/components/ui/Button";
 import Backdrop from "@/components/motion/Backdrop";
-import { getPageSeo } from "@/lib/seo";
-import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+import Spotlight from "@/components/motion/Spotlight";
 
 const channelColor: Record<string, string> = {
   WhatsApp: "#25D366",
@@ -25,14 +25,9 @@ const channelColor: Record<string, string> = {
 export default function ProductTemplate({ data, resolveLabel }: { data: ProductPage; resolveLabel: (slug: string) => string }) {
   const color = channelColor[data.category] ?? "#AFFF49";
   const fileSlug = data.slug.replace(/^\//, "").replace(/\//g, "-");
-  const seo = getPageSeo(data.slug);
 
   return (
     <div>
-      <BreadcrumbJsonLd
-        items={[{ name: "Home", slug: "/" }, { name: data.category }, { name: data.name, slug: data.slug }]}
-      />
-      <FaqJsonLd items={data.faq} />
       <section className="relative overflow-hidden bg-paper-warm -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] pb-16 md:pb-24">
         <Backdrop tone="light" variant="grid" />
         <div className="container max-w-container relative">
@@ -58,14 +53,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
                 {data.oneLiner}
               </h1>
             </Reveal>
-            {seo?.intro && (
-              <Reveal delay={140}>
-                <p className="mt-6 max-w-[62ch] text-[16px] md:text-[17px] leading-relaxed text-text-secondary">
-                  {seo.intro}
-                </p>
-              </Reveal>
-            )}
-            <Reveal delay={200}>
+            <Reveal delay={160}>
               <p className="mt-6 flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.14em] text-text-muted">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: color }} />
                 {data.category}
@@ -142,6 +130,28 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
         </div>
       </section>
 
+      <section className="relative overflow-hidden bg-ink py-20 md:py-24">
+        <Backdrop tone="dark" variant="dots" glow={false} />
+        <div className="container max-w-container relative">
+          <Reveal variant="scale">
+            <Spotlight className="shine-host rounded-lg border border-ink-line bg-white/[0.03] p-8 md:p-10">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div>
+                  <Eyebrow index="07" label="Price" dark />
+                  <p className="font-display font-extrabold text-on-dark text-[36px] md:text-[44px] tracking-tight">
+                    {data.price.headline}
+                  </p>
+                  <p className="mt-2 text-[15px] text-on-dark-3 max-w-[50ch]">{data.price.note}</p>
+                </div>
+                <Button href="/pricing" variant="secondary" arrow className="!text-on-dark !border-ink-line hover:!border-lime hover:!bg-white/5 shrink-0">
+                  See the full rate card
+                </Button>
+              </div>
+            </Spotlight>
+          </Reveal>
+        </div>
+      </section>
+
       {data.category === "RCS" && (
         <div className="container max-w-container py-10">
           <Reveal>
@@ -153,7 +163,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
       <section className="py-20 md:py-24 bg-paper-warm">
         <div className="container max-w-container">
           <Reveal>
-            <Eyebrow index="07" label="Related channels" />
+            <Eyebrow index="08" label="Related channels" />
           </Reveal>
           <div className="flex flex-wrap gap-3">
             {data.related.map((slug, i) => (
@@ -176,7 +186,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
       <section className="py-20 md:py-24 bg-paper">
         <div className="container max-w-container-narrow">
           <Reveal>
-            <Eyebrow index="08" label="FAQ" />
+            <Eyebrow index="09" label="FAQ" />
           </Reveal>
           <Reveal delay={80}>
             <Accordion items={data.faq} />

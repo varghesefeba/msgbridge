@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Reveal from "@/components/ui/Reveal";
 
-export const metadata: Metadata = buildMetadata("/blog");
+export const metadata: Metadata = { title: "Blog & Guides", description: "Guides on DLT compliance, channel strategy and messaging in India.", alternates: { canonical: "/blog" } };
 
 const POSTS = [
   { slug: "/blog/dlt-registration-checklist", title: "The DLT registration checklist most teams miss", excerpt: "The five things that most often delay approval, and how to avoid each one." },

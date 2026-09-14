@@ -12,7 +12,7 @@ npm run lint       # next lint (ESLint)
 npm run typecheck  # tsc --noEmit — strict TypeScript check, no test suite exists
 ```
 
-There is no test framework. Verification is `npm run typecheck` + `npm run build`. Git remote: `origin` → https://github.com/varghesefeba/msgbridge.git (branch `main`).
+There is no test framework. Verification is `npm run typecheck` + `npm run build`. This is not a git repository.
 
 ## What this is
 
@@ -37,19 +37,6 @@ Each `app/**/page.tsx` in these families is boilerplate: define `const SLUG`, lo
 ### `draft?: boolean`
 
 Many content objects and nav links carry `draft: true`, meaning the offering isn't fully confirmed. Templates render a `Callout` disclaimer for draft pages; the nav (`lib/nav.ts`) flags draft links. Preserve `draft` flags — don't silently promote a page to non-draft.
-
-### SEO metadata system (blueprint-driven)
-
-Per-page SEO copy lives centrally, not scattered across pages:
-
-- **`lib/page-seo.ts`** — auto-generated map `PAGE_SEO[slug] = { title, description, intro }` derived from the SEO content blueprint. `title` is used absolutely (already ends with "| MsgBridge"), `description` is the meta description, `intro` is the opening paragraph rendered near the top of the page.
-- **`lib/seo.ts`** — `getPageSeo(slug)` and `buildMetadata(slug, fallback?)`. Every content page's `generateMetadata` and every standalone page's `metadata` calls `buildMetadata(SLUG)`, which sets an absolute title, description, self-referencing canonical, and Open Graph/Twitter fields.
-- Templates render `getPageSeo(data.slug)?.intro` as the crawlable opening paragraph and emit `BreadcrumbList` (all four) and `FaqJsonLd` (products, services) structured data via **`components/seo/JsonLd.tsx`**.
-- To change a page's title/meta/opening, edit `lib/page-seo.ts`. To add a new page, add its slug there too.
-
-### No pricing
-
-Pricing has been removed entirely: no `/pricing*` routes, no pricing nav menu, no per-product `price` or per-service `cost` fields/sections, no rate cards or estimators. `/pricing` and `/pricing/:path*` 301-redirect to `/contact` (`next.config.mjs`). Do not reintroduce pricing pages, `price`/`cost` type fields, or "see pricing / rate card" copy.
 
 ### Navigation and SEO are kept in sync by hand
 

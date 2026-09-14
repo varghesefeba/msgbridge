@@ -6,14 +6,10 @@ import Reveal from "@/components/ui/Reveal";
 import Callout from "@/components/ui/Callout";
 import CTABand from "@/components/ui/CTABand";
 import Backdrop from "@/components/motion/Backdrop";
-import { getPageSeo } from "@/lib/seo";
-import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export default function IndustryTemplate({ data, resolveLabel }: { data: IndustryPage; resolveLabel: (slug: string) => string }) {
-  const seo = getPageSeo(data.slug);
   return (
     <div>
-      <BreadcrumbJsonLd items={[{ name: "Home", slug: "/" }, { name: "Industries", slug: "/industries" }, { name: data.name, slug: data.slug }]} />
       <section className="relative overflow-hidden bg-paper-warm -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] pb-16 md:pb-24">
         <Backdrop tone="light" variant="grid" />
         <div className="container max-w-container relative">
@@ -31,11 +27,6 @@ export default function IndustryTemplate({ data, resolveLabel }: { data: Industr
               How {data.name.toLowerCase()} messages customers
             </h1>
           </Reveal>
-          {seo?.intro && (
-            <Reveal delay={180}>
-              <p className="mt-6 max-w-[62ch] text-[16px] md:text-[17px] leading-relaxed text-text-secondary">{seo.intro}</p>
-            </Reveal>
-          )}
         </div>
       </section>
 

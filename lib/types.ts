@@ -28,6 +28,7 @@ export interface ProductPage {
   whenToUse: string[];
   requirements: { item: string; leadTime: string }[];
   goLive: { title: string; detail: string }[];
+  price: { headline: string; note: string };
   related: string[]; // slugs
   faq: FAQ[];
   draft?: boolean;
@@ -65,6 +66,7 @@ export interface ServicePage {
   deliverables: string[];
   whatYouProvide: string[];
   process: { stage: string; timeline: string; outsideControl?: boolean }[];
+  cost: { model: "included" | "one-off" | "quoted"; detail: string };
   rejectionPolicy: string;
   faq: FAQ[];
   draft?: boolean;

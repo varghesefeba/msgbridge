@@ -32,6 +32,7 @@ export const productsB: ProductPage[] = [
       { title: "Test in sandbox", detail: "Trigger a handful of test calls to your own number before switching on live traffic." },
       { title: "Go live", detail: "Point your OTP flow at the Voice OTP endpoint, generally activated within a day of setup." },
     ],
+    price: { headline: "From ₹0.09 per second", note: "Billed per second connected; see the full voice rate card." },
     related: ["/verify", "/sms/otp", "/compliance"],
     faq: [
       {
@@ -83,6 +84,7 @@ export const productsB: ProductPage[] = [
       { title: "Choose the language", detail: "Pick from supported languages; the same text can be sent to different customers in different languages." },
       { title: "Schedule or send", detail: "Send immediately, or schedule a bulk campaign for a specific time window." },
     ],
+    price: { headline: "From ₹0.09 per second", note: "Per-second billing; bulk campaign volumes get a lower blended rate." },
     related: ["/voice/press-1", "/voice/broadcast", "/solutions/appointments"],
     faq: [
       {
@@ -134,6 +136,7 @@ export const productsB: ProductPage[] = [
       { title: "Submit the recording", detail: "Provide a voice recording or let us generate one from text." },
       { title: "Test and launch", detail: "Run a small test batch, confirm the responses land correctly in your system, then launch the full campaign." },
     ],
+    price: { headline: "From ₹0.11 per connected call", note: "Priced per connected call; unanswered calls aren't billed." },
     related: ["/voice/tts", "/solutions/payment-reminders", "/services/integration"],
     faq: [
       {
@@ -184,6 +187,7 @@ export const productsB: ProductPage[] = [
       { title: "Prepare the message", detail: "Record the message or write the text for us to generate it." },
       { title: "Schedule the broadcast", detail: "Send immediately or schedule for a specific date and time." },
     ],
+    price: { headline: "From ₹0.08 per second", note: "Volume discounts apply above 50,000 calls per campaign." },
     related: ["/voice/tts", "/solutions/alerts", "/numbers/toll-free"],
     faq: [
       {
@@ -234,6 +238,7 @@ export const productsB: ProductPage[] = [
       { title: "Build and test", detail: "We configure the flow and you test it end to end before it goes live." },
       { title: "Launch and adjust", detail: "Once live, menu options and routing can be updated without changing your number." },
     ],
+    price: { headline: "From ₹999/month", note: "Platform fee plus per-minute usage; see the full voice rate card." },
     related: ["/numbers/toll-free", "/voice/press-1", "/solutions/support"],
     faq: [
       {
@@ -286,6 +291,7 @@ export const productsB: ProductPage[] = [
       { title: "Submit KYC", detail: "Complete the business KYC required to activate a toll-free number." },
       { title: "Configure and activate", detail: "Routing and IVR go live once KYC and number selection are confirmed." },
     ],
+    price: { headline: "From ₹999/month", note: "Plus per-minute usage; higher-volume plans available." },
     related: ["/voice/ivr", "/numbers/missed-call", "/compliance"],
     faq: [
       {
@@ -336,6 +342,7 @@ export const productsB: ProductPage[] = [
       { title: "Connect the trigger", detail: "Point the webhook at your CRM or configure an automatic SMS reply." },
       { title: "Publish and track", detail: "Put the number on your ad or website and track calls in real time." },
     ],
+    price: { headline: "From ₹499/month", note: "Plus a small fee per missed call registered." },
     related: ["/numbers/toll-free", "/solutions/lead-generation", "/sms/transactional"],
     faq: [
       {
@@ -386,6 +393,7 @@ export const productsB: ProductPage[] = [
       { title: "Integrate the API", detail: "Call the bridging endpoint whenever two parties need to be connected." },
       { title: "Go live", detail: "Numbers unmask automatically once the time-to-live expires, no manual cleanup needed." },
     ],
+    price: { headline: "From ₹0.10 per minute bridged", note: "Plus a small fee per number allocated from the pool." },
     related: ["/numbers/toll-free", "/industries/logistics", "/services/integration"],
     faq: [
       {
@@ -437,6 +445,7 @@ export const productsB: ProductPage[] = [
       { title: "Submit for approval", detail: "The application goes through the relevant registry and operator review." },
       { title: "Configure and launch", detail: "Once approved, we wire the code into your two-way SMS flow." },
     ],
+    price: { headline: "Quoted per use case", note: "Short-code pricing depends on term length and exclusivity; ask for the current rate card." },
     related: ["/sms/two-way", "/compliance", "/services/dlt-registration"],
     faq: [
       {

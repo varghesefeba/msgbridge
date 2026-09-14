@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CTABand from "@/components/ui/CTABand";
 import TemplateLibrary, { type TemplateEntry } from "@/components/resources/TemplateLibrary";
 import { industries, solutions } from "@/lib/content";
 
-export const metadata: Metadata = buildMetadata("/resources/templates");
+export const metadata: Metadata = {
+  title: "SMS Templates Library",
+  description: "DLT-format content templates by industry and use case, ready to register — copy and adapt.",
+  alternates: { canonical: "/resources/templates" },
+};
 
 export default function TemplatesPage() {
   const entries: TemplateEntry[] = [

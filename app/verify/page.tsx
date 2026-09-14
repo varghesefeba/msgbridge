@@ -45,8 +45,8 @@ const FAQ = [
     a: "It sits alongside it. Point verification traffic at the Verify endpoint and keep using OTP SMS directly for flows that don't need failover.",
   },
   {
-    q: "Is it billed per attempt or per verification?",
-    a: "Per successful verification — a cascade that tries all three channels counts the same as one that succeeds on the first, so retries across channels don't multiply what you pay.",
+    q: "How is it billed?",
+    a: "Per successful verification. Pricing is confirmed on your rate card — see the Pricing page for current rates.",
   },
 ];
 
@@ -107,6 +107,18 @@ export default function VerifyPage() {
               ))}
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="py-20 bg-paper">
+        <div className="container max-w-container">
+          <Eyebrow index="06" label="What it costs" />
+          <p className="font-display font-extrabold text-text-primary text-[32px] mb-2">Charged per successful verification</p>
+          <p className="text-[15px] text-text-secondary max-w-[56ch]">
+            Not per attempt — a cascade that tries all three channels costs the same as one that succeeds on SMS.
+            See the <a className="text-lime-forest font-medium underline" href="/pricing">pricing page</a> for the
+            current rate.
+          </p>
         </div>
       </section>
 
