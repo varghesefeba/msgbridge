@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import ProseTemplate from "@/components/templates/ProseTemplate";
 import Callout from "@/components/ui/Callout";
 
-export const metadata: Metadata = { title: "Rate Limits", description: "Default API rate limits and how to raise them.", alternates: { canonical: "/developers/limits" } };
+export const metadata: Metadata = buildMetadata("/developers/limits");
 
 export default function LimitsPage() {
   return (

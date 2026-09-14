@@ -31,6 +31,13 @@ export const metadata: Metadata = {
   description:
     "One compliance-ready platform for SMS, WhatsApp, RCS, Voice and AI messaging in India. DLT and TRAI paperwork handled. Live in days, not quarters.",
   icons: { icon: "/favicon.svg" },
+  openGraph: {
+    siteName: "MsgBridge",
+    type: "website",
+    locale: "en_IN",
+    url: "https://msgbridge.in",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

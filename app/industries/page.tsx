@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import Link from "next/link";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
@@ -6,11 +7,7 @@ import Reveal from "@/components/ui/Reveal";
 import CTABand from "@/components/ui/CTABand";
 import { industries, longTailSectors } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Industries",
-  description: "How every kind of Indian business messages its customers, on the right channel, without tripping over DLT.",
-  alternates: { canonical: "/industries" },
-};
+export const metadata: Metadata = buildMetadata("/industries");
 
 export default function IndustriesIndex() {
   return (

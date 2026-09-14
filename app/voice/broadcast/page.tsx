@@ -1,19 +1,12 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getProduct, resolveLabel } from "@/lib/content";
+import { buildMetadata } from "@/lib/seo";
 import ProductTemplate from "@/components/templates/ProductTemplate";
 
 const SLUG = "/voice/broadcast";
 
-export function generateMetadata(): Metadata {
-  const data = getProduct(SLUG);
-  if (!data) return {};
-  return {
-    title: data.name,
-    description: data.oneLiner,
-    alternates: { canonical: SLUG },
-  };
-}
+export const generateMetadata = (): Metadata => buildMetadata(SLUG);
 
 export default function Page() {
   const data = getProduct(SLUG);

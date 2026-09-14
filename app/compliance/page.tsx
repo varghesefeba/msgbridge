@@ -1,16 +1,12 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Callout from "@/components/ui/Callout";
 import CTABand from "@/components/ui/CTABand";
 import TableOfContents from "@/components/compliance/TableOfContents";
 
-export const metadata: Metadata = {
-  title: "DLT & TRAI Compliance Guide",
-  description:
-    "What DLT is, how principal entity, sender ID and content template registration work, and realistic timelines at each stage — a genuine reference, not a lead magnet.",
-  alternates: { canonical: "/compliance" },
-};
+export const metadata: Metadata = buildMetadata("/compliance");
 
 const SECTIONS = [
   { id: "what-is-dlt", label: "What DLT is" },

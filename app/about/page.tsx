@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import ProseTemplate from "@/components/templates/ProseTemplate";
 
-export const metadata: Metadata = {
-  title: "About MsgBridge",
-  description: "MsgBridge is India's unified customer-communication platform — SMS, WhatsApp, RCS, Voice and AI messaging under one contract, with DLT compliance handled.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = buildMetadata("/about");
 
 export default function AboutPage() {
   return (

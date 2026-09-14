@@ -3,7 +3,7 @@ import Button from "@/components/ui/Button";
 
 const SUGGESTIONS = [
   { label: "MsgBridge Verify", href: "/verify" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Industries", href: "/industries" },
   { label: "Developer quickstart", href: "/developers/quickstart" },
   { label: "Compliance guide", href: "/compliance" },
 ];

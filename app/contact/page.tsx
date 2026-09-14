@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import ContactForm from "@/components/contact/ContactForm";
 
-export const metadata: Metadata = {
-  title: "Contact & Support",
-  description: "Talk to us about SMS, WhatsApp, RCS, Voice or MsgBridge Verify. First response within 4 working hours.",
-  alternates: { canonical: "/contact" },
-};
+export const metadata: Metadata = buildMetadata("/contact");
 
 export default function ContactPage() {
   return (

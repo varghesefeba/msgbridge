@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import DevApiTemplate from "@/components/templates/DevApiTemplate";
 
-export const metadata: Metadata = { title: "RCS API", description: "Send RCS rich cards and carousels.", alternates: { canonical: "/developers/rcs-api" } };
+export const metadata: Metadata = buildMetadata("/developers/rcs-api");
 
 export default function RcsApiPage() {
   return (

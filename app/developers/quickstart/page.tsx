@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import CodeCard from "@/components/ui/CodeCard";
@@ -6,11 +7,7 @@ import Stepper from "@/components/ui/Stepper";
 import CTABand from "@/components/ui/CTABand";
 import Button from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title: "Developer Quickstart",
-  description: "Signup to a delivered test message in under five minutes. cURL, Node and Python examples against the MsgBridge sandbox.",
-  alternates: { canonical: "/developers/quickstart" },
-};
+export const metadata: Metadata = buildMetadata("/developers/quickstart");
 
 const STEPS = [
   { title: "Get a sandbox key", detail: "Request sandbox credentials — no card, no contract." },

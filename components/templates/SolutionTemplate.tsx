@@ -6,8 +6,11 @@ import Reveal from "@/components/ui/Reveal";
 import CTABand from "@/components/ui/CTABand";
 import Backdrop from "@/components/motion/Backdrop";
 import Spotlight from "@/components/motion/Spotlight";
+import { getPageSeo } from "@/lib/seo";
+import { BreadcrumbJsonLd } from "@/components/seo/JsonLd";
 
 export default function SolutionTemplate({ data, resolveLabel }: { data: SolutionPage; resolveLabel: (slug: string) => string }) {
+  const seo = getPageSeo(data.slug);
   const flow = [
     { label: "Trigger", value: data.flow.trigger },
     { label: "Primary channel", value: data.flow.primary },
@@ -17,6 +20,7 @@ export default function SolutionTemplate({ data, resolveLabel }: { data: Solutio
 
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Home", slug: "/" }, { name: "Solutions" }, { name: data.name, slug: data.slug }]} />
       <section className="relative overflow-hidden bg-ink -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] pb-16 md:pb-24">
         <Backdrop tone="dark" variant="grid" />
         <Spotlight border={false} className="relative">
@@ -32,6 +36,11 @@ export default function SolutionTemplate({ data, resolveLabel }: { data: Solutio
                 {data.problem}
               </h1>
             </Reveal>
+            {seo?.intro && (
+              <Reveal delay={180}>
+                <p className="mt-6 max-w-[62ch] text-[16px] md:text-[17px] leading-relaxed text-on-dark-3">{seo.intro}</p>
+              </Reveal>
+            )}
           </div>
         </Spotlight>
       </section>

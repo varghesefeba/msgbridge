@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import ProseTemplate from "@/components/templates/ProseTemplate";
 import Button from "@/components/ui/Button";
 
-export const metadata: Metadata = {
-  title: "Partner & Reseller Programme",
-  description: "Margin, white-label options and a sub-account model for agencies and resellers reaching Indian businesses.",
-  alternates: { canonical: "/partners" },
-};
+export const metadata: Metadata = buildMetadata("/partners");
 
 export default function PartnersPage() {
   return (

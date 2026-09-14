@@ -14,6 +14,8 @@ const nextConfig = {
       { source: "/ivr-service", destination: "/voice/ivr", permanent: true },
       { source: "/opt-in", destination: "/compliance", permanent: true },
       { source: "/facebook-promotion", destination: "/services/social-leads", permanent: true },
+      { source: "/pricing", destination: "/contact", permanent: true },
+      { source: "/pricing/:path*", destination: "/contact", permanent: true },
     ];
   },
 };

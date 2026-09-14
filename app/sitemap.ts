@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { products, solutions, industries, services } from "@/lib/content";
 
 const STATIC_ROUTES = [
-  "/", "/verify", "/pricing", "/pricing/sms", "/pricing/whatsapp", "/pricing/voice", "/pricing/rcs",
+  "/", "/verify",
   "/compliance", "/industries", "/about", "/why-msgbridge", "/contact", "/partners", "/careers",
   "/blog", "/blog/dlt-registration-checklist", "/blog/whatsapp-vs-sms-otp", "/blog/rcs-in-india",
   "/case-studies", "/resources/templates",

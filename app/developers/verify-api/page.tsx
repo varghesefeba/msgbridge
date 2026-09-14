@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import DevApiTemplate from "@/components/templates/DevApiTemplate";
 
-export const metadata: Metadata = { title: "Verify API", description: "Start and check a cascading OTP verification.", alternates: { canonical: "/developers/verify-api" } };
+export const metadata: Metadata = buildMetadata("/developers/verify-api");
 
 export default function VerifyApiPage() {
   return (

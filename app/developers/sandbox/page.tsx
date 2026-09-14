@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Callout from "@/components/ui/Callout";
 import ContactForm from "@/components/contact/ContactForm";
 
-export const metadata: Metadata = { title: "Sandbox & Test Credentials", description: "Request sandbox credentials to start building.", alternates: { canonical: "/developers/sandbox" } };
+export const metadata: Metadata = buildMetadata("/developers/sandbox");
 
 export default function SandboxPage() {
   return (

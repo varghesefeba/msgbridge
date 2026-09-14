@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Callout from "@/components/ui/Callout";
 import CTABand from "@/components/ui/CTABand";
 
-export const metadata: Metadata = { title: "Error Codes", description: "Common API error codes and how to resolve them.", alternates: { canonical: "/developers/errors" } };
+export const metadata: Metadata = buildMetadata("/developers/errors");
 
 const ERRORS = [
   { code: "invalid_number", status: 400, fix: "The recipient number isn't a valid E.164 number. Include the country code, e.g. +91XXXXXXXXXX." },

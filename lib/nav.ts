@@ -166,21 +166,6 @@ export const developersMenu: NavMenu = {
   ],
 };
 
-export const pricingMenu: NavMenu = {
-  label: "Pricing",
-  columns: [
-    {
-      links: [
-        { label: "Compare Plans", href: "/pricing" },
-        { label: "SMS Pricing", href: "/pricing/sms", draft: true },
-        { label: "WhatsApp Pricing", href: "/pricing/whatsapp", draft: true },
-        { label: "Voice Pricing", href: "/pricing/voice", draft: true },
-        { label: "RCS Pricing", href: "/pricing/rcs", draft: true },
-      ],
-    },
-  ],
-};
-
 export const companyMenu: NavMenu = {
   label: "Company",
   columns: [
@@ -206,7 +191,7 @@ export const companyMenu: NavMenu = {
   ],
 };
 
-export const primaryMenus: NavMenu[] = [productsMenu, solutionsMenu, industriesMenu, developersMenu, pricingMenu, companyMenu];
+export const primaryMenus: NavMenu[] = [productsMenu, solutionsMenu, industriesMenu, developersMenu, companyMenu];
 
 export const footerLegal: NavLink[] = [
   { label: "Terms of Service", href: "/legal/terms" },

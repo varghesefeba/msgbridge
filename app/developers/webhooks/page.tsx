@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 import DevApiTemplate from "@/components/templates/DevApiTemplate";
 
-export const metadata: Metadata = { title: "Webhooks & Delivery Reports", description: "Delivery report payload shape and retry behaviour.", alternates: { canonical: "/developers/webhooks" } };
+export const metadata: Metadata = buildMetadata("/developers/webhooks");
 
 export default function WebhooksPage() {
   return (
