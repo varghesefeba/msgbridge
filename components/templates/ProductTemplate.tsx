@@ -150,10 +150,36 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
         </div>
       )}
 
+      {data.deepDive && data.deepDive.length > 0 && (
+        <section className="py-20 md:py-24 bg-paper">
+          <div className="container max-w-container-narrow">
+            <Reveal>
+              <Eyebrow index="07" label="In depth" />
+            </Reveal>
+            <div className="space-y-10">
+              {data.deepDive.map((sec, i) => (
+                <Reveal key={sec.heading} delay={i * 50}>
+                  <h2 className="font-display font-bold text-text-primary text-[20px] md:text-[25px] tracking-tight mb-3 text-balance">
+                    {sec.heading}
+                  </h2>
+                  <div className="space-y-3.5">
+                    {sec.body.map((para, j) => (
+                      <p key={j} className="text-[15.5px] leading-relaxed text-text-secondary max-w-[68ch]">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="py-20 md:py-24 bg-paper-warm">
         <div className="container max-w-container">
           <Reveal>
-            <Eyebrow index="07" label="Related channels" />
+            <Eyebrow index={data.deepDive?.length ? "08" : "07"} label="Related channels" />
           </Reveal>
           <div className="flex flex-wrap gap-3">
             {data.related.map((slug, i) => (
@@ -176,7 +202,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
       <section className="py-20 md:py-24 bg-paper">
         <div className="container max-w-container-narrow">
           <Reveal>
-            <Eyebrow index="08" label="FAQ" />
+            <Eyebrow index={data.deepDive?.length ? "09" : "08"} label="FAQ" />
           </Reveal>
           <Reveal delay={80}>
             <Accordion items={data.faq} />

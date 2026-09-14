@@ -8,7 +8,7 @@ export default function TermsPage() {
     <ProseTemplate eyebrow="Legal" title="Terms of Service" crumb="Terms of Service">
       <p>These terms govern your use of the MsgBridge platform and website. By creating an account or sending traffic through MsgBridge, you agree to them.</p>
       <h2>1. The service</h2>
-      <p>MsgBridge provides access to SMS, WhatsApp, RCS, Voice and AI messaging delivered through our operator and platform partners, under a single contract and API.</p>
+      <p>MsgBridge provides access to SMS, WhatsApp, RCS and Voice messaging — together with automation such as chatbots, OTP verification and webhooks — delivered through our operator and platform partners, under a single contract and API.</p>
       <h2>2. Your responsibilities</h2>
       <p>You are responsible for the content you send, holding valid consent for promotional messages, and keeping your DLT entity, headers and templates registered and accurate.</p>
       <h2>3. Acceptable use</h2>

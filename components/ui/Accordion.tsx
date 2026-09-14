@@ -7,15 +7,12 @@ export default function Accordion({ items }: { items: FAQ[] }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="border-t border-line" itemScope itemType="https://schema.org/FAQPage">
+    <div className="border-t border-line">
       {items.map((item, i) => {
         const isOpen = open === i;
         return (
           <div
             key={item.q}
-            itemScope
-            itemProp="mainEntity"
-            itemType="https://schema.org/Question"
             className="group/faq relative border-b border-line"
           >
             <span
@@ -26,7 +23,6 @@ export default function Accordion({ items }: { items: FAQ[] }) {
 
             <h3 className="m-0">
               <button
-                itemProp="name"
                 aria-expanded={isOpen}
                 onClick={() => setOpen(isOpen ? null : i)}
                 className="flex w-full items-center gap-4 py-5 pl-5 pr-2 text-left"
@@ -65,15 +61,11 @@ export default function Accordion({ items }: { items: FAQ[] }) {
             </h3>
 
             <div
-              itemScope
-              itemProp="acceptedAnswer"
-              itemType="https://schema.org/Answer"
               className="grid transition-[grid-template-rows] duration-base ease-out"
               style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
             >
               <div className="overflow-hidden">
                 <p
-                  itemProp="text"
                   className="max-w-[66ch] pb-5 pl-[36px] pr-2 text-[15.5px] leading-[1.7] text-text-secondary transition-opacity duration-base"
                   style={{ opacity: isOpen ? 1 : 0 }}
                 >

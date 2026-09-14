@@ -7,12 +7,18 @@ import Accordion from "@/components/ui/Accordion";
 import CTABand from "@/components/ui/CTABand";
 import Chip from "@/components/ui/Chip";
 import VerifyDemo from "@/components/home/VerifyDemo";
+import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/JsonLd";
+
+const TITLE = "MsgBridge Verify — Cascading OTP Delivery Across SMS, WhatsApp & Voice";
+const DESCRIPTION =
+  "One API call sends an OTP over SMS, then falls back to WhatsApp and a voice call until the code lands — so more users finish signup and login. Built for fintech, e-commerce and healthcare in India.";
 
 export const metadata: Metadata = {
-  title: "MsgBridge Verify — cascading OTP delivery",
-  description:
-    "SMS, then WhatsApp, then a voice call — one API call, until the code lands. MsgBridge Verify is cascading OTP delivery for fintech, e-commerce and healthcare.",
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: { canonical: "/verify" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/verify", siteName: "MsgBridge", type: "website", locale: "en_IN" },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
 const CONFIG_ROWS = [
@@ -53,6 +59,8 @@ const FAQ = [
 export default function VerifyPage() {
   return (
     <div>
+      <BreadcrumbJsonLd items={[{ name: "Home", slug: "/" }, { name: "Products" }, { name: "MsgBridge Verify", slug: "/verify" }]} />
+      <FaqJsonLd items={FAQ} />
       <section className="relative overflow-hidden -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] bg-ink pb-20">
         <div className="container max-w-container">
           <Breadcrumb tone="dark" items={[{ label: "Products", href: "/" }, { label: "MsgBridge Verify" }]} />

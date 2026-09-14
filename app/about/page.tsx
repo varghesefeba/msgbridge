@@ -14,8 +14,9 @@ export default function AboutPage() {
     >
       <h2>What we do</h2>
       <p>
-        We bring SMS, WhatsApp, RCS, Voice and AI messaging together under one contract, one API and one invoice —
-        and run the DLT and TRAI paperwork alongside your integration, so going live takes days, not quarters.
+        We bring SMS, WhatsApp, RCS and Voice together under one contract, one API and one invoice — with automation
+        like chatbots, OTP verification and webhooks on top — and run the DLT and TRAI paperwork alongside your
+        integration, so going live takes days, not quarters.
       </p>
       <h2>How we work</h2>
       <p>

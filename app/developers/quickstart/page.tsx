@@ -89,6 +89,34 @@ export default function QuickstartPage() {
         </div>
       </section>
 
+      <section className="py-16 bg-paper">
+        <div className="container max-w-container-narrow">
+          <Eyebrow index="05" label="Next steps" />
+          <p className="text-[15px] text-text-secondary mb-6 max-w-[56ch]">
+            Once your first message is delivering, explore the channel APIs, verification and delivery tooling.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { label: "SMS API", href: "/developers/sms-api" },
+              { label: "WhatsApp API", href: "/developers/whatsapp-api" },
+              { label: "Voice API", href: "/developers/voice-api" },
+              { label: "Verify API", href: "/developers/verify-api" },
+              { label: "Webhooks", href: "/developers/webhooks" },
+              { label: "Error codes", href: "/developers/errors" },
+            ].map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="group/pill inline-flex items-center gap-2 rounded-pill border border-line bg-white px-5 py-2.5 text-[14px] font-medium text-text-primary transition-all duration-base ease-out hover:-translate-y-0.5 hover:border-lime-deep hover:shadow-card-sm"
+              >
+                {l.label}
+                <span aria-hidden className="text-lime-forest transition-transform duration-base ease-out group-hover/pill:translate-x-1">→</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTABand title="Have a technical question first?" supporting="Talk to our integration team before you write a line of code." cta="Talk to us" />
     </div>
   );

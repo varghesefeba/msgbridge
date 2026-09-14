@@ -44,8 +44,21 @@ Per-page SEO copy lives centrally, not scattered across pages:
 
 - **`lib/page-seo.ts`** — auto-generated map `PAGE_SEO[slug] = { title, description, intro }` derived from the SEO content blueprint. `title` is used absolutely (already ends with "| MsgBridge"), `description` is the meta description, `intro` is the opening paragraph rendered near the top of the page.
 - **`lib/seo.ts`** — `getPageSeo(slug)` and `buildMetadata(slug, fallback?)`. Every content page's `generateMetadata` and every standalone page's `metadata` calls `buildMetadata(SLUG)`, which sets an absolute title, description, self-referencing canonical, and Open Graph/Twitter fields.
-- Templates render `getPageSeo(data.slug)?.intro` as the crawlable opening paragraph and emit `BreadcrumbList` (all four) and `FaqJsonLd` (products, services) structured data via **`components/seo/JsonLd.tsx`**.
+- Templates render `getPageSeo(data.slug)?.intro` as the crawlable opening paragraph and emit `BreadcrumbList` and `FaqJsonLd` structured data via **`components/seo/JsonLd.tsx`**. FAQ structured data is JSON-LD only — `Accordion` carries no microdata (avoid double FAQPage declarations).
 - To change a page's title/meta/opening, edit `lib/page-seo.ts`. To add a new page, add its slug there too.
+
+### On-page content depth (optional data fields)
+
+Content types carry optional fields that templates render as extra crawlable sections when present (all non-fabricated — capabilities only):
+- `ProductPage.deepDive?: ContentSection[]` — "In depth" prose ("What is X", comparisons, best practices). `ContentSection = { heading, body: string[] }`.
+- `SolutionPage.integration?`, `.metrics?: string[]`, `.faq?: FAQ[]` — "How to integrate", "Metrics to monitor", FAQ.
+- `IndustryPage.faq?: FAQ[]` — industry-specific FAQ.
+- `DevApiTemplate` renders a shared "API essentials" (base URL, auth, status codes) + "Related references" block on every developer API page.
+- Deduplication rule: product = "what it is", solution = "business problem", industry = "how this sector uses it", developer = "how to integrate", blog = "educational". Do not repeat the same paragraph across page types.
+
+### AI is automation, not a channel
+
+Channels are SMS / WhatsApp / RCS / Voice (4). "AI" is presented as automation (AI chatbot, Verify, webhooks), never as a fifth messaging channel. Do not re-add "AI" to the hero channel rotation or channel counts.
 
 ### No pricing
 
