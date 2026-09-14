@@ -215,118 +215,112 @@ export default function Header() {
 }
 
 function MegaPanel({ menu, open, onClose, pathname }: { menu: NavMenu; open: boolean; onClose: () => void; pathname: string }) {
-  const panelRef = useRef<HTMLDivElement>(null);
-  const [highlight, setHighlight] = useState({ top: 0, left: 0, width: 0, height: 0, on: false });
+  const [active, setActive] = useState(0);
 
-  const move = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const panel = panelRef.current;
-    if (!panel) return;
-    const item = e.currentTarget.getBoundingClientRect();
-    const box = panel.getBoundingClientRect();
-    setHighlight({ top: item.top - box.top, left: item.left - box.left, width: item.width, height: item.height, on: true });
-  };
+  // Reset to the first tab each time the menu opens.
+  useEffect(() => {
+    if (open) setActive(0);
+  }, [open]);
+
+  const cols = menu.columns;
+  const activeCol = cols[Math.min(active, cols.length - 1)] ?? cols[0];
 
   return (
     <div
-      ref={panelRef}
-      role="menu"
       aria-label={menu.label}
-      onMouseLeave={() => setHighlight((h) => ({ ...h, on: false }))}
       className={`absolute left-0 right-0 top-[calc(100%+10px)] origin-top overflow-hidden rounded-2xl border border-line bg-white/95 shadow-[0_36px_80px_-40px_rgba(10,11,13,0.55)] backdrop-blur-xl transition-all duration-slow ease-out ${
         open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
       }`}
     >
-      <span
-        aria-hidden
-        className="absolute rounded-lg bg-lime-050 transition-all duration-300 ease-out"
-        style={{
-          top: highlight.top,
-          left: highlight.left,
-          width: highlight.width,
-          height: highlight.height,
-          opacity: highlight.on ? 1 : 0,
-        }}
-      />
-
-      <div
-        className="relative grid gap-8 p-7"
-        style={{ gridTemplateColumns: `repeat(${menu.columns.length}, minmax(0,1fr)) ${menu.promo ? "300px" : ""}` }}
-      >
-        {menu.columns.map((col, i) => (
-          <div
-            key={i}
-            className="transition-all duration-slow ease-out"
-            style={{ transitionDelay: open ? `${60 + i * 45}ms` : "0ms", opacity: open ? 1 : 0, transform: open ? "none" : "translateY(6px)" }}
-          >
-            {col.heading && (
-              <p className="mb-3 flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-[0.12em] text-text-muted">
-                <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
-                {col.heading}
-              </p>
-            )}
-            <ul className="space-y-0.5">
-              {col.links.map((link) => {
-                const active = pathname === link.href;
-                return (
-                  <li key={`${link.href}|${link.label}`}>
-                    <Link
-                      href={link.href}
-                      onClick={onClose}
-                      onMouseEnter={move}
-                      onFocus={(e) => move(e as unknown as React.MouseEvent<HTMLAnchorElement>)}
-                      className="group/link relative z-10 flex flex-col rounded-lg px-2.5 py-2"
-                    >
-                      <span className="flex items-center gap-2 text-[14.5px] font-medium text-text-primary">
-                        {link.label}
-                        {active && <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" aria-label="current page" />}
-                        {link.draft && (
-                          <span className="rounded-xs bg-ink px-1.5 py-0.5 font-display text-[9.5px] uppercase tracking-wide text-lime">Soon</span>
-                        )}
-                        <span
-                          aria-hidden
-                          className="ml-auto -translate-x-1 text-lime-forest opacity-0 transition-all duration-base group-hover/link:translate-x-0 group-hover/link:opacity-100"
-                        >
-                          →
-                        </span>
-                      </span>
-                      {link.sub && <span className="mt-0.5 text-[12.5px] leading-snug text-text-muted">{link.sub}</span>}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
-
-        {menu.promo && (
-          <Link
-            href={menu.promo.href}
-            onClick={onClose}
-            className="group/promo relative z-10 flex flex-col justify-between overflow-hidden rounded-xl border border-lime-200 bg-lime-050 p-5 transition-colors duration-base hover:bg-lime-100"
-            style={{ transitionDelay: open ? "180ms" : "0ms", opacity: open ? 1 : 0, transform: open ? "none" : "translateY(6px)" }}
-          >
-            <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-lime" />
-            <div>
-              <p className="mb-2 font-mono text-[10.5px] font-medium uppercase tracking-[0.14em] text-lime-forest">Featured</p>
-              <p className="mb-1 font-display text-[16px] font-bold text-text-primary">{menu.promo.title}</p>
-              <p className="text-[13px] leading-snug text-text-secondary">{menu.promo.body}</p>
-            </div>
-            <div className="mt-4 flex items-center gap-1.5" aria-hidden>
-              {["#53BDEB", "#25D366", "#FF9A3E"].map((c, i) => (
-                <span key={c} className="relative flex h-2 w-2">
+      <div className="flex min-h-[248px]">
+        {/* Left rail — column headings as clickable tabs */}
+        <div className="w-[240px] shrink-0 border-r border-line bg-paper-warm/60 p-4">
+          <p className="mb-3 px-3 font-mono text-[10.5px] font-medium uppercase tracking-[0.14em] text-text-muted">{menu.label}</p>
+          <div role="tablist" aria-orientation="vertical" aria-label={menu.label} className="flex flex-col gap-1">
+            {cols.map((col, i) => {
+              const label = col.heading ?? menu.label;
+              const isActive = i === active;
+              return (
+                <button
+                  key={i}
+                  role="tab"
+                  aria-selected={isActive}
+                  tabIndex={isActive ? 0 : -1}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  className={`group/tab relative flex items-center justify-between gap-2 rounded-lg px-3 py-2.5 text-left font-display text-[14px] font-semibold transition-all duration-fast ${
+                    isActive ? "bg-white text-text-primary shadow-card-sm" : "text-text-secondary hover:bg-white/60 hover:text-text-primary"
+                  }`}
+                >
                   <span
-                    className="absolute inline-flex h-full w-full rounded-full opacity-60 motion-safe:group-hover/promo:animate-ping"
-                    style={{ background: c, animationDelay: `${i * 180}ms` }}
+                    aria-hidden
+                    className={`absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-lime-deep transition-opacity duration-base ${
+                      isActive ? "opacity-100" : "opacity-0"
+                    }`}
                   />
-                  <span className="relative inline-flex h-2 w-2 rounded-full" style={{ background: c }} />
-                </span>
-              ))}
-              <span className="ml-2 font-display text-[12px] font-semibold uppercase tracking-wide text-lime-forest">
+                  <span className="truncate">{label}</span>
+                  <span
+                    aria-hidden
+                    className={`shrink-0 text-lime-forest transition-all duration-base ${isActive ? "translate-x-0 opacity-100" : "-translate-x-1 opacity-0"}`}
+                  >
+                    →
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Right panel — the selected tab's sub-pages */}
+        <div className="min-w-0 flex-1 p-5" role="tabpanel" aria-label={activeCol?.heading ?? menu.label}>
+          <div key={active} className="grid gap-1 sm:grid-cols-2">
+            {activeCol?.links.map((link) => {
+              const isCurrent = pathname === link.href;
+              return (
+                <Link
+                  key={`${link.href}|${link.label}`}
+                  href={link.href}
+                  onClick={onClose}
+                  className="group/link relative flex flex-col rounded-xl px-4 py-3 transition-colors duration-fast hover:bg-lime-050"
+                >
+                  <span className="flex items-center gap-2 text-[14.5px] font-semibold text-text-primary">
+                    {link.label}
+                    {isCurrent && <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" aria-label="current page" />}
+                    {link.draft && (
+                      <span className="rounded-xs bg-ink px-1.5 py-0.5 font-display text-[9.5px] uppercase tracking-wide text-lime">Soon</span>
+                    )}
+                    <span
+                      aria-hidden
+                      className="ml-auto -translate-x-1 text-lime-forest opacity-0 transition-all duration-base group-hover/link:translate-x-0 group-hover/link:opacity-100"
+                    >
+                      →
+                    </span>
+                  </span>
+                  {link.sub && <span className="mt-0.5 text-[12.5px] leading-snug text-text-muted">{link.sub}</span>}
+                </Link>
+              );
+            })}
+          </div>
+
+          {menu.promo && (
+            <Link
+              href={menu.promo.href}
+              onClick={onClose}
+              className="group/promo relative mt-3 flex items-center justify-between gap-4 overflow-hidden rounded-xl border border-lime-200 bg-lime-050 px-4 py-3 pl-5 transition-colors duration-base hover:bg-lime-100"
+            >
+              <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-lime" />
+              <div className="min-w-0">
+                <p className="font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-lime-forest">Featured</p>
+                <p className="font-display text-[14.5px] font-bold text-text-primary">{menu.promo.title}</p>
+                <p className="text-[12.5px] leading-snug text-text-secondary">{menu.promo.body}</p>
+              </div>
+              <span className="shrink-0 font-display text-[12px] font-semibold uppercase tracking-wide text-lime-forest">
                 {menu.promo.cta} →
               </span>
-            </div>
-          </Link>
-        )}
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
