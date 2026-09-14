@@ -7,10 +7,6 @@ import ChannelsGrid from "@/components/home/ChannelsGrid";
 import ChannelLadder from "@/components/home/ChannelLadder";
 import DltHandled from "@/components/home/DltHandled";
 import TwoDoors from "@/components/home/TwoDoors";
-import SolutionsStrip from "@/components/home/SolutionsStrip";
-import CustomerStory from "@/components/home/CustomerStory";
-import QuickstartTabs from "@/components/home/QuickstartTabs";
-import SupportCommitment from "@/components/home/SupportCommitment";
 
 export const metadata: Metadata = {
   title: "MsgBridge — SMS, WhatsApp, RCS & Voice API for India",
@@ -30,10 +26,6 @@ export default function HomePage() {
       <ChannelLadder />
       <DltHandled />
       <TwoDoors />
-      <SolutionsStrip />
-      <CustomerStory />
-      <QuickstartTabs />
-      <SupportCommitment />
     </>
   );
 }
