@@ -201,7 +201,7 @@ export const industries: IndustryPage[] = [
       "Each stage of a shipment's lifecycle needs its own approved template — bundling every update into one generic template is a common rejection reason.",
       "Failed-delivery and reschedule messages need the underlying delivery attempt logged and available on request, or high-frequency sends can get flagged.",
       "Voice broadcasts used for COD confirmation at scale need their own registered use case — routing them through an OTP-category voice line gets flagged.",
-      "Regional-language delivery updates, a real need outside metro areas, affect segment-based SMS pricing and should be planned for in the rate card upfront.",
+      "Regional-language delivery updates, a real need outside metro areas, use Unicode encoding and split into more SMS segments, so plan message length for non-Latin scripts upfront.",
     ],
     templatePack: [
       { title: "Pickup confirmed", body: "Your shipment #{{1}} has been picked up and is on its way to the hub." },

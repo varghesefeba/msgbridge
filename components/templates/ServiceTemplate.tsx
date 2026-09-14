@@ -107,15 +107,10 @@ export default function ServiceTemplate({ data }: { data: ServicePage }) {
       </section>
 
       <section className="py-20 md:py-24 bg-paper">
-        <div className="container max-w-container grid md:grid-cols-2 gap-12">
+        <div className="container max-w-container-narrow">
           <Reveal variant="left">
-            <Eyebrow index="04" label="What it costs" />
-            <p className="font-display font-semibold text-[17px] text-text-primary mb-1 capitalize">{data.cost.model}</p>
-            <p className="text-[15px] text-text-secondary leading-relaxed max-w-[46ch]">{data.cost.detail}</p>
-          </Reveal>
-          <Reveal variant="right" delay={80}>
-            <Eyebrow index="05" label="If it's rejected" />
-            <p className="text-[15px] text-text-secondary leading-relaxed max-w-[46ch]">{data.rejectionPolicy}</p>
+            <Eyebrow index="04" label="If it's rejected" />
+            <p className="text-[15px] text-text-secondary leading-relaxed max-w-[56ch]">{data.rejectionPolicy}</p>
           </Reveal>
         </div>
       </section>
@@ -123,7 +118,7 @@ export default function ServiceTemplate({ data }: { data: ServicePage }) {
       <section className="py-20 md:py-24 bg-paper-warm">
         <div className="container max-w-container-narrow">
           <Reveal>
-            <Eyebrow index="06" label="FAQ" />
+            <Eyebrow index="05" label="FAQ" />
           </Reveal>
           <Reveal delay={80}>
             <Accordion items={data.faq} />

@@ -8,7 +8,6 @@ import ChannelLadder from "@/components/home/ChannelLadder";
 import DltHandled from "@/components/home/DltHandled";
 import TwoDoors from "@/components/home/TwoDoors";
 import SolutionsStrip from "@/components/home/SolutionsStrip";
-import PricingTeaser from "@/components/home/PricingTeaser";
 import CustomerStory from "@/components/home/CustomerStory";
 import QuickstartTabs from "@/components/home/QuickstartTabs";
 import SupportCommitment from "@/components/home/SupportCommitment";
@@ -32,7 +31,6 @@ export default function HomePage() {
       <DltHandled />
       <TwoDoors />
       <SolutionsStrip />
-      <PricingTeaser />
       <CustomerStory />
       <QuickstartTabs />
       <SupportCommitment />

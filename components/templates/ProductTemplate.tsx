@@ -9,9 +9,7 @@ import Stepper from "@/components/ui/Stepper";
 import Accordion from "@/components/ui/Accordion";
 import CTABand from "@/components/ui/CTABand";
 import Callout from "@/components/ui/Callout";
-import Button from "@/components/ui/Button";
 import Backdrop from "@/components/motion/Backdrop";
-import Spotlight from "@/components/motion/Spotlight";
 
 const channelColor: Record<string, string> = {
   WhatsApp: "#25D366",
@@ -130,28 +128,6 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink py-20 md:py-24">
-        <Backdrop tone="dark" variant="dots" glow={false} />
-        <div className="container max-w-container relative">
-          <Reveal variant="scale">
-            <Spotlight className="shine-host rounded-lg border border-ink-line bg-white/[0.03] p-8 md:p-10">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
-                <div>
-                  <Eyebrow index="07" label="Price" dark />
-                  <p className="font-display font-extrabold text-on-dark text-[36px] md:text-[44px] tracking-tight">
-                    {data.price.headline}
-                  </p>
-                  <p className="mt-2 text-[15px] text-on-dark-3 max-w-[50ch]">{data.price.note}</p>
-                </div>
-                <Button href="/pricing" variant="secondary" arrow className="!text-on-dark !border-ink-line hover:!border-lime hover:!bg-white/5 shrink-0">
-                  See the full rate card
-                </Button>
-              </div>
-            </Spotlight>
-          </Reveal>
-        </div>
-      </section>
-
       {data.category === "RCS" && (
         <div className="container max-w-container py-10">
           <Reveal>
@@ -163,7 +139,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
       <section className="py-20 md:py-24 bg-paper-warm">
         <div className="container max-w-container">
           <Reveal>
-            <Eyebrow index="08" label="Related channels" />
+            <Eyebrow index="07" label="Related channels" />
           </Reveal>
           <div className="flex flex-wrap gap-3">
             {data.related.map((slug, i) => (
@@ -186,7 +162,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
       <section className="py-20 md:py-24 bg-paper">
         <div className="container max-w-container-narrow">
           <Reveal>
-            <Eyebrow index="09" label="FAQ" />
+            <Eyebrow index="08" label="FAQ" />
           </Reveal>
           <Reveal delay={80}>
             <Accordion items={data.faq} />

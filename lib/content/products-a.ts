@@ -35,7 +35,6 @@ export const productsA: ProductPage[] = [
       { title: "Approve templates", detail: "Draft and submit your first message templates for approval." },
       { title: "Go live", detail: "Integrate the API and start sending from your team inbox." },
     ],
-    price: { headline: "From ₹0.35 per conversation", note: "Priced per conversation, by template category — see the WhatsApp rate card." },
     related: ["/whatsapp-chatbot", "/rcs", "/services/whatsapp-verification"],
     faq: [
       {
@@ -90,7 +89,6 @@ export const productsA: ProductPage[] = [
       { title: "Test", detail: "Run through every path, including the handover to a live agent." },
       { title: "Launch", detail: "Go live, with monitoring during the first weeks of traffic." },
     ],
-    price: { headline: "From ₹4,999 one-off build fee", note: "Plus your WhatsApp Business API conversation charges." },
     related: ["/whatsapp-business-api", "/services/chatbot-development", "/solutions/support"],
     faq: [
       {
@@ -144,7 +142,6 @@ export const productsA: ProductPage[] = [
       { title: "Integrate", detail: "Connect the API and send a test card to your own device." },
       { title: "Launch", detail: "Roll out to your full audience, with automatic fallback where RCS is unavailable." },
     ],
-    price: { headline: "From ₹0.28 per message", note: "Priced per message, by type — see the RCS rate card." },
     related: ["/whatsapp-business-api", "/sms/promotional", "/solutions/marketing"],
     faq: [
       {
@@ -199,7 +196,6 @@ export const productsA: ProductPage[] = [
       { title: "Integrate", detail: "API access is typically ready within one working day once formalities and testing are complete." },
       { title: "Go live", detail: "Start sending OTPs with delivery reports over the API." },
     ],
-    price: { headline: "From ₹0.14 per SMS", note: "See the SMS rate card for volume pricing." },
     related: ["/verify", "/voice/otp", "/compliance", "/solutions/otp-verification"],
     faq: [
       {
@@ -253,7 +249,6 @@ export const productsA: ProductPage[] = [
       { title: "Integrate", detail: "Connect the send API with your order, payment or booking system." },
       { title: "Go live", detail: "Real-time delivery reports are retrievable over the API from day one." },
     ],
-    price: { headline: "From ₹0.12 per SMS", note: "See the SMS rate card for volume pricing." },
     related: ["/sms/otp", "/sms/promotional", "/solutions/order-updates"],
     faq: [
       {
@@ -307,7 +302,6 @@ export const productsA: ProductPage[] = [
       { title: "Schedule", detail: "Campaigns are sent only within TRAI's permitted time windows." },
       { title: "Report", detail: "Delivery and opt-out data available over the API and dashboard." },
     ],
-    price: { headline: "From ₹0.10 per SMS", note: "See the SMS rate card for volume pricing." },
     related: ["/sms/transactional", "/rcs", "/solutions/marketing"],
     faq: [
       {
@@ -361,7 +355,6 @@ export const productsA: ProductPage[] = [
       { title: "Test", detail: "Send a reply and confirm it reaches your endpoint." },
       { title: "Launch", detail: "Route inbound replies into your support desk or CRM." },
     ],
-    price: { headline: "From ₹4,999/month", note: "Number rental plus per-message inbound and outbound rates." },
     related: ["/sms/transactional", "/services/integration"],
     faq: [
       {
@@ -415,7 +408,6 @@ export const productsA: ProductPage[] = [
       { title: "Schedule", detail: "Choose a send time within the permitted window for the route." },
       { title: "Review", detail: "Delivery and DND-scrub reports are available in the panel after sending." },
     ],
-    price: { headline: "From ₹999/month", note: "Panel access plus per-message rates. Availability depends on a branded sub-panel being provisioned for your account." },
     related: ["/sms/promotional", "/sms/transactional"],
     faq: [
       {
