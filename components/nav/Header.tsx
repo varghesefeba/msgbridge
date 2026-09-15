@@ -203,6 +203,14 @@ export default function Header() {
             style={{ transform: `scaleX(${progress})`, opacity: progress > 0.01 ? 0.9 : 0, transition: "transform 90ms linear, opacity 240ms" }}
           />
 
+          {/* Invisible bridge over the 10px gap between the pill and the dropdown,
+              so moving the cursor into the dropdown never leaves the nav's hover
+              region. Only active while a menu is open. */}
+          <span
+            aria-hidden
+            className={`absolute inset-x-0 top-full h-[14px] ${openMenu ? "pointer-events-auto" : "pointer-events-none"}`}
+          />
+
           {primaryMenus.map((menu) => (
             <MegaPanel key={menu.label} menu={menu} open={openMenu === menu.label} onClose={() => setOpenMenu(null)} pathname={pathname} />
           ))}
