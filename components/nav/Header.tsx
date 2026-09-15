@@ -257,7 +257,7 @@ function MegaPanel({ menu, open, onClose, pathname }: { menu: NavMenu; open: boo
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`group/tab relative flex items-center justify-between gap-2 rounded-lg px-3 py-2.5 text-left font-display text-[14px] font-semibold transition-all duration-fast ${
+                  className={`group/tab relative flex items-center justify-between gap-2 rounded-md px-3 py-2.5 text-left font-display text-[14px] font-semibold transition-all duration-fast ${
                     isActive ? "bg-white text-text-primary shadow-card-sm" : "text-text-secondary hover:bg-white/60 hover:text-text-primary"
                   }`}
                 >
@@ -290,7 +290,7 @@ function MegaPanel({ menu, open, onClose, pathname }: { menu: NavMenu; open: boo
                   key={`${link.href}|${link.label}`}
                   href={link.href}
                   onClick={onClose}
-                  className="group/link relative flex flex-col rounded-xl px-4 py-3 transition-colors duration-fast hover:bg-lime-050"
+                  className="group/link relative flex flex-col rounded-md px-4 py-3 transition-colors duration-fast hover:bg-lime-050"
                 >
                   <span className="flex items-center gap-2 text-[14.5px] font-semibold text-text-primary">
                     {link.label}
@@ -315,7 +315,7 @@ function MegaPanel({ menu, open, onClose, pathname }: { menu: NavMenu; open: boo
             <Link
               href={menu.promo.href}
               onClick={onClose}
-              className="group/promo relative mt-3 flex items-center justify-between gap-4 overflow-hidden rounded-xl border border-lime-200 bg-lime-050 px-4 py-3 pl-5 transition-colors duration-base hover:bg-lime-100"
+              className="group/promo relative mt-3 flex items-center justify-between gap-4 overflow-hidden rounded-md border border-lime-200 bg-lime-050 px-4 py-3 pl-5 transition-colors duration-base hover:bg-lime-100"
             >
               <span aria-hidden className="absolute inset-y-0 left-0 w-1 bg-lime" />
               <div className="min-w-0">
