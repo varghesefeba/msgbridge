@@ -12,7 +12,7 @@ npm run lint       # next lint (ESLint)
 npm run typecheck  # tsc --noEmit — strict TypeScript check, no test suite exists
 ```
 
-There is no test framework. Verification is `npm run typecheck` + `npm run build`. This is not a git repository.
+There is no test framework. Verification is `npm run typecheck` + `npm run build`.
 
 ## What this is
 

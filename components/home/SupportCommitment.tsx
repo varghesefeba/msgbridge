@@ -25,7 +25,7 @@ export default function SupportCommitment() {
     <>
       <section className="bg-paper py-24 md:py-28">
         <div className="container max-w-container">
-          <Eyebrow index="12" label="Support that replies" />
+          <Eyebrow index="08" label="Support that replies" />
           <Reveal delay={60}>
             <h2 className="mb-12 max-w-[22ch] font-display text-[28px] font-extrabold tracking-tight text-text-primary md:text-[38px]">
               A named person answers. Not a ticket number.

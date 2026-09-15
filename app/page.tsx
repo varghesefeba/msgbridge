@@ -7,7 +7,7 @@ import ChannelsGrid from "@/components/home/ChannelsGrid";
 import ChannelLadder from "@/components/home/ChannelLadder";
 import DltHandled from "@/components/home/DltHandled";
 import TwoDoors from "@/components/home/TwoDoors";
-import CTABand from "@/components/ui/CTABand";
+import SupportCommitment from "@/components/home/SupportCommitment";
 
 export const metadata: Metadata = {
   title: "MsgBridge — SMS, WhatsApp, RCS & Voice API for India",
@@ -27,12 +27,7 @@ export default function HomePage() {
       <ChannelLadder />
       <DltHandled />
       <TwoDoors />
-      <CTABand
-        title="Ready to reach every customer, on every channel?"
-        supporting="SMS, WhatsApp, RCS and Voice through one integration — with DLT and TRAI paperwork handled. Talk to us and go live in days, not quarters."
-        cta="Book a demo"
-        href="/contact"
-      />
+      <SupportCommitment />
     </>
   );
 }
