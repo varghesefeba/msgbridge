@@ -1,22 +1,26 @@
 "use client";
 
-import { useRef, type CSSProperties, type ReactNode } from "react";
+import { createContext, useContext, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import Backdrop from "@/components/motion/Backdrop";
 import Spotlight from "@/components/motion/Spotlight";
 import CountUp from "@/components/motion/CountUp";
 import Eyebrow from "@/components/ui/Eyebrow";
-import { useInView, useReducedMotion, useSequence } from "@/lib/motion";
+import { useReducedMotion, useSequence } from "@/lib/motion";
 
 /* ── Shared cell plumbing ─────────────────────────────────────────────── */
 
-/** Loops a step sequence while the cell is on screen; parks on the final
- *  frame when the visitor has asked for reduced motion. */
+/** True while the enclosing card is hovered, focused, or clicked (pinned).
+ *  Card animations only run when this is true. */
+const CellActiveContext = createContext(false);
+
+/** Loops a step sequence only while the card is active (hover / focus / click);
+ *  sits on the first frame at rest, and parks on the final frame for reduced motion. */
 function useCellLoop(steps: number, interval: number) {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, 0.3);
+  const active = useContext(CellActiveContext);
   const reduced = useReducedMotion();
-  const raw = useSequence(steps, inView && !reduced, interval);
-  return { ref, step: reduced ? steps - 1 : raw, reduced, inView };
+  const raw = useSequence(steps, active && !reduced, interval);
+  return { ref, step: reduced ? steps - 1 : active ? raw : 0, reduced, active };
 }
 
 function Cell({
@@ -32,20 +36,48 @@ function Cell({
   glow?: string;
   children: ReactNode;
 }) {
+  const [hovered, setHovered] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const active = hovered || pinned;
+
   return (
-    <div className={span} data-reveal="rise">
-      <Spotlight className="h-full rounded-lg border border-ink-line bg-ink-raised p-6">
-        <div className="relative h-[172px] overflow-hidden">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0"
-            style={{ background: `radial-gradient(70% 60% at 50% 45%, ${glow}, transparent 70%)` }}
-          />
-          {children}
-        </div>
-        <h3 className="mt-5 font-display text-[15.5px] font-semibold text-on-dark">{title}</h3>
-        <p className="mt-1.5 text-[13.5px] leading-relaxed text-on-dark-4">{desc}</p>
-      </Spotlight>
+    <div
+      className={`${span} rounded-lg`}
+      data-reveal="rise"
+      role="button"
+      tabIndex={0}
+      aria-pressed={pinned}
+      aria-label={`${title}. Hover or click to play the animation.`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      onClick={() => setPinned((p) => !p)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setPinned((p) => !p);
+        }
+      }}
+    >
+      <CellActiveContext.Provider value={active}>
+        <Spotlight
+          className={`h-full rounded-lg border bg-ink-raised p-6 transition-colors duration-base ${
+            active ? "border-lime/40" : "border-ink-line"
+          }`}
+        >
+          <div className="relative h-[172px] overflow-hidden">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{ background: `radial-gradient(70% 60% at 50% 45%, ${glow}, transparent 70%)` }}
+            />
+            {children}
+          </div>
+          <h3 className="mt-5 font-display text-[15.5px] font-semibold text-on-dark">{title}</h3>
+          <p className="mt-1.5 text-[13.5px] leading-relaxed text-on-dark-4">{desc}</p>
+        </Spotlight>
+      </CellActiveContext.Provider>
     </div>
   );
 }
@@ -295,11 +327,15 @@ const ORBIT = [
 ];
 
 function OrbitCell() {
+  const active = useContext(CellActiveContext);
+  const reduced = useReducedMotion();
+  const spin = active && !reduced;
+
   return (
     <div className="relative flex h-full items-center justify-center">
       <div className="absolute h-[124px] w-[124px] rounded-full border border-dashed border-ink-line" aria-hidden />
 
-      <div className="absolute h-[124px] w-[124px] animate-spin-slow" aria-hidden>
+      <div className={`absolute h-[124px] w-[124px] ${spin ? "animate-spin-slow" : ""}`} aria-hidden>
         {ORBIT.map((channel, i) => {
           const angle = i * 72;
           return (
@@ -309,7 +345,7 @@ function OrbitCell() {
               style={{ transform: `rotate(${angle}deg) translateY(-62px)` }}
             >
               <span
-                className="block animate-spin-slow"
+                className={spin ? "block animate-spin-slow" : "block"}
                 style={{ animationDirection: "reverse" } as CSSProperties}
               >
                 <span
@@ -393,14 +429,15 @@ function TemplateCell() {
 const BARS = [26, 44, 34, 62, 48, 78, 56, 90, 64, 84, 70, 96, 66, 80];
 
 function ThroughputCell() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, 0.3);
+  const active = useContext(CellActiveContext);
+  const reduced = useReducedMotion();
+  const grow = active || reduced;
 
   return (
-    <div ref={ref} className="relative flex h-full flex-col justify-between">
+    <div className="relative flex h-full flex-col justify-between">
       <div>
         <p className="font-display text-[30px] font-extrabold leading-none text-on-dark">
-          <CountUp to={12480} />
+          {active ? <CountUp to={12480} /> : <span className="tabular-nums">{(12480).toLocaleString("en-IN")}</span>}
         </p>
         <p className="mt-1 text-[12px] text-on-dark-4">messages routed across five channels</p>
       </div>
@@ -413,7 +450,7 @@ function ThroughputCell() {
             style={{
               height: `${height}%`,
               background: i === BARS.length - 3 ? "#AFFF49" : "rgba(175,255,73,0.28)",
-              transform: inView ? "scaleY(1)" : "scaleY(0.04)",
+              transform: grow ? "scaleY(1)" : "scaleY(0.04)",
               transition: `transform 620ms cubic-bezier(0.2,0.7,0.3,1) ${i * 45}ms`,
             }}
           />
