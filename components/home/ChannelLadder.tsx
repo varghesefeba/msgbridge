@@ -183,9 +183,9 @@ export default function ChannelLadder() {
               style={{ background: `radial-gradient(circle, ${rung.color}26, transparent 65%)` }}
             />
 
-            {/* Silver phone */}
-            <div className="relative aspect-[9/19] rounded-[48px] bg-gradient-to-br from-[#f4f5f7] via-[#c6cad0] to-[#989ea6] p-[11px] shadow-[0_46px_90px_-28px_rgba(0,0,0,0.55)]">
-              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/50" />
+            {/* Black phone */}
+            <div className="relative aspect-[9/19] rounded-[48px] bg-gradient-to-br from-[#43464c] via-[#17191d] to-[#050506] p-[11px] shadow-[0_46px_90px_-28px_rgba(0,0,0,0.55)]">
+              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/15" />
               <span aria-hidden className="absolute left-1/2 top-[16px] z-30 h-[20px] w-[80px] -translate-x-1/2 rounded-full bg-black" />
               <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[38px] border border-black/50 bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
                 <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
