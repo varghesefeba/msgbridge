@@ -1,40 +1,98 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
 import Eyebrow from "@/components/ui/Eyebrow";
 import { useInView, useReducedMotion } from "@/lib/motion";
 
-const RUNGS = [
+type Rung = {
+  key: string;
+  label: string;
+  short: string;
+  note: string;
+  color: string;
+  logo: string;
+  sender: string;
+  body: string;
+  buttons: string[];
+  pos: string;
+  rot: string;
+};
+
+const RUNGS: Rung[] = [
   {
     key: "sms",
     label: "Plain SMS",
+    short: "SMS",
     note: "Works on every handset in India.",
     color: "#53BDEB",
+    logo: "/logos/sms.jpg",
     sender: "MSGBRG",
     body: "Your order #4821 has shipped. Track: msgb.in/t/4821",
-    buttons: [] as string[],
+    buttons: [],
+    pos: "top-10 -right-14",
+    rot: "rotate-2",
   },
   {
     key: "whatsapp",
     label: "WhatsApp template",
+    short: "WhatsApp",
     note: "Buttons, media, and a reply that comes back to you.",
     color: "#25D366",
+    logo: "/logos/whatsapp.jpg",
     sender: "MsgBridge",
     body: "Your order #4821 has shipped and is on its way.",
     buttons: ["Track order", "Contact support"],
+    pos: "top-1/2 -left-16 -translate-y-1/2",
+    rot: "-rotate-2",
   },
   {
     key: "rcs",
     label: "RCS rich card",
+    short: "RCS",
     note: "Verified sender, branded card, native inbox.",
     color: "#3D82F5",
+    logo: "/logos/sms.jpg",
     sender: "MsgBridge ✓",
     body: "Order #4821 shipped\nArriving in 2 days",
     buttons: ["Track order", "Reschedule"],
+    pos: "bottom-10 -right-14",
+    rot: "rotate-1",
   },
 ];
 
 const DWELL = 4200;
+
+/** A floating channel card — the active channel is highlighted, the rest are dimmed. */
+function LadderCard({ rung, isActive, className = "" }: { rung: Rung; isActive: boolean; className?: string }) {
+  return (
+    <div
+      className={`w-[210px] rounded-2xl bg-white p-3.5 transition-all duration-500 ${
+        isActive ? "shadow-[0_30px_60px_-16px_rgba(0,0,0,0.4)]" : "shadow-card-sm"
+      } ${className}`}
+      style={{ opacity: isActive ? 1 : 0.4, borderLeft: `3px solid ${rung.color}` }}
+    >
+      <div className="mb-1.5 flex items-center gap-2">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-black/5">
+          <img src={rung.logo} alt={`${rung.short} logo`} className="h-full w-full object-contain p-0.5 mix-blend-multiply" />
+        </span>
+        <span className="font-display text-[11px] font-bold uppercase tracking-wide" style={{ color: rung.color }}>
+          {rung.short}
+        </span>
+      </div>
+      <p className="whitespace-pre-line text-[12.5px] leading-snug text-text-primary">{rung.body}</p>
+      {rung.buttons.length > 0 && (
+        <div className="mt-2 flex flex-wrap gap-1.5 border-t border-black/[0.06] pt-2">
+          {rung.buttons.map((b) => (
+            <span key={b} className="rounded-full px-2 py-0.5 text-[10px] font-semibold" style={{ background: `${rung.color}1a`, color: rung.color }}>
+              {b}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function ChannelLadder() {
   const ref = useRef<HTMLDivElement>(null);
@@ -117,91 +175,58 @@ export default function ChannelLadder() {
           </div>
         </div>
 
-        <div className="flex justify-center">
-          <div className="relative w-[280px]">
+        <div>
+          <div className="relative mx-auto w-[280px]">
             <div
               aria-hidden
               className="absolute -inset-10 rounded-full blur-3xl transition-colors duration-700"
               style={{ background: `radial-gradient(circle, ${rung.color}26, transparent 65%)` }}
             />
 
-            {/* Phone */}
-            <div className="relative aspect-[9/19] rounded-[48px] border-[11px] border-[#0c0e12] bg-[#0c0e12] shadow-[0_46px_90px_-30px_rgba(0,0,0,0.7)]">
-              <span aria-hidden className="absolute left-1/2 top-[10px] z-20 h-[22px] w-[84px] -translate-x-1/2 rounded-full bg-black" />
-              <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[36px] bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
-                {/* app header */}
+            {/* Silver phone */}
+            <div className="relative aspect-[9/19] rounded-[48px] bg-gradient-to-br from-[#f4f5f7] via-[#c6cad0] to-[#989ea6] p-[11px] shadow-[0_46px_90px_-28px_rgba(0,0,0,0.55)]">
+              <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/50" />
+              <span aria-hidden className="absolute left-1/2 top-[16px] z-30 h-[20px] w-[80px] -translate-x-1/2 rounded-full bg-black" />
+              <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[38px] border border-black/50 bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
                 <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
                   <span
-                    key={`${rung.key}-av`}
-                    className="animate-fade-up flex h-8 w-8 items-center justify-center rounded-full font-display text-[12px] font-bold text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-full font-display text-[12px] font-bold text-white transition-colors duration-500"
                     style={{ background: rung.color }}
                   >
                     M
                   </span>
                   <div className="min-w-0">
                     <p className="truncate font-display text-[11.5px] font-semibold text-text-primary">{rung.sender}</p>
-                    <p className="font-mono text-[8px] uppercase tracking-[0.12em] text-text-muted">{rung.label}</p>
+                    <p className="font-mono text-[8px] uppercase tracking-[0.12em] text-text-muted transition-colors duration-500" style={{ color: rung.color }}>
+                      {rung.short}
+                    </p>
                   </div>
                 </div>
 
-                {/* thread */}
-                <div className="flex-1 px-4 pt-4">
-                  <div key={rung.key} className="animate-fade-up max-w-[85%]">
-                    <div
-                      className="rounded-2xl rounded-tl-md px-3 py-2.5 shadow-[0_12px_26px_-12px_rgba(0,0,0,0.55)]"
-                      style={{ background: rung.key === "whatsapp" ? "#D9FDD3" : "#FFFFFF" }}
-                    >
-                      {rung.key === "rcs" && (
-                        <div
-                          aria-hidden
-                          className="mb-2 h-20 rounded-lg"
-                          style={{ background: `linear-gradient(120deg, ${rung.color}38, ${rung.color}12)` }}
-                        />
-                      )}
-                      <p className="whitespace-pre-line text-[12px] leading-snug text-text-primary">{rung.body}</p>
-
-                      {rung.buttons.length > 0 && (
-                        <div className="mt-2 flex flex-col gap-1 border-t border-black/[0.08] pt-2">
-                          {rung.buttons.map((b, i) => (
-                            <span
-                              key={b}
-                              className="animate-fade-up py-1 text-center text-[11px] font-semibold"
-                              style={{ color: rung.color, animationDelay: `${120 + i * 90}ms` }}
-                            >
-                              {b}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-
-                      <p className="mt-1.5 text-right text-[8.5px] text-text-muted">
-                        <span className="text-ch-sms">✓✓</span> delivered
-                      </p>
-                    </div>
-                  </div>
+                {/* Minimal body — a decorative watermark only, so the floating cards never cover readable text */}
+                <div className="relative flex-1">
+                  <span aria-hidden className="absolute inset-0 flex items-center justify-center opacity-[0.13] transition-colors duration-500">
+                    <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke={rung.color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 11.5a8.4 8.4 0 0 1-11.9 7.6L3 21l1.9-5.6A8.4 8.4 0 1 1 21 11.5Z" />
+                    </svg>
+                  </span>
                 </div>
 
-                {/* home indicator */}
                 <div aria-hidden className="mx-auto mb-2 h-1 w-24 rounded-full bg-black/25" />
               </div>
             </div>
 
-            {/* Text floating over the phone */}
-            <div
-              key={`${rung.key}-tag`}
-              className="animate-fade-up absolute -left-7 top-28 hidden rounded-pill border border-line bg-white px-3.5 py-2 shadow-card sm:block"
-            >
-              <span className="flex items-center gap-2 text-[12px] font-semibold text-text-primary">
-                <span className="h-2 w-2 rounded-full" style={{ background: rung.color }} />
-                {rung.label}
-              </span>
-            </div>
-            <div
-              className="absolute -right-6 bottom-28 hidden rounded-pill border border-line bg-white px-3.5 py-2 text-[12px] font-semibold shadow-card sm:block"
-              style={{ color: rung.color }}
-            >
-              Delivered ✓✓
-            </div>
+            {/* Channel cards floating out around the phone (desktop) */}
+            {RUNGS.map((r, i) => (
+              <LadderCard key={r.key} rung={r} isActive={active === i} className={`absolute z-20 hidden lg:block ${r.pos} ${r.rot}`} />
+            ))}
+          </div>
+
+          {/* Same cards stacked below the phone on smaller screens */}
+          <div className="mt-6 flex flex-col items-center gap-3 lg:hidden">
+            {RUNGS.map((r, i) => (
+              <LadderCard key={r.key} rung={r} isActive={active === i} />
+            ))}
           </div>
         </div>
       </div>
