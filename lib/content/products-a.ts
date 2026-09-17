@@ -167,7 +167,7 @@ export const productsA: ProductPage[] = [
     category: "SMS",
     name: "OTP SMS",
     oneLiner:
-      "One-time passwords delivered over DLT-registered routes for login, signup, password reset and payment confirmation.",
+      "One-time passwords on dedicated, OTP-grade routes — DLT-registered, DND-exempt, with delivery receipts straight from the operator.",
     example: {
       channel: "sms",
       sender: "MSGBRG",
@@ -180,39 +180,39 @@ export const productsA: ProductPage[] = [
     },
     whenToUse: [
       "Login and signup verification",
-      "Password and PIN reset",
+      "Password and PIN resets",
       "Payment confirmation before a transaction completes",
-      "Two-factor authentication for account changes",
+      "Two-factor authentication on account changes",
     ],
     requirements: [
-      { item: "Registered principal entity", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "Approved 6-character header", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "Approved content template with variables", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "TM chain binding", leadTime: "Completed once entity, header and template are approved" },
+      { item: "Principal entity on the operator's DLT portal", leadTime: "Usually same-day to 48 hours, with your GST and PAN" },
+      { item: "Six-character sender header, mapped to your brand", leadTime: "Clears in 1–3 working days once the entity is live" },
+      { item: "Registered content template with variables", leadTime: "Filed in parallel — nothing waits on nothing" },
+      { item: "TM chain binding to a high-priority route", leadTime: "Completed once entity, header and template are live" },
     ],
     goLive: [
-      { title: "Register", detail: "Principal entity and sender header submitted to the DLT platform." },
-      { title: "Approve", detail: "Content template drafted and approved, then bound to your entity." },
-      { title: "Integrate", detail: "API access is typically ready within one working day once formalities and testing are complete." },
-      { title: "Go live", detail: "Start sending OTPs with delivery reports over the API." },
+      { title: "Register in parallel", detail: "Entity, sender header and template are filed together with your integration, so registration never blocks the build." },
+      { title: "Bind the route", detail: "Your OTP template is bound to a dedicated, high-priority route built for authentication traffic." },
+      { title: "Integrate", detail: "One send call — API access is typically ready within a working day of approvals." },
+      { title: "Go live", detail: "OTPs land with operator-end delivery receipts: delivered, failed and rejected states with reason codes." },
     ],
     related: ["/verify", "/voice/otp", "/compliance", "/solutions/otp-verification"],
     faq: [
       {
+        q: "Do OTPs go to DND numbers?",
+        a: "Yes — transactional and service-implicit traffic is exempt from DND. Only promotional and explicit-consent traffic is filtered.",
+      },
+      {
         q: "How fast does an OTP arrive?",
-        a: "Delivery over transactional routes is typically fast, though exact timing depends on the recipient's operator and network conditions at the time.",
+        a: "OTPs run on dedicated, high-priority routes built for authentication traffic, prioritised over bulk and promotional sends. Exact timing still depends on the recipient's operator and network at that moment.",
       },
       {
-        q: "What if SMS delivery fails?",
-        a: "For higher-stakes verification, MsgBridge Verify automatically falls back to WhatsApp and then a voice call until the code lands.",
+        q: "How long does DLT registration take?",
+        a: "Principal entity registration is usually same-day to 48 hours. Sender IDs and content templates clear in 1–3 working days once the entity is live. We file all three in parallel with your integration so nothing waits on nothing.",
       },
       {
-        q: "Do I need my own DLT registration?",
-        a: "Your business needs a registered entity, header and template. We can complete this for you — see DLT Registration Assistance.",
-      },
-      {
-        q: "Can I customise the OTP message text?",
-        a: "Yes, within DLT's template and variable rules. We help draft the template so it passes approval on the first attempt.",
+        q: "What if an OTP doesn't arrive?",
+        a: "You get operator-end delivery receipts with reason codes, so a failure is visible immediately. For higher-stakes verification, MsgBridge Verify falls back to WhatsApp and then a voice call until the code lands.",
       },
     ],
   },
@@ -221,7 +221,7 @@ export const productsA: ProductPage[] = [
     category: "SMS",
     name: "Transactional SMS",
     oneLiner:
-      "Service messages triggered by a customer action — order updates, payment confirmations, appointment reminders and account alerts.",
+      "Service messages tied to a customer action — order, delivery and payment updates on DLT-registered routes, with delivery receipts straight from the operator.",
     example: {
       channel: "sms",
       sender: "MSGBRG",
@@ -233,39 +233,39 @@ export const productsA: ProductPage[] = [
       python: `msgbridge.sms.send(\n    to="+91XXXXXXXXXX",\n    template_id="payment_confirmed",\n    entity_id="$ENTITY_ID",\n    content={"amount": "2499"},\n)`,
     },
     whenToUse: [
-      "Order confirmations and shipping updates",
+      "Order confirmations and dispatch updates",
       "Payment and refund confirmations",
-      "Appointment and booking reminders",
-      "Account alerts such as low balance or expiry notices",
+      "Delivery and booking updates tied to a purchase",
+      "Account alerts — low balance, expiry and security notices",
     ],
     requirements: [
-      { item: "Registered principal entity", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "Approved header and content template", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "TM chain binding", leadTime: "Completed once entity, header and template are approved" },
+      { item: "Principal entity on the operator's DLT portal", leadTime: "Usually same-day to 48 hours, with your GST and PAN" },
+      { item: "Six-character sender header and content template", leadTime: "Clear in 1–3 working days, filed in parallel" },
+      { item: "TM chain binding across the routes", leadTime: "Completed once entity, header and template are live" },
     ],
     goLive: [
-      { title: "Register", detail: "Entity, header and template submitted for DLT approval." },
-      { title: "Approve", detail: "Template approved and bound to your entity via TM chain." },
-      { title: "Integrate", detail: "Connect the send API with your order, payment or booking system." },
-      { title: "Go live", detail: "Real-time delivery reports are retrievable over the API from day one." },
+      { title: "Register in parallel", detail: "Entity, header and template are filed together with your integration — nothing waits on nothing." },
+      { title: "Connect", detail: "Wire the send call into your order, payment or booking system." },
+      { title: "Validate templates", detail: "Every send is checked against the registered template before it leaves the platform, so a stray space never fails silently." },
+      { title: "Go live", detail: "Operator-end delivery receipts return delivered, failed and rejected states with reason codes." },
     ],
     related: ["/sms/otp", "/sms/promotional", "/solutions/order-updates"],
     faq: [
       {
-        q: "What's the difference between transactional and promotional SMS?",
-        a: "Transactional messages are triggered by a customer's own action and can be sent any time. Promotional messages are marketing sends restricted to specific hours and require DND scrubbing.",
+        q: "What's the difference between transactional, service and promotional?",
+        a: "Transactional is service-implicit — OTPs, banking alerts, ticket confirmations. Service is service-explicit — order, delivery and payment updates tied to a purchase. Both are exempt from DND and can send any time. Promotional is marketing: filtered against DND and restricted to permitted hours.",
+      },
+      {
+        q: "Why did my message fail with a template mismatch?",
+        a: "DLT compares the sent text against the registered template character by character, including variable placement. A stray space or an extra full stop is enough. Our sender validates against the registered template before it leaves the platform and tells you exactly what differs.",
+      },
+      {
+        q: "What counts as one message?",
+        a: "160 characters of plain English, or 70 if the text contains any Unicode — one Hindi character or one emoji turns the whole message Unicode. Longer messages split into segments and bill per segment.",
       },
       {
         q: "Can I track delivery in real time?",
-        a: "Yes. Operator-end delivery reports are available over the API as soon as a message is delivered or fails.",
-      },
-      {
-        q: "How are template variables declared?",
-        a: "Each approved template declares its variable positions up front — for example the amount or order number — which you then fill in per request.",
-      },
-      {
-        q: "Is Unicode text supported?",
-        a: "Yes, including Hindi and other regional scripts. Unicode messages count as more segments than plain-English text, which affects the price per send.",
+        a: "Yes. Operator-end delivery receipts return delivered, failed and rejected states with reason codes, over the same API you send on.",
       },
     ],
   },
@@ -274,7 +274,7 @@ export const productsA: ProductPage[] = [
     category: "SMS",
     name: "Promotional SMS",
     oneLiner:
-      "Marketing sends on promotional routes, scrubbed against the National Do Not Disturb registry and delivered within TRAI's permitted time windows.",
+      "Opt-in offers and cold campaigns to non-DND numbers — scrubbed against preference lists and sent inside TRAI's permitted windows.",
     example: {
       channel: "sms",
       sender: "MSGBRG",
@@ -286,27 +286,27 @@ export const productsA: ProductPage[] = [
       python: `msgbridge.sms.send(\n    to="+91XXXXXXXXXX",\n    template_id="weekend_sale",\n    entity_id="$ENTITY_ID",\n    route="promotional",\n)`,
     },
     whenToUse: [
-      "Sales, discounts and limited-time offers",
-      "New product or store launch announcements",
-      "Re-engagement campaigns to a customer list",
+      "Sales, discounts and limited-time offers to an opted-in list",
+      "Cold campaigns to non-DND numbers",
+      "New product and store-launch announcements",
       "Regional-language campaigns for a local audience",
     ],
     requirements: [
-      { item: "Registered principal entity and header", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "Approved promotional template", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "Consent records for the recipient list", leadTime: "Maintained by you, verified during setup" },
+      { item: "Principal entity and six-character header", leadTime: "Entity same-day to 48 hours; header in 1–3 working days" },
+      { item: "Registered promotional content template", leadTime: "Clears in 1–3 working days, filed in parallel" },
+      { item: "Consent records for your list", leadTime: "Opt-in logs kept where a regulator can actually see them" },
     ],
     goLive: [
-      { title: "Register", detail: "Entity, header and promotional template submitted for approval." },
-      { title: "Scrub", detail: "Recipient list checked against the National DND registry." },
-      { title: "Schedule", detail: "Campaigns are sent only within TRAI's permitted time windows." },
-      { title: "Report", detail: "Delivery and opt-out data available over the API and dashboard." },
+      { title: "Register in parallel", detail: "Entity, header and promotional template are filed alongside your setup." },
+      { title: "Scrub", detail: "Preference lists are checked before send, so DND-registered numbers drop out automatically." },
+      { title: "Schedule", detail: "Campaigns go out only inside TRAI's permitted windows for the route." },
+      { title: "Report", detail: "Delivery, DND-scrub and opt-out data come back with reason codes over the API and panel." },
     ],
     related: ["/sms/transactional", "/rcs", "/solutions/marketing"],
     faq: [
       {
         q: "What happens if a number is on the DND registry?",
-        a: "Promotional messages are automatically scrubbed against the National DND registry before sending, so registered numbers are excluded from promotional routes.",
+        a: "Promotional and explicit-consent traffic is filtered against preference lists before send, so DND-registered numbers are excluded. Transactional and service-implicit traffic is exempt.",
       },
       {
         q: "What hours can promotional SMS be sent?",
@@ -314,11 +314,11 @@ export const productsA: ProductPage[] = [
       },
       {
         q: "Can I send in Hindi or other regional languages?",
-        a: "Yes, Unicode is supported for Hindi, Marathi, Bengali, Tamil, Telugu, Gujarati, Kannada and other regional scripts. Note that Unicode messages use more segments than plain English text of the same length, which changes the price.",
+        a: "Yes. Unicode covers Hindi, Marathi, Bengali, Tamil, Telugu and other scripts. But one Unicode character turns the whole message Unicode — 70 characters per segment instead of 160 — and longer messages bill per segment.",
       },
       {
         q: "Do I need consent from recipients?",
-        a: "Yes. You should maintain consent records for your promotional list — see the compliance guide for how opt-in and DND scrubbing fit together.",
+        a: "For opt-in offers, yes — keep opt-in logs where a regulator can see them. Cold campaigns are only permitted to non-DND numbers.",
       },
     ],
   },
@@ -328,7 +328,7 @@ export const productsA: ProductPage[] = [
     name: "Two-Way & Inbound SMS",
     draft: true,
     oneLiner:
-      "Receive replies to your SMS sends on a short code or long code, and route them into your support desk or CRM.",
+      "Replies to your SMS on a long code or short code — keyword responses routed into the same shared inbox as WhatsApp and RCS.",
     example: {
       channel: "sms",
       sender: "56070",
@@ -341,29 +341,29 @@ export const productsA: ProductPage[] = [
     },
     whenToUse: [
       "Appointment confirmations with a YES/NO reply",
-      "Support requests started over SMS",
-      "Keyword-based opt-in campaigns",
+      "Keyword opt-in and opt-out campaigns",
+      "Support conversations that start over SMS",
       "Survey responses collected by reply",
     ],
     requirements: [
       { item: "Short code or long code allocation", leadTime: "Timelines vary by number type and operator" },
-      { item: "Inbound webhook endpoint", leadTime: "Set up on your side before go-live" },
+      { item: "Inbound routing — shared inbox or webhook", leadTime: "Configured before go-live" },
     ],
     goLive: [
       { title: "Choose a number", detail: "Pick a short code or long code depending on volume and budget." },
-      { title: "Configure", detail: "Point your inbound webhook at the number." },
-      { title: "Test", detail: "Send a reply and confirm it reaches your endpoint." },
-      { title: "Launch", detail: "Route inbound replies into your support desk or CRM." },
+      { title: "Route inbound", detail: "Keyword replies land in the same shared inbox as WhatsApp and RCS, or post to a webhook you configure." },
+      { title: "Test", detail: "Send a reply and confirm it reaches your inbox or endpoint." },
+      { title: "Launch", detail: "Inbound replies flow into your support desk or CRM in near real time." },
     ],
     related: ["/sms/transactional", "/services/integration"],
     faq: [
       {
-        q: "Short code or long code — which do I need?",
-        a: "Short codes suit high-volume, consumer-facing campaigns; long codes suit lower-volume or support-style two-way conversations. We'll help you pick based on your use case.",
+        q: "Can customers reply to my SMS?",
+        a: "On a long code or short code, yes. Keyword replies route into the same shared inbox as WhatsApp and RCS, so a reply does not disappear into a dead number.",
       },
       {
-        q: "How do inbound replies reach my system?",
-        a: "Replies are posted to a webhook URL you configure, in near real time.",
+        q: "Short code or long code — which do I need?",
+        a: "Short codes suit high-volume, consumer-facing campaigns; long codes suit lower-volume or support-style two-way conversations. We'll help you pick based on your use case.",
       },
       {
         q: "Can I keep my existing number?",
@@ -381,7 +381,7 @@ export const productsA: ProductPage[] = [
     name: "Bulk SMS Panel",
     draft: true,
     oneLiner:
-      "A branded web panel for uploading a contact list and sending a bulk SMS campaign without writing any code.",
+      "Upload a list, pick an approved template, and send — CSV or API, segmented from your CRM, with delivery receipts on every send.",
     example: {
       channel: "sms",
       sender: "MSGBRG",
@@ -395,18 +395,18 @@ export const productsA: ProductPage[] = [
     whenToUse: [
       "Seasonal sales and festive offers",
       "One-off announcements to an existing list",
-      "Teams without an in-house developer",
+      "Scheduled sends segmented from your CRM",
       "Non-technical marketing staff running their own sends",
     ],
     requirements: [
-      { item: "Registered entity, header and template", leadTime: "Subject to operator DLT approval timelines" },
-      { item: "Contact list in the required format", leadTime: "Prepared by you before your first campaign" },
+      { item: "Registered entity, header and template", leadTime: "Entity same-day to 48 hours; header and template in 1–3 working days" },
+      { item: "Contact list as CSV, or a CRM segment", leadTime: "Prepared by you before your first campaign" },
     ],
     goLive: [
       { title: "Set up", detail: "Your panel login is created once DLT registration is complete." },
-      { title: "Upload", detail: "Import your contact list and select an approved template." },
-      { title: "Schedule", detail: "Choose a send time within the permitted window for the route." },
-      { title: "Review", detail: "Delivery and DND-scrub reports are available in the panel after sending." },
+      { title: "Upload or segment", detail: "Import a CSV or pull a segment from your CRM, then pick an approved template." },
+      { title: "Schedule", detail: "Choose a send time inside the permitted window for the route." },
+      { title: "Review", detail: "Delivery receipts and DND-scrub reports land in the panel, with reason codes on every failure." },
     ],
     related: ["/sms/promotional", "/sms/transactional"],
     faq: [
@@ -415,16 +415,16 @@ export const productsA: ProductPage[] = [
         a: "No — the panel is a web interface for uploading a list and sending a campaign without any integration work.",
       },
       {
-        q: "Is this the same as the SMS API?",
-        a: "It sends over the same registered routes as the API; the panel is a no-code way to run one-off campaigns rather than an automated integration.",
+        q: "CSV or API — what's the difference?",
+        a: "Both send over the same registered routes. Upload a CSV in the panel for one-off campaigns, or call the API for automated, CRM-segmented sends.",
+      },
+      {
+        q: "What counts as one message?",
+        a: "160 characters of plain English, or 70 if the text contains any Unicode — one Hindi character or one emoji turns the whole message Unicode. Longer messages split into segments and bill per segment.",
       },
       {
         q: "Will my account definitely get a panel?",
         a: "A branded sub-panel is provisioned where available. Confirm current availability for your account with our team before planning around it.",
-      },
-      {
-        q: "Can I still use the API alongside the panel?",
-        a: "Yes, both draw from the same registered entity, header and templates.",
       },
     ],
   },
