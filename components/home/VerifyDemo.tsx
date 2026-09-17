@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
 import { useEffect, useRef, useState } from "react";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Button from "@/components/ui/Button";
@@ -27,9 +28,9 @@ const STAGES: Stage[] = [
 
 /** Channel tags that float around the phone and light up as the cascade reaches them. */
 const FLOAT_CHANNELS = [
-  { key: "sms", label: "SMS", color: "#53BDEB", pos: "-left-9 top-28" },
-  { key: "whatsapp", label: "WhatsApp", color: "#25D366", pos: "-right-12 top-44" },
-  { key: "voice", label: "Voice", color: "#FF9A3E", pos: "-left-7 bottom-32" },
+  { key: "sms", label: "SMS", color: "#53BDEB", logo: "/logos/sms.jpg", pos: "-left-10 top-24" },
+  { key: "whatsapp", label: "WhatsApp", color: "#25D366", logo: "/logos/whatsapp.jpg", pos: "-right-14 top-40" },
+  { key: "voice", label: "Voice", color: "#FF9A3E", logo: "/logos/voice.png", pos: "-left-8 bottom-28" },
 ];
 
 export default function VerifyDemo() {
@@ -141,10 +142,11 @@ export default function VerifyDemo() {
                   style={{ background: `radial-gradient(circle, ${current.color}30, transparent 66%)` }}
                 />
 
-                {/* Phone */}
-                <div className="relative aspect-[9/19] rounded-[48px] border-[11px] border-[#0c0e12] bg-[#0c0e12] shadow-[0_46px_90px_-30px_rgba(0,0,0,0.85)]">
-                  <span aria-hidden className="absolute left-1/2 top-[10px] z-20 h-[22px] w-[84px] -translate-x-1/2 rounded-full bg-black" />
-                  <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[36px] bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
+                {/* Silver phone — stands out on the dark section */}
+                <div className="relative aspect-[9/19] rounded-[48px] bg-gradient-to-br from-[#f4f5f7] via-[#c6cad0] to-[#989ea6] p-[11px] shadow-[0_46px_90px_-28px_rgba(0,0,0,0.85)]">
+                  <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/50" />
+                  <span aria-hidden className="absolute left-1/2 top-[16px] z-30 h-[20px] w-[80px] -translate-x-1/2 rounded-full bg-black" />
+                  <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[38px] border border-black/50 bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
                     <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
                       <span
                         className="flex h-8 w-8 items-center justify-center rounded-full font-display text-[13px] font-bold text-ink transition-colors duration-500"
@@ -193,23 +195,43 @@ export default function VerifyDemo() {
                   </div>
                 </div>
 
-                {/* Channel tags floating over the phone */}
+                {/* Channel chips (logo + name) floating over the phone */}
                 {FLOAT_CHANNELS.map((c) => {
                   const at = STAGES.findIndex((s) => s.key === c.key);
                   const reached = at !== -1 && at <= stage;
                   return (
                     <div
                       key={c.key}
-                      className={`absolute ${c.pos} hidden rounded-pill border bg-white px-3 py-1.5 shadow-card transition-all duration-500 sm:block`}
-                      style={{ borderColor: reached ? c.color : "#E8EAE3", opacity: reached ? 1 : 0.55 }}
+                      className={`absolute ${c.pos} hidden items-center gap-2 rounded-pill border bg-white py-1.5 pl-1.5 pr-3.5 shadow-card transition-all duration-500 sm:flex`}
+                      style={{ borderColor: reached ? c.color : "#E8EAE3", opacity: reached ? 1 : 0.5 }}
                     >
-                      <span className="flex items-center gap-1.5 text-[11.5px] font-semibold" style={{ color: reached ? c.color : "#9AA091" }}>
-                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: reached ? c.color : "#C9CEC4" }} />
-                        {c.label}
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-black/5">
+                        <img src={c.logo} alt={`${c.label} logo`} className="h-full w-full object-contain p-0.5 mix-blend-multiply" />
                       </span>
+                      <span className="font-display text-[12.5px] font-semibold" style={{ color: reached ? "#111827" : "#9AA091" }}>{c.label}</span>
                     </div>
                   );
                 })}
+
+                {/* Current message floating out of the screen */}
+                {stage >= 1 && (
+                  <div
+                    key={`${current.key}-float`}
+                    className="animate-fade-up absolute -right-10 bottom-24 hidden w-[190px] rounded-2xl bg-white p-3.5 shadow-[0_30px_60px_-18px_rgba(0,0,0,0.75)] sm:block"
+                    style={{ borderLeft: `3px solid ${current.color}` }}
+                  >
+                    <p className="mb-1 font-display text-[9px] font-bold uppercase tracking-wide" style={{ color: current.color }}>
+                      {current.label}
+                    </p>
+                    <p className="text-[12.5px] leading-snug text-text-primary">
+                      {current.key === "verified"
+                        ? "Verified. You're signed in."
+                        : current.fail
+                          ? "No delivery — trying the next channel…"
+                          : "482913 is your MsgBridge code."}
+                    </p>
+                  </div>
+                )}
               </div>
 
               {!reduced && (
