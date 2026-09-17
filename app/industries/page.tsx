@@ -17,11 +17,17 @@ export default function IndustriesIndex() {
     <div>
       <section className="relative overflow-hidden -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] bg-paper-warm pb-16">
         <div className="container max-w-container">
-          <Breadcrumb items={[{ label: "Industries" }]} />
-          <Eyebrow index="00" label="All industries" />
-          <h1 className="font-display font-extrabold text-text-primary text-[30px] md:text-[48px] tracking-tight max-w-[20ch]">
-            Built for how your sector actually messages.
-          </h1>
+          <Reveal variant="fall">
+            <Breadcrumb items={[{ label: "Industries" }]} />
+          </Reveal>
+          <Reveal delay={60}>
+            <Eyebrow index="00" label="All industries" />
+          </Reveal>
+          <Reveal variant="blur" delay={120}>
+            <h1 className="font-display font-extrabold text-text-primary text-[30px] md:text-[48px] tracking-tight max-w-[20ch]">
+              Built for how your sector actually messages.
+            </h1>
+          </Reveal>
         </div>
       </section>
 
@@ -30,7 +36,7 @@ export default function IndustriesIndex() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {industries.map((ind, i) => (
               <Reveal key={ind.slug} delay={i * 40}>
-                <Link href={ind.slug} className="group block h-full rounded-md border border-line bg-white p-6 hover:shadow-card-sm hover:-translate-y-0.5 transition-all duration-base">
+                <Link href={ind.slug} className="group block h-full rounded-md border border-line bg-white p-6 transition-all duration-base ease-out hover:-translate-y-1 hover:border-lime-200 hover:shadow-card-sm">
                   <span className="text-[11px] font-display font-semibold uppercase tracking-wide text-lime-forest bg-lime-100 px-2 py-0.5 rounded-xs">
                     {ind.group}
                   </span>
@@ -47,17 +53,23 @@ export default function IndustriesIndex() {
 
       <section className="py-16 bg-paper-warm">
         <div className="container max-w-container">
-          <Eyebrow index="01" label="More sectors" />
-          <p className="text-[15px] text-text-secondary max-w-[60ch] mb-8">
-            Don&rsquo;t see yours above? These sectors run on the same channels — here&rsquo;s the closest deep page for
-            each.
-          </p>
+          <Reveal>
+            <Eyebrow index="01" label="More sectors" />
+          </Reveal>
+          <Reveal delay={80}>
+            <p className="text-[15px] text-text-secondary max-w-[60ch] mb-8">
+              Don&rsquo;t see yours above? These sectors run on the same channels — here&rsquo;s the closest deep page for
+              each.
+            </p>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {longTailSectors.map((s) => (
-              <Link key={s.name} href={s.nearest} className="block rounded-md border border-line bg-white p-5 hover:border-lime-deep transition-colors">
-                <p className="font-display font-semibold text-[15px] text-text-primary mb-1">{s.name}</p>
-                <p className="text-[13px] text-text-muted">{s.note}</p>
-              </Link>
+            {longTailSectors.map((s, i) => (
+              <Reveal key={s.name} delay={i * 40}>
+                <Link href={s.nearest} className="group block h-full rounded-md border border-line bg-white p-5 transition-all duration-base ease-out hover:-translate-y-0.5 hover:border-lime-deep hover:shadow-card-sm">
+                  <p className="font-display font-semibold text-[15px] text-text-primary mb-1 transition-colors group-hover:text-lime-forest">{s.name}</p>
+                  <p className="text-[13px] text-text-muted">{s.note}</p>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>

@@ -23,18 +23,24 @@ export default function WhyPage() {
     <div>
       <section className="relative overflow-hidden -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] bg-paper-warm pb-16">
         <div className="container max-w-container">
-          <Breadcrumb items={[{ label: "Why MsgBridge" }]} />
-          <Eyebrow index="00" label="Why MsgBridge" />
-          <h1 className="font-display font-extrabold text-text-primary text-[30px] md:text-[48px] tracking-tight max-w-[20ch]">
-            Six reasons teams switch to us.
-          </h1>
+          <Reveal variant="fall">
+            <Breadcrumb items={[{ label: "Why MsgBridge" }]} />
+          </Reveal>
+          <Reveal delay={60}>
+            <Eyebrow index="00" label="Why MsgBridge" />
+          </Reveal>
+          <Reveal variant="blur" delay={120}>
+            <h1 className="font-display font-extrabold text-text-primary text-[30px] md:text-[48px] tracking-tight max-w-[20ch]">
+              Six reasons teams switch to us.
+            </h1>
+          </Reveal>
         </div>
       </section>
       <section className="py-16 bg-paper">
         <div className="container max-w-container grid sm:grid-cols-2 gap-6">
           {REASONS.map((r, i) => (
-            <Reveal key={r.title} delay={i * 60} className="rounded-md border border-line bg-white p-7">
-              <h2 className="font-display font-semibold text-[18px] text-text-primary mb-2">{r.title}</h2>
+            <Reveal key={r.title} delay={i * 60} className="group/card rounded-md border border-line bg-white p-7 transition-all duration-base ease-out hover:-translate-y-1 hover:border-lime-200 hover:shadow-card-sm">
+              <h2 className="font-display font-semibold text-[18px] text-text-primary mb-2 transition-colors duration-fast group-hover/card:text-lime-forest">{r.title}</h2>
               <p className="text-[15px] text-text-secondary leading-relaxed">{r.detail}</p>
             </Reveal>
           ))}

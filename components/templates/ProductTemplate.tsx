@@ -46,7 +46,7 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
             <Reveal variant="clip">
               <span className="block h-[3px] w-14 mb-5 rounded-full" style={{ background: color }} />
             </Reveal>
-            <Reveal delay={80}>
+            <Reveal variant="blur" delay={80}>
               <h1 className="font-display font-extrabold text-text-primary text-[30px] md:text-[48px] tracking-tight max-w-[22ch] text-balance">
                 {data.oneLiner}
               </h1>
@@ -69,14 +69,18 @@ export default function ProductTemplate({ data, resolveLabel }: { data: ProductP
               This is what {data.name.toLowerCase()} looks like when it lands on a customer&rsquo;s phone.
             </p>
             <Reveal variant="scale" delay={120}>
-              <DeviceMessage example={data.example} />
+              <div className="transition-all duration-base ease-out will-change-transform hover:-translate-y-1.5 hover:drop-shadow-xl">
+                <DeviceMessage example={data.example} />
+              </div>
             </Reveal>
           </Reveal>
 
           <Reveal variant="right" delay={80}>
             <Eyebrow index="03" label="The API call" />
             <p className="text-[15px] text-text-secondary mb-8 max-w-[46ch]">One request. Copy it, drop in your key, and send.</p>
-            <CodeCard code={data.api} filename={`${fileSlug}.sh`} />
+            <div className="transition-all duration-slow ease-out hover:drop-shadow-xl">
+              <CodeCard code={data.api} filename={`${fileSlug}.sh`} />
+            </div>
           </Reveal>
         </div>
       </section>

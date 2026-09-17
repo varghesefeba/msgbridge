@@ -375,6 +375,12 @@ body {
   color: #3f7a00;
   text-decoration: underline;
   text-underline-offset: 2px;
+  text-decoration-color: rgba(63, 122, 0, 0.35);
+  transition: color 160ms var(--ease-out), text-decoration-color 160ms var(--ease-out);
+}
+.prose-msg a:hover {
+  color: #2f5c00;
+  text-decoration-color: currentColor;
 }
 .prose-msg code {
   font-family: var(--font-mono);

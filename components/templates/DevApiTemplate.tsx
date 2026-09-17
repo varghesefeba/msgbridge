@@ -135,11 +135,15 @@ export default function DevApiTemplate({
         <div className="container max-w-container grid lg:grid-cols-2 gap-10">
           <Reveal variant="left">
             <Eyebrow index="02" label="Request" />
-            <CodeCard code={request} filename="request.sh" />
+            <div className="transition-all duration-slow ease-out hover:drop-shadow-xl">
+              <CodeCard code={request} filename="request.sh" />
+            </div>
           </Reveal>
           <Reveal variant="right" delay={80}>
             <Eyebrow index="03" label="Response" />
-            <CodeCard code={{ curl: response, node: response, python: response }} filename="200.json" chrome={false} />
+            <div className="transition-all duration-slow ease-out hover:drop-shadow-xl">
+              <CodeCard code={{ curl: response, node: response, python: response }} filename="200.json" chrome={false} />
+            </div>
           </Reveal>
         </div>
       </section>

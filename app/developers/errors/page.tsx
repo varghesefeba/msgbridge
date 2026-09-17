@@ -3,6 +3,7 @@ import Breadcrumb from "@/components/ui/Breadcrumb";
 import Eyebrow from "@/components/ui/Eyebrow";
 import Callout from "@/components/ui/Callout";
 import CTABand from "@/components/ui/CTABand";
+import Reveal from "@/components/ui/Reveal";
 
 export const metadata: Metadata = { title: "Error Codes", description: "Common API error codes and how to resolve them.", alternates: { canonical: "/developers/errors" } };
 
@@ -20,17 +21,25 @@ export default function ErrorsPage() {
     <div>
       <section className="relative overflow-hidden -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] bg-ink pb-16">
         <div className="container max-w-container">
-          <Breadcrumb tone="dark" items={[{ label: "Developers", href: "/developers/quickstart" }, { label: "Error Codes" }]} />
-          <Eyebrow index="API" label="Reference" dark />
-          <h1 className="font-display font-extrabold text-on-dark text-[28px] md:text-[42px] tracking-tight">Error codes</h1>
+          <Reveal variant="fall">
+            <Breadcrumb tone="dark" items={[{ label: "Developers", href: "/developers/quickstart" }, { label: "Error Codes" }]} />
+          </Reveal>
+          <Reveal delay={60}>
+            <Eyebrow index="API" label="Reference" dark />
+          </Reveal>
+          <Reveal variant="blur" delay={120}>
+            <h1 className="font-display font-extrabold text-on-dark text-[28px] md:text-[42px] tracking-tight">Error codes</h1>
+          </Reveal>
         </div>
       </section>
       <div className="container max-w-container py-10">
-        <Callout variant="note">This is a representative set. The full, versioned catalogue ships with your API key.</Callout>
+        <Reveal>
+          <Callout variant="note">This is a representative set. The full, versioned catalogue ships with your API key.</Callout>
+        </Reveal>
       </div>
       <section className="py-10 bg-paper">
         <div className="container max-w-container">
-          <div className="rounded-lg border border-line overflow-hidden overflow-x-auto bg-white">
+          <Reveal delay={80} className="rounded-lg border border-line overflow-hidden overflow-x-auto bg-white">
             <table className="w-full text-left min-w-[560px]">
               <thead className="bg-paper-warm">
                 <tr>
@@ -41,15 +50,15 @@ export default function ErrorsPage() {
               </thead>
               <tbody className="divide-y divide-line">
                 {ERRORS.map((e) => (
-                  <tr key={e.code}>
-                    <td className="px-6 py-3.5 font-mono text-[13.5px] text-text-primary">{e.code}</td>
+                  <tr key={e.code} className="group/row transition-colors duration-fast hover:bg-lime-050">
+                    <td className="px-6 py-3.5 font-mono text-[13.5px] text-text-primary transition-colors duration-fast group-hover/row:text-lime-forest">{e.code}</td>
                     <td className="px-6 py-3.5 text-[13.5px] text-text-muted">{e.status}</td>
                     <td className="px-6 py-3.5 text-[13.5px] text-text-secondary">{e.fix}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          </div>
+          </Reveal>
         </div>
       </section>
       <CTABand title="Stuck on an error?" supporting="Send us the message ID and we'll dig in." href="/services/integration" cta="Get integration support" />

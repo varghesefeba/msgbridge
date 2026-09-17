@@ -194,7 +194,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="shine-host group/submit relative inline-flex w-full items-center justify-center gap-2.5 rounded-pill bg-lime px-8 py-3.5 font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink transition-all duration-fast ease-out hover:shadow-[0_16px_38px_-12px_rgba(175,255,73,0.85)] active:scale-[0.98] disabled:cursor-wait sm:w-auto"
+        className="shine-host group/submit relative inline-flex w-full items-center justify-center gap-2.5 rounded-pill bg-lime px-8 py-3.5 font-display text-[15px] font-bold uppercase tracking-[0.06em] text-ink transition-all duration-fast ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_38px_-12px_rgba(175,255,73,0.85)] active:translate-y-0 active:scale-[0.98] disabled:cursor-wait sm:w-auto"
       >
         {status === "submitting" ? (
           <>

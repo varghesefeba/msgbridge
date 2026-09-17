@@ -55,15 +55,23 @@ export default function VerifyPage() {
     <div>
       <section className="relative overflow-hidden -mt-[var(--nav-h)] pt-[calc(var(--nav-h)+40px)] bg-ink pb-20">
         <div className="container max-w-container">
-          <Breadcrumb tone="dark" items={[{ label: "Products", href: "/" }, { label: "MsgBridge Verify" }]} />
-          <Eyebrow index="00" label="Flagship product" dark />
-          <h1 className="font-display font-extrabold text-on-dark text-[32px] md:text-[56px] tracking-tight max-w-[18ch] leading-[1.02]">
-            One API call. Three channels. Until the code lands.
-          </h1>
-          <p className="mt-5 text-[18px] text-on-dark-3 max-w-[54ch]">
-            MsgBridge Verify cascades a one-time code across SMS, WhatsApp and voice — so a stuck OTP never costs
-            you a signup.
-          </p>
+          <Reveal variant="fall">
+            <Breadcrumb tone="dark" items={[{ label: "Products", href: "/" }, { label: "MsgBridge Verify" }]} />
+          </Reveal>
+          <Reveal delay={60}>
+            <Eyebrow index="00" label="Flagship product" dark />
+          </Reveal>
+          <Reveal variant="blur" delay={120}>
+            <h1 className="font-display font-extrabold text-on-dark text-[32px] md:text-[56px] tracking-tight max-w-[18ch] leading-[1.02]">
+              One API call. Three channels. Until the code lands.
+            </h1>
+          </Reveal>
+          <Reveal delay={200}>
+            <p className="mt-5 text-[18px] text-on-dark-3 max-w-[54ch]">
+              MsgBridge Verify cascades a one-time code across SMS, WhatsApp and voice — so a stuck OTP never costs
+              you a signup.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -71,15 +79,21 @@ export default function VerifyPage() {
 
       <section className="py-20 bg-paper">
         <div className="container max-w-container-narrow">
-          <Eyebrow index="02" label="The problem" />
-          <h2 className="font-display font-extrabold text-text-primary text-[26px] md:text-[32px] mb-4">
-            SMS OTP delivery doesn&rsquo;t always land.
-          </h2>
-          <p className="text-[16px] text-text-secondary leading-relaxed max-w-[62ch]">
-            Network congestion, DND misconfiguration, a handset with a full inbox, a user roaming abroad — any one
-            of these turns a one-time password into an abandoned signup. Every channel has a failure mode. Verify&rsquo;s
-            answer is to not depend on just one.
-          </p>
+          <Reveal>
+            <Eyebrow index="02" label="The problem" />
+          </Reveal>
+          <Reveal variant="blur" delay={80}>
+            <h2 className="font-display font-extrabold text-text-primary text-[26px] md:text-[32px] mb-4">
+              SMS OTP delivery doesn&rsquo;t always land.
+            </h2>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="text-[16px] text-text-secondary leading-relaxed max-w-[62ch]">
+              Network congestion, DND misconfiguration, a handset with a full inbox, a user roaming abroad — any one
+              of these turns a one-time password into an abandoned signup. Every channel has a failure mode. Verify&rsquo;s
+              answer is to not depend on just one.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -88,6 +102,7 @@ export default function VerifyPage() {
           <Reveal>
             <Eyebrow index="04" label="The API" />
             <p className="text-[15px] text-text-secondary mb-6 max-w-[46ch]">One request starts the cascade. One webhook tells you how it ended.</p>
+            <div className="transition-all duration-slow ease-out hover:drop-shadow-xl">
             <CodeCard
               code={{
                 curl: `curl https://api.msgbridge.in/v1/verify/start \\\n  -H "Authorization: Bearer $API_KEY" \\\n  -d to="+91XXXXXXXXXX" \\\n  -d channels="sms,whatsapp,voice" \\\n  -d code_length="6" \\\n  -d ttl_seconds="300"`,
@@ -95,12 +110,13 @@ export default function VerifyPage() {
                 python: `verification = msgbridge.verify.start(\n    to="+91XXXXXXXXXX",\n    channels=["sms", "whatsapp", "voice"],\n    code_length=6,\n    ttl_seconds=300,\n)`,
               }}
             />
+            </div>
           </Reveal>
           <Reveal delay={80}>
             <Eyebrow index="05" label="Configuration" />
             <div className="rounded-lg border border-line bg-white divide-y divide-line">
               {CONFIG_ROWS.map((row) => (
-                <div key={row.label} className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-5 py-4">
+                <div key={row.label} className="group/row flex flex-col sm:flex-row sm:items-center justify-between gap-1 px-5 py-4 transition-colors duration-fast hover:bg-paper-warm">
                   <span className="text-[13.5px] font-display font-semibold uppercase tracking-wide text-text-muted">{row.label}</span>
                   <span className="text-[14.5px] text-text-primary text-right">{row.value}</span>
                 </div>
@@ -113,10 +129,14 @@ export default function VerifyPage() {
 
       <section className="py-20 bg-paper-warm">
         <div className="container max-w-container">
-          <Eyebrow index="07" label="Who it's for" />
+          <Reveal>
+            <Eyebrow index="07" label="Who it's for" />
+          </Reveal>
           <div className="flex flex-wrap gap-3">
-            {["Fintech", "Banking", "E-commerce", "Healthcare", "Education", "Delivery apps"].map((s) => (
-              <Chip key={s} label={s} />
+            {["Fintech", "Banking", "E-commerce", "Healthcare", "Education", "Delivery apps"].map((s, i) => (
+              <Reveal key={s} variant="scale" delay={i * 60} className="transition-transform duration-base ease-out hover:-translate-y-0.5">
+                <Chip label={s} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -124,8 +144,12 @@ export default function VerifyPage() {
 
       <section className="py-20 bg-paper">
         <div className="container max-w-container-narrow">
-          <Eyebrow index="09" label="FAQ" />
-          <Accordion items={FAQ} />
+          <Reveal>
+            <Eyebrow index="09" label="FAQ" />
+          </Reveal>
+          <Reveal delay={80}>
+            <Accordion items={FAQ} />
+          </Reveal>
         </div>
       </section>
 
