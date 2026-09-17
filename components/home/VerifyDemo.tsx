@@ -25,6 +25,13 @@ const STAGES: Stage[] = [
   { key: "verified", label: "Verified", detail: "Code entered — one webhook, one charge", color: "#AFFF49", log: "verification=complete via=voice" },
 ];
 
+/** Channel tags that float around the phone and light up as the cascade reaches them. */
+const FLOAT_CHANNELS = [
+  { key: "sms", label: "SMS", color: "#53BDEB", pos: "-left-9 top-28" },
+  { key: "whatsapp", label: "WhatsApp", color: "#25D366", pos: "-right-12 top-44" },
+  { key: "voice", label: "Voice", color: "#FF9A3E", pos: "-left-7 bottom-32" },
+];
+
 export default function VerifyDemo() {
   const outerRef = useRef<HTMLDivElement>(null);
   const progress = useScrollProgress(outerRef);
@@ -127,29 +134,39 @@ export default function VerifyDemo() {
             </div>
 
             <div className="relative">
-              <div className="relative mx-auto w-[260px]">
+              <div className="relative mx-auto w-[280px]">
                 <div
                   aria-hidden
-                  className="absolute -inset-6 rounded-[52px] blur-2xl transition-colors duration-700"
-                  style={{ background: `radial-gradient(circle, ${current.color}26, transparent 68%)` }}
+                  className="absolute -inset-8 rounded-full blur-3xl transition-colors duration-700"
+                  style={{ background: `radial-gradient(circle, ${current.color}30, transparent 66%)` }}
                 />
-                <div className="relative overflow-hidden rounded-[34px] border-[6px] border-device-bezel bg-device-bezel shadow-device">
-                  <div className="min-h-[330px] bg-device-ground px-3 pb-4 pt-3">
-                    <div className="mb-3 flex items-center justify-between px-1 font-mono text-[9px] text-text-muted">
-                      <span>9:41</span>
-                      <span className="flex items-center gap-1">
-                        <span className="h-1 w-1 rounded-full bg-text-muted" />
-                        <span className="h-1.5 w-3.5 rounded-[2px] border border-text-muted" />
+
+                {/* Phone */}
+                <div className="relative aspect-[9/19] rounded-[48px] border-[11px] border-[#0c0e12] bg-[#0c0e12] shadow-[0_46px_90px_-30px_rgba(0,0,0,0.85)]">
+                  <span aria-hidden className="absolute left-1/2 top-[10px] z-20 h-[22px] w-[84px] -translate-x-1/2 rounded-full bg-black" />
+                  <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[36px] bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
+                    <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
+                      <span
+                        className="flex h-8 w-8 items-center justify-center rounded-full font-display text-[13px] font-bold text-ink transition-colors duration-500"
+                        style={{ background: current.color }}
+                      >
+                        ✦
                       </span>
+                      <div className="min-w-0">
+                        <p className="font-display text-[11.5px] font-semibold text-text-primary">MsgBridge Verify</p>
+                        <p className="font-mono text-[8px] uppercase tracking-[0.12em] transition-colors duration-500" style={{ color: current.color }}>
+                          {current.label}
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="flex-1 space-y-2 overflow-hidden px-4 pt-4">
                       {STAGES.slice(1).map((s, i) => {
                         const idx = i + 1;
                         if (idx > stage) return null;
                         if (s.fail) {
                           return (
-                            <p key={s.key} className="px-1 text-center font-mono text-[9.5px] text-text-muted">
+                            <p key={s.key} className="text-center font-mono text-[9px] text-text-muted">
                               {s.label.toLowerCase()} · retrying
                             </p>
                           );
@@ -158,37 +175,45 @@ export default function VerifyDemo() {
                         return (
                           <div
                             key={s.key}
-                            className="animate-fade-up rounded-lg px-2.5 py-2 shadow-sm"
-                            style={{ background: isVerified ? "#E4FFBC" : "#FFFFFF", borderLeft: `3px solid ${s.color}` }}
+                            className="animate-fade-up max-w-[86%] rounded-2xl rounded-tl-md px-3 py-2 shadow-[0_12px_26px_-12px_rgba(0,0,0,0.55)]"
+                            style={{ background: isVerified ? "#E4FFBC" : "#FFFFFF" }}
                           >
-                            <p className="mb-0.5 font-display text-[8.5px] font-bold uppercase tracking-wide" style={{ color: s.color }}>
+                            <p className="mb-0.5 font-display text-[8px] font-bold uppercase tracking-wide" style={{ color: s.color }}>
                               {s.label}
                             </p>
-                            <p className="text-[10.5px] leading-snug text-text-primary">
+                            <p className="text-[11px] leading-snug text-text-primary">
                               {isVerified ? "Verified. You're signed in." : "482913 is your MsgBridge code."}
                             </p>
                           </div>
                         );
                       })}
                     </div>
+
+                    <div aria-hidden className="mx-auto mb-2 h-1 w-24 rounded-full bg-black/25" />
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-5 rounded-lg border border-ink-line bg-ink-raised/80 p-3 font-mono text-[11px] leading-relaxed backdrop-blur">
-                {STAGES.map((s, i) => (
-                  <p
-                    key={s.key}
-                    className="truncate transition-all duration-300"
-                    style={{ opacity: i <= stage ? 1 : 0.18, color: i === stage ? s.color : "#7E8474" }}
-                  >
-                    <span className="text-on-dark-6">›</span> {s.log}
-                  </p>
-                ))}
+                {/* Channel tags floating over the phone */}
+                {FLOAT_CHANNELS.map((c) => {
+                  const at = STAGES.findIndex((s) => s.key === c.key);
+                  const reached = at !== -1 && at <= stage;
+                  return (
+                    <div
+                      key={c.key}
+                      className={`absolute ${c.pos} hidden rounded-pill border bg-white px-3 py-1.5 shadow-card transition-all duration-500 sm:block`}
+                      style={{ borderColor: reached ? c.color : "#E8EAE3", opacity: reached ? 1 : 0.55 }}
+                    >
+                      <span className="flex items-center gap-1.5 text-[11.5px] font-semibold" style={{ color: reached ? c.color : "#9AA091" }}>
+                        <span className="h-1.5 w-1.5 rounded-full" style={{ background: reached ? c.color : "#C9CEC4" }} />
+                        {c.label}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
 
               {!reduced && (
-                <div aria-hidden className="mt-4 h-[3px] overflow-hidden rounded-full bg-ink-line">
+                <div aria-hidden className="mx-auto mt-6 h-[3px] w-[280px] overflow-hidden rounded-full bg-ink-line">
                   <div
                     className="h-full rounded-full bg-lime transition-transform duration-150"
                     style={{ transform: `scaleX(${(stage + 1) / STAGES.length})`, transformOrigin: "left" }}
