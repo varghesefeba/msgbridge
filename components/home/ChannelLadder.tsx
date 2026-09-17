@@ -26,7 +26,7 @@ const RUNGS: Rung[] = [
     short: "SMS",
     note: "Works on every handset in India.",
     color: "#53BDEB",
-    logo: "/logos/sms.jpg",
+    logo: "/logos/sms.svg",
     sender: "MSGBRG",
     body: "Your order #4821 has shipped. Track: msgb.in/t/4821",
     buttons: [],
