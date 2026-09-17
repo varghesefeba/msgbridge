@@ -12,8 +12,8 @@ const CHANNELS = ["WhatsApp", "SMS", "RCS", "Voice", "AI"];
 /** Trust points that float around the mockup — each shows a tick, then types itself out. */
 const FLOATERS: { text: string; delay: number; pos: string }[] = [
   { text: "DLT handled", delay: 200, pos: "lg:absolute lg:-top-6 lg:left-6 lg:-rotate-2" },
-  { text: "One contract, five channels", delay: 620, pos: "lg:absolute lg:top-20 lg:-right-28 lg:rotate-2" },
-  { text: "Live in days", delay: 1040, pos: "lg:absolute lg:bottom-28 lg:-left-28 lg:rotate-1" },
+  { text: "One contract, five channels", delay: 620, pos: "lg:absolute lg:top-20 lg:-right-12 lg:rotate-2" },
+  { text: "Live in days", delay: 1040, pos: "lg:absolute lg:bottom-28 lg:-left-12 lg:rotate-1" },
   { text: "Delivery reports built in", delay: 1460, pos: "lg:absolute lg:-bottom-6 lg:right-8 lg:-rotate-1" },
 ];
 
@@ -98,7 +98,7 @@ export default function Hero() {
 
       <div className="container relative max-w-container">
         {/* Mockup, enlarged and centred at the top, ringed by floating trust chips */}
-        <div className="relative mx-auto w-full max-w-[700px]">
+        <div className="relative mx-auto w-full max-w-[800px]">
           <div data-reveal="scale">
             <HeroConsole />
           </div>
@@ -112,8 +112,8 @@ export default function Hero() {
 
         {/* Headline + CTAs, centred at the bottom */}
         <div className="mt-16 text-center md:mt-24" data-reveal="rise">
-          <h1 className="mx-auto max-w-[20ch] font-display text-[38px] font-extrabold leading-[1.05] tracking-[-0.035em] text-on-dark sm:text-[52px] md:max-w-none lg:text-[64px]">
-            <span className="block md:whitespace-nowrap">Reach every customer, on</span>
+          <h1 className="mx-auto max-w-[20ch] font-display text-[34px] font-extrabold leading-[1.05] tracking-[-0.035em] text-on-dark sm:max-w-none sm:text-[46px] lg:text-[58px]">
+            <span className="block sm:whitespace-nowrap">Reach every customer, on</span>
             {reduced ? (
               <span className="mt-1 block text-gradient-lime">every channel.</span>
             ) : (
