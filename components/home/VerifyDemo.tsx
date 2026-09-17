@@ -64,7 +64,7 @@ export default function VerifyDemo() {
         />
 
         <div className="container relative max-w-container">
-          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)]">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,500px)]">
             <div>
               <Eyebrow index="02" label="MsgBridge Verify" dark />
               <h2 className="max-w-[17ch] font-display text-[30px] font-extrabold leading-[1.04] tracking-tight text-on-dark md:text-[46px]">
@@ -135,103 +135,88 @@ export default function VerifyDemo() {
             </div>
 
             <div className="relative">
-              <div className="relative mx-auto w-[280px]">
-                <div
-                  aria-hidden
-                  className="absolute -inset-8 rounded-full blur-3xl transition-colors duration-700"
-                  style={{ background: `radial-gradient(circle, ${current.color}30, transparent 66%)` }}
-                />
-
-                {/* Silver phone — stands out on the dark section */}
-                <div className="relative aspect-[9/19] rounded-[48px] bg-gradient-to-br from-[#f4f5f7] via-[#c6cad0] to-[#989ea6] p-[11px] shadow-[0_46px_90px_-28px_rgba(0,0,0,0.85)]">
-                  <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/50" />
-                  <span aria-hidden className="absolute left-1/2 top-[16px] z-30 h-[20px] w-[80px] -translate-x-1/2 rounded-full bg-black" />
-                  <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[38px] border border-black/50 bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
-                    <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
-                      <span
-                        className="flex h-8 w-8 items-center justify-center rounded-full font-display text-[13px] font-bold text-ink transition-colors duration-500"
-                        style={{ background: current.color }}
+              <div className="flex flex-col items-center justify-center gap-6 lg:flex-row lg:items-center lg:gap-6">
+                {/* Channel chips beside the phone — clear of the chat bubbles */}
+                <div className="order-2 flex flex-wrap justify-center gap-3 lg:order-1 lg:w-[152px] lg:flex-col lg:items-stretch">
+                  {FLOAT_CHANNELS.map((c) => {
+                    const at = STAGES.findIndex((s) => s.key === c.key);
+                    const reached = at !== -1 && at <= stage;
+                    return (
+                      <div
+                        key={c.key}
+                        className="flex items-center gap-2.5 rounded-pill border bg-white py-1.5 pl-1.5 pr-4 shadow-card transition-all duration-500"
+                        style={{ borderColor: reached ? c.color : "#E8EAE3", opacity: reached ? 1 : 0.45 }}
                       >
-                        ✦
-                      </span>
-                      <div className="min-w-0">
-                        <p className="font-display text-[11.5px] font-semibold text-text-primary">MsgBridge Verify</p>
-                        <p className="font-mono text-[8px] uppercase tracking-[0.12em] transition-colors duration-500" style={{ color: current.color }}>
-                          {current.label}
-                        </p>
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-black/5">
+                          <img src={c.logo} alt={`${c.label} logo`} className="h-full w-full object-contain p-0.5 mix-blend-multiply" />
+                        </span>
+                        <span className="font-display text-[13px] font-semibold" style={{ color: reached ? "#111827" : "#9AA091" }}>
+                          {c.label}
+                        </span>
                       </div>
-                    </div>
-
-                    <div className="flex-1 space-y-2 overflow-hidden px-4 pt-4">
-                      {STAGES.slice(1).map((s, i) => {
-                        const idx = i + 1;
-                        if (idx > stage) return null;
-                        if (s.fail) {
-                          return (
-                            <p key={s.key} className="text-center font-mono text-[9px] text-text-muted">
-                              {s.label.toLowerCase()} · retrying
-                            </p>
-                          );
-                        }
-                        const isVerified = s.key === "verified";
-                        return (
-                          <div
-                            key={s.key}
-                            className="animate-fade-up max-w-[86%] rounded-2xl rounded-tl-md px-3 py-2 shadow-[0_12px_26px_-12px_rgba(0,0,0,0.55)]"
-                            style={{ background: isVerified ? "#E4FFBC" : "#FFFFFF" }}
-                          >
-                            <p className="mb-0.5 font-display text-[8px] font-bold uppercase tracking-wide" style={{ color: s.color }}>
-                              {s.label}
-                            </p>
-                            <p className="text-[11px] leading-snug text-text-primary">
-                              {isVerified ? "Verified. You're signed in." : "482913 is your MsgBridge code."}
-                            </p>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    <div aria-hidden className="mx-auto mb-2 h-1 w-24 rounded-full bg-black/25" />
-                  </div>
+                    );
+                  })}
                 </div>
 
-                {/* Channel chips (logo + name) floating over the phone */}
-                {FLOAT_CHANNELS.map((c) => {
-                  const at = STAGES.findIndex((s) => s.key === c.key);
-                  const reached = at !== -1 && at <= stage;
-                  return (
-                    <div
-                      key={c.key}
-                      className={`absolute ${c.pos} hidden items-center gap-2 rounded-pill border bg-white py-1.5 pl-1.5 pr-3.5 shadow-card transition-all duration-500 sm:flex`}
-                      style={{ borderColor: reached ? c.color : "#E8EAE3", opacity: reached ? 1 : 0.5 }}
-                    >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-black/5">
-                        <img src={c.logo} alt={`${c.label} logo`} className="h-full w-full object-contain p-0.5 mix-blend-multiply" />
-                      </span>
-                      <span className="font-display text-[12.5px] font-semibold" style={{ color: reached ? "#111827" : "#9AA091" }}>{c.label}</span>
-                    </div>
-                  );
-                })}
-
-                {/* Current message floating out of the screen */}
-                {stage >= 1 && (
+                {/* Silver phone — stands out on the dark section */}
+                <div className="relative order-1 w-[280px] lg:order-2">
                   <div
-                    key={`${current.key}-float`}
-                    className="animate-fade-up absolute -right-10 bottom-24 hidden w-[190px] rounded-2xl bg-white p-3.5 shadow-[0_30px_60px_-18px_rgba(0,0,0,0.75)] sm:block"
-                    style={{ borderLeft: `3px solid ${current.color}` }}
-                  >
-                    <p className="mb-1 font-display text-[9px] font-bold uppercase tracking-wide" style={{ color: current.color }}>
-                      {current.label}
-                    </p>
-                    <p className="text-[12.5px] leading-snug text-text-primary">
-                      {current.key === "verified"
-                        ? "Verified. You're signed in."
-                        : current.fail
-                          ? "No delivery — trying the next channel…"
-                          : "482913 is your MsgBridge code."}
-                    </p>
+                    aria-hidden
+                    className="absolute -inset-8 rounded-full blur-3xl transition-colors duration-700"
+                    style={{ background: `radial-gradient(circle, ${current.color}30, transparent 66%)` }}
+                  />
+                  <div className="relative aspect-[9/19] rounded-[48px] bg-gradient-to-br from-[#f4f5f7] via-[#c6cad0] to-[#989ea6] p-[11px] shadow-[0_46px_90px_-28px_rgba(0,0,0,0.85)]">
+                    <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/50" />
+                    <span aria-hidden className="absolute left-1/2 top-[16px] z-30 h-[20px] w-[80px] -translate-x-1/2 rounded-full bg-black" />
+                    <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[38px] border border-black/50 bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
+                      <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
+                        <span
+                          className="flex h-8 w-8 items-center justify-center rounded-full font-display text-[13px] font-bold text-ink transition-colors duration-500"
+                          style={{ background: current.color }}
+                        >
+                          ✦
+                        </span>
+                        <div className="min-w-0">
+                          <p className="font-display text-[11.5px] font-semibold text-text-primary">MsgBridge Verify</p>
+                          <p className="font-mono text-[8px] uppercase tracking-[0.12em] transition-colors duration-500" style={{ color: current.color }}>
+                            {current.label}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex-1 space-y-2 overflow-hidden px-4 pt-4">
+                        {STAGES.slice(1).map((s, i) => {
+                          const idx = i + 1;
+                          if (idx > stage) return null;
+                          if (s.fail) {
+                            return (
+                              <p key={s.key} className="text-center font-mono text-[9px] text-text-muted">
+                                {s.label.toLowerCase()} · retrying
+                              </p>
+                            );
+                          }
+                          const isVerified = s.key === "verified";
+                          return (
+                            <div
+                              key={s.key}
+                              className="animate-fade-up max-w-[86%] rounded-2xl rounded-tl-md px-3 py-2 shadow-[0_12px_26px_-12px_rgba(0,0,0,0.55)]"
+                              style={{ background: isVerified ? "#E4FFBC" : "#FFFFFF" }}
+                            >
+                              <p className="mb-0.5 font-display text-[8px] font-bold uppercase tracking-wide" style={{ color: s.color }}>
+                                {s.label}
+                              </p>
+                              <p className="text-[11px] leading-snug text-text-primary">
+                                {isVerified ? "Verified. You're signed in." : "482913 is your MsgBridge code."}
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      <div aria-hidden className="mx-auto mb-2 h-1 w-24 rounded-full bg-black/25" />
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
 
               {!reduced && (
