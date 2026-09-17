@@ -33,10 +33,14 @@ const CHANNELS: Channel[] = [
     color: "#3D82F5",
     desc: "Rich cards and carousels in the native messages app.",
     glyph: (
-      <>
-        <rect x="3.5" y="4.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M3.5 11.5h13M8 15.5v-4" stroke="currentColor" strokeWidth="1.6" />
-      </>
+      <path
+        d="M10 3.4c4.2 0 7.6 2.5 7.6 5.8 0 3.2-3.4 5.8-7.6 5.8-.8 0-1.6-.1-2.4-.3L4 16.6l1-3.3C3.6 12.1 2.4 10.6 2.4 9.2 2.4 5.9 5.8 3.4 10 3.4Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
     ),
   },
   {
