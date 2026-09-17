@@ -112,24 +112,22 @@ export default function Hero() {
 
         {/* Headline + CTAs, centred at the bottom */}
         <div className="mt-16 text-center md:mt-24" data-reveal="rise">
-          <h1 className="mx-auto max-w-[20ch] font-display text-[34px] font-extrabold leading-[1.05] tracking-[-0.035em] text-on-dark sm:max-w-none sm:text-[46px] lg:text-[58px]">
-            <span className="block sm:whitespace-nowrap">Reach every customer, on</span>
+          <h1 className="mx-auto max-w-[22ch] font-display text-[34px] font-extrabold leading-[1.08] tracking-[-0.035em] text-on-dark sm:text-[44px] lg:max-w-none lg:whitespace-nowrap lg:text-[46px] xl:text-[54px]">
+            Reach every customer, on{" "}
             {reduced ? (
-              <span className="mt-1 block text-gradient-lime">every channel.</span>
+              <span className="text-gradient-lime">every channel.</span>
             ) : (
-              <span className="mt-1 flex justify-center">
-                <span className="inline-grid justify-items-center">
-                  {CHANNELS.map((c, i) => (
-                    <span
-                      key={c}
-                      aria-hidden={i !== index}
-                      className="whitespace-nowrap text-gradient-lime transition-all duration-500 ease-out [grid-area:1/1]"
-                      style={{ opacity: i === index ? 1 : 0, transform: i === index ? "translateY(0)" : "translateY(6px)" }}
-                    >
-                      {c}.
-                    </span>
-                  ))}
-                </span>
+              <span className="inline-grid justify-items-start align-bottom">
+                {CHANNELS.map((c, i) => (
+                  <span
+                    key={c}
+                    aria-hidden={i !== index}
+                    className="whitespace-nowrap text-gradient-lime transition-all duration-500 ease-out [grid-area:1/1]"
+                    style={{ opacity: i === index ? 1 : 0, transform: i === index ? "translateY(0)" : "translateY(6px)" }}
+                  >
+                    {c}.
+                  </span>
+                ))}
               </span>
             )}
           </h1>
