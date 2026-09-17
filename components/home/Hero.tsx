@@ -98,7 +98,7 @@ export default function Hero() {
 
       <div className="container relative max-w-container">
         {/* Mockup, enlarged and centred at the top, ringed by floating trust chips */}
-        <div className="relative mx-auto w-full max-w-[600px]">
+        <div className="relative mx-auto w-full max-w-[700px]">
           <div data-reveal="scale">
             <HeroConsole />
           </div>
@@ -112,8 +112,8 @@ export default function Hero() {
 
         {/* Headline + CTAs, centred at the bottom */}
         <div className="mt-16 text-center md:mt-24" data-reveal="rise">
-          <h1 className="mx-auto max-w-[20ch] font-display text-[38px] font-extrabold leading-[1.05] tracking-[-0.035em] text-on-dark sm:text-[52px] lg:text-[64px]">
-            <span className="block">Reach every customer, on</span>
+          <h1 className="mx-auto max-w-[20ch] font-display text-[38px] font-extrabold leading-[1.05] tracking-[-0.035em] text-on-dark sm:text-[52px] md:max-w-none lg:text-[64px]">
+            <span className="block md:whitespace-nowrap">Reach every customer, on</span>
             {reduced ? (
               <span className="mt-1 block text-gradient-lime">every channel.</span>
             ) : (
