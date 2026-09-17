@@ -53,7 +53,7 @@ const RUNGS: Rung[] = [
     note: "Verified sender, branded card, native inbox.",
     color: "#3D82F5",
     logo: "/logos/sms.jpg",
-    sender: "MsgBridge ✓",
+    sender: "MsgBridge",
     body: "Order #4821 shipped\nArriving in 2 days",
     buttons: ["Track order", "Reschedule"],
     pos: "bottom-10 -right-14",
@@ -62,6 +62,37 @@ const RUNGS: Rung[] = [
 ];
 
 const DWELL = 4200;
+
+/** Readable text color (near-black or white) for a given solid background hex. */
+function readableOn(hex: string) {
+  const c = hex.replace("#", "");
+  const r = parseInt(c.slice(0, 2), 16);
+  const g = parseInt(c.slice(2, 4), 16);
+  const b = parseInt(c.slice(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.62 ? "#0A0B0D" : "#ffffff";
+}
+
+/** Blue "verified sender" seal — used in place of spelled-out verify wording. */
+function VerifiedBadge({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} role="img" aria-label="Verified">
+      <path
+        fill="#1D9BF0"
+        d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.26-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34z"
+      />
+      <path fill="none" stroke="#fff" strokeWidth="2.1" strokeLinecap="round" strokeLinejoin="round" d="M8.2 12.2l2.6 2.6 5-5.4" />
+    </svg>
+  );
+}
+
+/** Contact-avatar person silhouette, tinted to the channel color. */
+function PersonIcon({ className = "", color = "currentColor" }: { className?: string; color?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill={color} aria-hidden>
+      <path d="M12 12.4a4.2 4.2 0 1 0 0-8.4 4.2 4.2 0 0 0 0 8.4Zm0 1.8c-3.6 0-7.4 1.9-7.4 5.2V21h14.8v-1.6c0-3.3-3.8-5.2-7.4-5.2Z" />
+    </svg>
+  );
+}
 
 /** A floating channel card — the active channel is highlighted, the rest are dimmed. */
 function LadderCard({ rung, isActive, className = "" }: { rung: Rung; isActive: boolean; className?: string }) {
@@ -188,18 +219,19 @@ export default function ChannelLadder() {
               <span aria-hidden className="pointer-events-none absolute inset-0 rounded-[48px] ring-1 ring-white/15" />
               <span aria-hidden className="absolute left-1/2 top-[16px] z-30 h-[20px] w-[80px] -translate-x-1/2 rounded-full bg-black" />
               <div className="relative flex h-full w-full flex-col overflow-hidden rounded-[38px] border border-black/50 bg-gradient-to-b from-[#f5f2ec] to-[#eae6dd]">
-                <div className="flex items-center gap-2.5 border-b border-black/[0.06] bg-white/70 px-4 pb-2.5 pt-9 backdrop-blur">
-                  <span
-                    className="flex h-8 w-8 items-center justify-center rounded-full font-display text-[12px] font-bold text-white transition-colors duration-500"
-                    style={{ background: rung.color }}
-                  >
-                    M
+                <div
+                  className="flex items-center gap-2.5 border-b border-black/10 px-4 pb-2.5 pt-9 transition-colors duration-500"
+                  style={{ background: rung.color }}
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white shadow-sm">
+                    <PersonIcon className="h-5 w-5" color={rung.color} />
                   </span>
-                  <div className="min-w-0">
-                    <p className="truncate font-display text-[11.5px] font-semibold text-text-primary">{rung.sender}</p>
-                    <p className="font-mono text-[8px] uppercase tracking-[0.12em] text-text-muted transition-colors duration-500" style={{ color: rung.color }}>
-                      {rung.short}
+                  <div className="min-w-0" style={{ color: readableOn(rung.color) }}>
+                    <p className="flex items-center gap-1 font-display text-[11.5px] font-semibold">
+                      <span className="truncate">{rung.sender}</span>
+                      <VerifiedBadge className="h-3.5 w-3.5 shrink-0" />
                     </p>
+                    <p className="font-mono text-[8px] uppercase tracking-[0.12em] opacity-80">{rung.short}</p>
                   </div>
                 </div>
 
