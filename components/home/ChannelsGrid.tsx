@@ -54,21 +54,6 @@ const CHANNELS: Channel[] = [
       />
     ),
   },
-  {
-    name: "AI Chatbot",
-    href: "/whatsapp-chatbot",
-    color: "#7C5CFF",
-    desc: "Automated conversations with live-agent handover.",
-    glyph: (
-      <path
-        d="M10 3.2 11.4 7 15.2 8.4 11.4 9.8 10 13.6 8.6 9.8 4.8 8.4 8.6 7ZM14.8 12.6l.6 1.6 1.6.6-1.6.6-.6 1.6-.6-1.6-1.6-.6 1.6-.6Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-    ),
-  },
 ];
 
 export default function ChannelsGrid() {
@@ -80,7 +65,7 @@ export default function ChannelsGrid() {
             <Eyebrow index="04" label="Channels" />
             <Reveal delay={60}>
               <h2 className="max-w-[22ch] font-display text-[28px] font-extrabold tracking-tight text-text-primary md:text-[38px]">
-                Five channels. One contract, one invoice, one team to call.
+                Four channels. One contract, one invoice, one team to call.
               </h2>
             </Reveal>
           </div>
@@ -97,7 +82,7 @@ export default function ChannelsGrid() {
           </Reveal>
         </div>
 
-        <Reveal stagger={70} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <Reveal stagger={70} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {CHANNELS.map((c) => (
             <Reveal key={c.name}>
               <Link
