@@ -5,16 +5,74 @@ import Button from "@/components/ui/Button";
 import CodeCard from "@/components/ui/CodeCard";
 import Magnetic from "@/components/motion/Magnetic";
 import Backdrop from "@/components/motion/Backdrop";
-import { useReducedMotion } from "@/lib/motion";
+import { useReducedMotion, useTypewriter } from "@/lib/motion";
 
 const CHANNELS = ["WhatsApp", "SMS", "RCS", "Voice", "AI"];
-const TRUST = ["DLT handled", "One contract, five channels", "Live in days", "Delivery reports built in"];
+
+/** Trust points that float around the mockup — each shows a tick, then types itself out. */
+const FLOATERS: { text: string; delay: number; pos: string }[] = [
+  { text: "DLT handled", delay: 200, pos: "lg:absolute lg:-top-6 lg:left-6 lg:-rotate-2" },
+  { text: "One contract, five channels", delay: 620, pos: "lg:absolute lg:top-20 lg:-right-28 lg:rotate-2" },
+  { text: "Live in days", delay: 1040, pos: "lg:absolute lg:bottom-28 lg:-left-28 lg:rotate-1" },
+  { text: "Delivery reports built in", delay: 1460, pos: "lg:absolute lg:-bottom-6 lg:right-8 lg:-rotate-1" },
+];
 
 const SNIPPET = {
   curl: `curl https://api.msgbridge.in/v1/messages \\\n  -H "Authorization: Bearer $API_KEY" \\\n  -d to="+91XXXXXXXXXX" \\\n  -d channel="sms" \\\n  -d template_id="otp_login"`,
   node: `const client = new MsgBridge(process.env.API_KEY);\n\nawait client.messages.send({\n  to: "+91XXXXXXXXXX",\n  channel: "sms",\n  templateId: "otp_login",\n});`,
   python: `client = MsgBridge(api_key=os.environ["API_KEY"])\n\nclient.messages.send(\n    to="+91XXXXXXXXXX",\n    channel="sms",\n    template_id="otp_login",\n)`,
 };
+
+/** A floating trust chip: the tick springs in, then the sentence types itself. */
+function TypedChip({ text, delay, className = "" }: { text: string; delay: number; className?: string }) {
+  const reduced = useReducedMotion();
+  const [visible, setVisible] = useState(false);
+  const [typing, setTyping] = useState(false);
+
+  useEffect(() => {
+    if (reduced) {
+      setVisible(true);
+      setTyping(true);
+      return;
+    }
+    const t1 = setTimeout(() => setVisible(true), delay);
+    const t2 = setTimeout(() => setTyping(true), delay + 420);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [delay, reduced]);
+
+  const typed = useTypewriter(text, typing, 32);
+  const label = reduced ? text : typed;
+  const done = reduced || typed.length >= text.length;
+
+  return (
+    <div
+      aria-label={text}
+      className={`inline-flex items-center gap-2 rounded-pill border border-ink-line bg-ink-raised/85 px-3.5 py-2 text-[13px] font-medium text-on-dark-2 shadow-[0_16px_44px_-24px_rgba(0,0,0,0.9)] backdrop-blur-md transition-all duration-500 ease-out ${className}`}
+      style={{ opacity: visible ? 1 : 0, transform: visible ? "none" : "translateY(8px) scale(0.96)" }}
+    >
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 16 16"
+        fill="none"
+        aria-hidden
+        className="shrink-0 text-lime transition-transform duration-300 ease-spring"
+        style={{ transform: visible ? "scale(1)" : "scale(0)" }}
+      >
+        <path d="M3 8.4l3.4 3.3L13 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span className="whitespace-nowrap" aria-hidden>
+        {label}
+        {!done && (
+          <span className="ml-0.5 inline-block h-[0.95em] w-[2px] translate-y-[2px] bg-lime motion-safe:animate-pulse" aria-hidden />
+        )}
+      </span>
+    </div>
+  );
+}
 
 export default function Hero() {
   const [index, setIndex] = useState(0);
@@ -27,7 +85,7 @@ export default function Hero() {
   }, [reduced]);
 
   return (
-    <section className="relative -mt-[var(--nav-h)] overflow-hidden bg-ink pb-20 pt-[calc(var(--nav-h)+56px)] md:pb-28 md:pt-[calc(var(--nav-h)+92px)]">
+    <section className="relative -mt-[var(--nav-h)] overflow-hidden bg-ink pb-20 pt-[calc(var(--nav-h)+52px)] md:pb-28 md:pt-[calc(var(--nav-h)+72px)]">
       <Backdrop variant="grid" tone="dark" />
 
       <svg
@@ -35,118 +93,63 @@ export default function Hero() {
         viewBox="0 0 100 62"
         className="pointer-events-none absolute -right-24 -top-10 hidden h-[420px] w-[680px] opacity-[0.10] lg:block"
       >
-        <path
-          data-draw
-          d="M6 56C6 30 30 8 50 8C70 8 94 30 94 56"
-          fill="none"
-          stroke="#AFFF49"
-          strokeWidth="5"
-          strokeLinecap="round"
-        />
+        <path data-draw d="M6 56C6 30 30 8 50 8C70 8 94 30 94 56" fill="none" stroke="#AFFF49" strokeWidth="5" strokeLinecap="round" />
       </svg>
 
       <div className="container relative max-w-container">
-        <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-12">
-          <div>
-            <div
-              data-reveal="rise"
-              className="mb-7 inline-flex items-center gap-2.5 rounded-pill border border-ink-line bg-white/[0.04] py-1.5 pl-2.5 pr-4 backdrop-blur"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-lime opacity-70 motion-safe:animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-lime" />
-              </span>
-              <span className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-on-dark-3">
-                SMS · WhatsApp · RCS · Voice · AI
-              </span>
-            </div>
-
-            <h1 className="font-display text-[42px] font-extrabold leading-[0.97] tracking-[-0.035em] text-on-dark sm:text-[56px] lg:text-[68px]">
-              <span data-reveal="rise" style={{ "--reveal-delay": 60 } as React.CSSProperties} className="block">
-                Reach every
-              </span>
-              <span data-reveal="rise" style={{ "--reveal-delay": 130 } as React.CSSProperties} className="block">
-                customer, on
-              </span>
-              <span data-reveal="rise" style={{ "--reveal-delay": 200 } as React.CSSProperties} className="block">
-                {reduced ? (
-                  <span className="text-gradient-lime">every channel.</span>
-                ) : (
-                  <span className="inline-grid align-bottom">
-                    {CHANNELS.map((c, i) => (
-                      <span
-                        key={c}
-                        aria-hidden={i !== index}
-                        className="text-gradient-lime transition-all duration-500 ease-out [grid-area:1/1]"
-                        style={{
-                          opacity: i === index ? 1 : 0,
-                          transform: i === index ? "translateY(0)" : "translateY(6px)",
-                        }}
-                      >
-                        {c}.
-                      </span>
-                    ))}
-                  </span>
-                )}
-              </span>
-            </h1>
-
-            <p
-              data-reveal="rise"
-              style={{ "--reveal-delay": 280 } as React.CSSProperties}
-              className="mt-7 max-w-[50ch] text-[18px] leading-relaxed text-on-dark-2"
-            >
-              One compliance-ready platform for every message an Indian business needs to send — and every reply it
-              gets back.
-            </p>
-
-            <div
-              data-reveal="rise"
-              style={{ "--reveal-delay": 350 } as React.CSSProperties}
-              className="mt-9 flex flex-wrap items-center gap-3"
-            >
-              <Magnetic>
-                <Button href="/contact" arrow>
-                  Book a demo
-                </Button>
-              </Magnetic>
-              <Magnetic strength={0.16}>
-                <Button href="/developers/quickstart" variant="secondary" className="!border-ink-line !text-on-dark hover:!border-lime hover:!bg-white/[0.04]">
-                  Read the docs
-                </Button>
-              </Magnetic>
-            </div>
-
-            <ul data-reveal="rise" style={{ "--reveal-delay": 420 } as React.CSSProperties} className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5">
-              {TRUST.map((chip) => (
-                <li key={chip} className="group flex items-center gap-2 text-[13.5px] text-on-dark-3">
-                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className="shrink-0 text-lime" aria-hidden>
-                    <path
-                      d="M3 8.4l3.4 3.3L13 5"
-                      stroke="currentColor"
-                      strokeWidth="2.1"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="transition-colors duration-fast group-hover:text-on-dark">{chip}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Mockup, enlarged and centred at the top, ringed by floating trust chips */}
+        <div className="relative mx-auto w-full max-w-[600px]">
+          <div data-reveal="scale">
+            <HeroConsole />
           </div>
 
-          <div data-reveal="scale" style={{ "--reveal-delay": 220 } as React.CSSProperties} className="relative">
-            <HeroConsole />
+          <div className="mt-10 flex flex-wrap justify-center gap-2.5 lg:contents">
+            {FLOATERS.map((f) => (
+              <TypedChip key={f.text} text={f.text} delay={f.delay} className={f.pos} />
+            ))}
           </div>
         </div>
 
-        <div className="mt-16 hidden justify-center lg:flex" aria-hidden>
-          <span className="flex h-9 w-[22px] items-start justify-center rounded-pill border border-ink-line pt-1.5">
-            <span
-              className="h-1.5 w-1.5 rounded-full bg-lime"
-              style={{ animation: "mb-scroll-hint 1.8s var(--ease-out) infinite" }}
-            />
-          </span>
+        {/* Headline + CTAs, centred at the bottom */}
+        <div className="mt-16 text-center md:mt-24" data-reveal="rise">
+          <h1 className="mx-auto max-w-[20ch] font-display text-[38px] font-extrabold leading-[1.05] tracking-[-0.035em] text-on-dark sm:text-[52px] lg:text-[64px]">
+            <span className="block">Reach every customer, on</span>
+            {reduced ? (
+              <span className="mt-1 block text-gradient-lime">every channel.</span>
+            ) : (
+              <span className="mt-1 flex justify-center">
+                <span className="inline-grid justify-items-center">
+                  {CHANNELS.map((c, i) => (
+                    <span
+                      key={c}
+                      aria-hidden={i !== index}
+                      className="whitespace-nowrap text-gradient-lime transition-all duration-500 ease-out [grid-area:1/1]"
+                      style={{ opacity: i === index ? 1 : 0, transform: i === index ? "translateY(0)" : "translateY(6px)" }}
+                    >
+                      {c}.
+                    </span>
+                  ))}
+                </span>
+              </span>
+            )}
+          </h1>
+
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+            <Magnetic>
+              <Button href="/contact" arrow>
+                Book a demo
+              </Button>
+            </Magnetic>
+            <Magnetic strength={0.16}>
+              <Button
+                href="/developers/quickstart"
+                variant="secondary"
+                className="!border-ink-line !text-on-dark hover:!border-lime hover:!bg-white/[0.04]"
+              >
+                Read the docs
+              </Button>
+            </Magnetic>
+          </div>
         </div>
       </div>
     </section>
@@ -200,9 +203,7 @@ function HeroConsole() {
         </button>
       </form>
       {state === "idle" ? (
-        <p className="mt-2.5 text-center font-mono text-[11px] text-on-dark-6">
-          Sandbox demo — nothing leaves this page
-        </p>
+        <p className="mt-2.5 text-center font-mono text-[11px] text-on-dark-6">Sandbox demo — nothing leaves this page</p>
       ) : (
         <div
           key={state}
